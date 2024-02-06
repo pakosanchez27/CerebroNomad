@@ -26,7 +26,7 @@ class GuardianFactory extends Factory
             'email' => $this->faker->email(),
             'telefono' => $this->faker->phoneNumber(),
             'parentesco' => $this->faker->randomElement(['Padre', 'Madre', 'Hermano', 'Hermana', 'Tio', 'Tia', 'Abuelo', 'Abuela', 'Primo', 'Prima', 'Amigo', 'Amiga']),
-            'id_pacients' => fake()->randomNumber(1, 10),
+            'patients_id' => Patient::factory(),
         ];
     }
 }

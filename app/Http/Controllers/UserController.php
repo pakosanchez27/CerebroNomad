@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
-    public function index($id_rol)
+    public function index()
     {
-        if(!$id_rol == 'all'){
-            $users = User::where('rol_id', $id_rol)->get();
-        }else{
-            $users = User::all();
-        }
-       
-        return response()->json(['data' => $users], 200);
+     $users = User::all();
+    return new UserCollection($users);
     }
 }

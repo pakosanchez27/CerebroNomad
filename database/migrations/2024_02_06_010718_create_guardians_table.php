@@ -18,13 +18,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
+            $table->integer('edad');
             $table->string('email');
             $table->string('telefono');
             $table->string('parentesco');
 
             //llaves foraneas
             $table->unsignedBigInteger('patients_id');
-            
+
             //Relaciones
             $table->foreign('patients_id')->references('id')->on('patients');
 

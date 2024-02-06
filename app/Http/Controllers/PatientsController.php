@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 
+use App\Http\Resources\PatientCollection;
 use App\Http\Requests\StorePatientsRequest;
 use App\Http\Requests\UpdatePatientsRequest;
 
@@ -12,18 +13,14 @@ class PatientsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($doctors_id)
+    public function index()
     {
-        if(!$doctors_id == 'all'){
-            $patients = Patient::where('doctor_id', $doctors_id)->get();
-        }else{
-            $patients = Patient::all();
-        }
-        return response()->json(['data' => $patients], 200);
+        $patients = Patient::all();
+        return new PatientCollection($patients);
     }
-    
-    
-    
+
+
+
 
     /**
      * Show the form for creating a new resource.

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Rols;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -24,17 +24,20 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+
+        $password = '12345';
         return [
             'name' => fake()->name(),
             'apellido_paterno' => fake()->lastName(),
             'apellido_materno' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => 'password',
+            'password' =>  $password ?: $password = Hash::make('password'), // password
             'remember_token' => Str::random(10),
-            'rol_id' => Rols::factory(),
+            'rol' => fake()->randomElement(['admin', 'editor', 'analista']), // Pasar un array de elementos
         ];
     }
+
 
     /**
      * Indicate that the model's email address should be unverified.

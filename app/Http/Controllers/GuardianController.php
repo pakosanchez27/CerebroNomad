@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guardian;
+use App\Http\Resources\GuardianCollection;
 use App\Http\Requests\StoreGuardianRequest;
 use App\Http\Requests\UpdateGuardianRequest;
 
@@ -13,7 +14,8 @@ class GuardianController extends Controller
      */
     public function index()
     {
-        //
+        $guardians = Guardian::all();
+        return new GuardianCollection($guardians);
     }
 
     /**

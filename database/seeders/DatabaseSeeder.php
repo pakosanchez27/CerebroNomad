@@ -19,13 +19,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
 
-            RolsSeeder::class,
+
             UsersSeeder::class,
             DoctorSeeder::class,
             InsuranceSeeder::class,
             PatientSeeder::class,
             AddressSeeder::class,
-            
+            GuardianSeeder::class,
+
 
         ]);
     }
