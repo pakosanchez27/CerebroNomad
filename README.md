@@ -1,28 +1,8 @@
-## Bienvenido CerebroNomad API 🧠. 
+## Documentación de la API REST de CerebroNomad 🧠. 
 
-Esta documentación permite entender el funcionamiento de la API REST de Nomad Genetics. <br>
+¡Bienvenido a la documentación oficial de la API REST de CerebroNomad! Esta API está diseñada exclusivamente para uso interno por empleados de Nomad y facilita la interacción entre las aplicaciones y la base de datos del sistema CerebroNomad. A través de esta guía, los empleados autorizados tendrán acceso a información detallada sobre los endpoints disponibles, los métodos de autenticación y otros aspectos fundamentales de la API.
 
-En esta API es el intermediario entre cualquier app web, mobil, escritorio, etc. y la base de datos de pacientes de Nomad Genetics. <br>
-Proporcionando a el usuario segun sea, su rol la capacidad de Crear, Leer, Editar y Eliminar registros. <br>
+Esperamos que esta documentación sea de gran ayuda para maximizar la funcionalidad de la API CerebroNomad dentro de nuestra organización.
 
-<table>
-    <tr>
-        <th>Usuario</th>
-        <th>Permisos</th>
-    </tr>
-    <tr>
-        <td>Administador</td>
-        <td>Crear, Leer, Editar y Eliminar</td>
-    </tr>
-     <tr>
-        <td>Editor</td>
-        <td>Crear, Leer y Editar</td>
-    </tr>
-     <tr>
-        <td>Analista</td>
-        <td>Solo leer</td>
-    </tr>
-</table>
-<br>
 
 ## Iniciemos.  
