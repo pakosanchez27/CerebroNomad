@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Rols;
 use Illuminate\Database\Seeder;
 
 class RolsSeeder extends Seeder
@@ -12,6 +12,20 @@ class RolsSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // Utiliza el método create para crear un nuevo registro en la tabla
+        Rols::create([
+            
+            'name' => 'Admin'
+        ]);
+
+        Rols::create([
+            
+            'name' => 'Editor'
+        ]);
+
+        Rols::create([
+            
+            'name' => 'Analista'
+        ]);
     }
 }

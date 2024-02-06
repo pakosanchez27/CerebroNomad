@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Rols>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Insurance>
  */
-class RolsFactory extends Factory
+class InsuranceFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class RolsFactory extends Factory
     {
         return [
             //
-            
+            'nombre' => $this->faker->company(),
         ];
     }
 }

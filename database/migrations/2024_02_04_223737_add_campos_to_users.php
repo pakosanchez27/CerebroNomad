@@ -12,11 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+
+            //Atributos de la tabla
             $table->string('apellido_paterno')->nullable();
             $table->string('apellido_materno')->nullable();
             
+            //llaves foraneas
             $table->unsignedBigInteger('rol_id')->nullable();
+
+            //Relaciones
+            $table->foreign('rol_id')->references('id')->on('rols');
             
         });
     }

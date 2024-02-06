@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rols;
-use App\Http\Requests\StoreRolsRequest;
-use App\Http\Requests\UpdateRolsRequest;
+use App\Models\Guardian;
+use App\Http\Requests\StoreGuardianRequest;
+use App\Http\Requests\UpdateGuardianRequest;
 
-class RolsController extends Controller
+class GuardianController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -27,7 +27,7 @@ class RolsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRolsRequest $request)
+    public function store(StoreGuardianRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class RolsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Rols $rols)
+    public function show(Guardian $guardian)
     {
         //
     }
@@ -43,7 +43,7 @@ class RolsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Rols $rols)
+    public function edit(Guardian $guardian)
     {
         //
     }
@@ -51,7 +51,7 @@ class RolsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRolsRequest $request, Rols $rols)
+    public function update(UpdateGuardianRequest $request, Guardian $guardian)
     {
         //
     }
@@ -59,7 +59,7 @@ class RolsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Rols $rols)
+    public function destroy(Guardian $guardian)
     {
         //
     }

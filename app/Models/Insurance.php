@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rols extends Model
+class Insurance extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name',
-        
+      
     ];
 
-    public function user()
+    public function patient()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Patient::class);
     }
+    
 }

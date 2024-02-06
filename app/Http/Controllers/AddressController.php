@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rols;
-use App\Http\Requests\StoreRolsRequest;
-use App\Http\Requests\UpdateRolsRequest;
+use App\Models\Address;
+use App\Http\Requests\StoreAddressRequest;
+use App\Http\Requests\UpdateAddressRequest;
 
-class RolsController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -27,7 +27,7 @@ class RolsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRolsRequest $request)
+    public function store(StoreAddressRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class RolsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Rols $rols)
+    public function show(Address $address)
     {
         //
     }
@@ -43,7 +43,7 @@ class RolsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Rols $rols)
+    public function edit(Address $address)
     {
         //
     }
@@ -51,7 +51,7 @@ class RolsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRolsRequest $request, Rols $rols)
+    public function update(UpdateAddressRequest $request, Address $address)
     {
         //
     }
@@ -59,7 +59,7 @@ class RolsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Rols $rols)
+    public function destroy(Address $address)
     {
         //
     }
