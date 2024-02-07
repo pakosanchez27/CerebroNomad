@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Patient;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,7 +27,7 @@ class AddressFactory extends Factory
             'pais' => $this->faker->country(),
             'referencias' => $this->faker->text(),
             'codigo_postal' => $this->faker->postcode(),
-            'patients_id' => Patient::factory(),
+            
 
         ];
     }

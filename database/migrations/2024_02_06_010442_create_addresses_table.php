@@ -24,11 +24,7 @@ return new class extends Migration
             $table->string('pais');
             $table->string('referencias');
 
-            //llaves foraneas
-            $table->unsignedBigInteger('patients_id');
-
-            //Relaciones
-            $table->foreign('patients_id')->references('id')->on('patients');
+            
 
             
             $table->timestamps();

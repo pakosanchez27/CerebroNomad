@@ -4,21 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 
+use App\Filters\PatientsFilter;
 use App\Http\Resources\PatientCollection;
 use App\Http\Requests\StorePatientsRequest;
 use App\Http\Requests\UpdatePatientsRequest;
+use Illuminate\Http\Request;
+
 
 class PatientsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $patients = Patient::all();
-        return new PatientCollection($patients);
+        $filter = new PatientsFilter();
+        $queryItems = $filter->transform($request);
+        
+        // Verificar si hay criterios de filtrado presentes
+        if (!empty($queryItems)) {
+            // Aplicar los criterios de filtrado a la consulta de pacientes
+            $patients = Patient::where($queryItems);
+        } else {
+            // Si no hay criterios de filtrado, obtener todos los pacientes
+            $patients = Patient::query();
+        }
+        
+        // Paginar los resultados y añadir los parámetros de la solicitud
+        return new PatientCollection($patients->paginate(10)->appends($request->query()));
     }
-
+    
 
 
 

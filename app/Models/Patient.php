@@ -16,20 +16,20 @@ class Patient extends Model
     {
         return $this->belongsTo(Insurance::class);
     }
-
+    
     public function guardian()
     {
-        return $this->belongsTo(guardian::class);
+        return $this->belongsTo(Guardian::class);
     }
-
+    
     public function doctor()
     {
         return $this->belongsTo(Doctor::class);
     }
-
+    
     public function address()
     {
-        return $this->belongsTo(Address::class);
+        return $this->hasOne(Address::class);
     }
-
+    
 }

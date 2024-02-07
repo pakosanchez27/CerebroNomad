@@ -15,8 +15,14 @@ class PatientSeeder extends Seeder
     {
         //
         Patient::factory()
-        ->count(1)
+        ->count(110)
+        ->hasInsurance(1)
+        ->hasGuardian(1)
+        ->hasDoctor(1)
         ->create();
+
+
+       
 }
 
     

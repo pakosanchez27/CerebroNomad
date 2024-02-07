@@ -30,11 +30,13 @@ return new class extends Migration
            
             $table->unsignedBigInteger('insurances_id');
             $table->unsignedBigInteger('doctors_id');
+            $table->unsignedBigInteger('addresses_id');
 
             //Relaciones}
            
             $table->foreign('insurances_id')->references('id')->on('insurances');
             $table->foreign('doctors_id')->references('id')->on('doctors');
+            $table->foreign('addresses_id')->references('id')->on('addresses');
 
 
 

@@ -13,8 +13,8 @@ class Address extends Model
         
     ];
 
-    public function patients()
+    public function patient()
     {
-        return $this->hasMany(Patient::class);
+        return $this->belongsTo(Patient::class);
     }
 }

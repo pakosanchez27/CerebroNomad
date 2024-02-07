@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -30,6 +31,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::apiResource('insurances', InsuranceController::class);
     Route::apiResource('doctors', DoctorController::class);
     Route::apiResource('guardians', GuardianController::class);
+    Route::apiResource('address', AddressController::class);
+    
 
 });
 
