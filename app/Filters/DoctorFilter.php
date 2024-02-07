@@ -4,8 +4,7 @@ namespace App\Filters;
 use Illuminate\Http\Request;
 use App\Filters\ApiFilter;
 
-// Definición de la clase `PatientsFilter` que extiende de `ApiFilter`
-class PatientsFilter extends ApiFilter
+class DoctorFilter extends ApiFilter
 {
     // Propiedades para almacenar los parámetros seguros, mapeos de columnas y operadores
 
@@ -16,28 +15,18 @@ class PatientsFilter extends ApiFilter
         'paterno' => ['eq'],
         'materno' => ['eq'],
         'sexo' => ['eq'],
-        'nacimiento' => ['eq', 'gt', 'lt', 'gte', 'lte', 'ne'],
-        'telefono' => ['eq'],
         'email' => ['eq'],
-        'identificacion' => ['eq'],
-        'sangre' => ['eq'],
-        'doctor' => ['eq'],
-        'insurance' => ['eq'],
-        'address' => ['eq'],
-
-        
+        'telefono' => ['eq'],
+        'especialidad' => ['eq'],
+        'cedula' => ['eq'],
+        'clinica' => ['eq'],
     ];
 
     // Mapeo de nombres de parámetros a nombres de columnas de la base de datos
     protected $columnMap = [
         'paterno' => 'apellido_paterno',
         'materno' => 'apellido_materno',
-        'nacimiento' => 'fecha_nacimiento',
-        'identificacion' => 'num_identificacion',
-        'sangre' => 'tipo_sangre',
-        'doctor' => 'doctors_id',
-        'insurance' => 'insurance_id',
-        'address' => 'address_id',
+        'clinica' => 'nombre_clinica',
     ];
 
     // Mapeo de operadores a sus equivalentes en SQL
@@ -50,3 +39,6 @@ class PatientsFilter extends ApiFilter
         'ne' => '!=', // Operador de desigualdad
     ];
 }
+
+
+?>
