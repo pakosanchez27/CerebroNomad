@@ -28,15 +28,15 @@ return new class extends Migration
 
             //llaves foraneas
            
-            $table->unsignedBigInteger('insurances_id');
-            $table->unsignedBigInteger('doctors_id');
-            $table->unsignedBigInteger('addresses_id');
+            $table->unsignedBigInteger('insurance_id');
+            $table->unsignedBigInteger('doctor_id');
+            
 
             //Relaciones}
            
-            $table->foreign('insurances_id')->references('id')->on('insurances');
-            $table->foreign('doctors_id')->references('id')->on('doctors');
-            $table->foreign('addresses_id')->references('id')->on('addresses');
+            $table->foreign('insurance_id')->references('id')->on('insurances');
+            $table->foreign('doctor_id')->references('id')->on('doctors');
+            
 
 
 

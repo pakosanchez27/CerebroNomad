@@ -28,9 +28,9 @@ class PatientFactory extends Factory
             'telefono' => $this->faker->phoneNumber(),
             'tipo_sangre' => $this->faker->randomElement(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
             'descripcion_medica' => $this->faker->text(),
-            'insurances_id' => Insurance::factory(),
-            'doctors_id' => Doctor::factory(),
-            'addresses_id' => Address::factory(),
+            'insurance_id' => Insurance::factory(),
+            'doctor_id' => Doctor::factory(),
+            
         ];
     }
 }

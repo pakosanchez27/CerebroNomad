@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
 
             UsersSeeder::class,
             PatientSeeder::class,
+            GuardianSeeder::class,
+            AddressSeeder::class,
             
 
 

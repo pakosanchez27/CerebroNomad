@@ -31,7 +31,7 @@ class PatientsController extends Controller
         }
         
         // Paginar los resultados y añadir los parámetros de la solicitud
-        return new PatientCollection($patients->paginate(10)->appends($request->query()));
+        return new PatientCollection($patients->with('Doctor', 'Insurance', 'Address', 'Guardian')->paginate(10)->appends($request->query()));
     }
     
 

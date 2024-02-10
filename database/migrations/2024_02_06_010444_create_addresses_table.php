@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
 
-            //Atributos de la tabla
+            // Atributos de la tabla
             $table->id();
             $table->string('calle');
             $table->string('numero');
@@ -24,12 +24,15 @@ return new class extends Migration
             $table->string('pais');
             $table->string('referencias');
 
-            
+            // Llave foránea corregida
+            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
 
-            
             $table->timestamps();
         });
     }
+
+
+
 
     /**
      * Reverse the migrations.

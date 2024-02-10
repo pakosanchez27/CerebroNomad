@@ -19,6 +19,7 @@ class PatientSeeder extends Seeder
         ->hasInsurance(1)
         ->hasGuardian(1)
         ->hasDoctor(5)
+        ->hasAddress(1)
         ->create();
 
 

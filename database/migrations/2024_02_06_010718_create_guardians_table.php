@@ -24,10 +24,10 @@ return new class extends Migration
             $table->string('parentesco');
 
             //llaves foraneas
-            $table->unsignedBigInteger('patients_id');
+            $table->unsignedBigInteger('patient_id');
 
             //Relaciones
-            $table->foreign('patients_id')->references('id')->on('patients');
+            $table->foreign('patient_id')->references('id')->on('patients');
 
             $table->timestamps();
         });

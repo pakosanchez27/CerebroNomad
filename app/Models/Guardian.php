@@ -14,6 +14,6 @@ class Guardian extends Model
 
     public function patient()
     {
-        return $this->hasMany(Patient::class);
+        return $this->belongsTo(Patient::class);
     }
 }

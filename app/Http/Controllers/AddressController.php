@@ -2,20 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\AddressFilter;
 use App\Models\Address;
 use App\Http\Requests\StoreAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
 use App\Http\Resources\AddressCollection;
+use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $addresses = Address::all();
-        return new AddressCollection($addresses);
+        $filter = new AddressFilter();
+        $queryItems = $filter->transform($request);
+
+        // Verificar si hay criterios de filtrado direcciones
+        if (!empty($queryItems)) {
+            // Aplicar los criterios de filtrado a la consulta de direcciones
+            $patients = Address::where($queryItems);
+        } else {
+            // Si no hay criterios de filtrado, obtener todos los direcciones
+            $patients = Address::query();
+        }
+
+        // Paginar los resultados y añadir los parámetros de la solicitud
+        return new AddressCollection($patients->with('Patient')->paginate(10)->appends($request->query()));
     }
 
     /**

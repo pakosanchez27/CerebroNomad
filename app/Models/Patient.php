@@ -19,7 +19,7 @@ class Patient extends Model
     
     public function guardian()
     {
-        return $this->belongsTo(Guardian::class);
+        return $this->hasOne(Guardian::class);
     }
     
     public function doctor()
