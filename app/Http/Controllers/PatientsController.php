@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 
+use Illuminate\Http\Request;
 use App\Filters\PatientsFilter;
+use App\Http\Resources\PatientResource;
 use App\Http\Resources\PatientCollection;
 use App\Http\Requests\StorePatientsRequest;
 use App\Http\Requests\UpdatePatientsRequest;
-use Illuminate\Http\Request;
 
 
 class PatientsController extends Controller
@@ -20,7 +21,7 @@ class PatientsController extends Controller
     {
         $filter = new PatientsFilter();
         $queryItems = $filter->transform($request);
-        
+
         // Verificar si hay criterios de filtrado presentes
         if (!empty($queryItems)) {
             // Aplicar los criterios de filtrado a la consulta de pacientes
@@ -29,11 +30,11 @@ class PatientsController extends Controller
             // Si no hay criterios de filtrado, obtener todos los pacientes
             $patients = Patient::query();
         }
-        
+
         // Paginar los resultados y añadir los parámetros de la solicitud
         return new PatientCollection($patients->with('Doctor', 'Insurance', 'Address', 'Guardian')->paginate(10)->appends($request->query()));
     }
-    
+
 
 
 
@@ -56,9 +57,13 @@ class PatientsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Patient $patients)
+    public function show(Patient $patient)
     {
-        //
+        // Cargar las relaciones necesarias
+        $patient->load('doctor', 'insurance', 'address', 'guardian');
+
+        // Pasar el modelo cargado a PatientResource
+        return new PatientResource($patient);
     }
 
     /**

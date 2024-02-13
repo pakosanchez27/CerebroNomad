@@ -32,7 +32,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::apiResource('doctors', DoctorController::class);
     Route::apiResource('guardians', GuardianController::class);
     Route::apiResource('address', AddressController::class);
-    
+
 
 });
 
