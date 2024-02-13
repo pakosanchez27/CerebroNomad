@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Filters\PatientsFilter;
 use App\Http\Resources\PatientResource;
 use App\Http\Resources\PatientCollection;
+use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\StorePatientsRequest;
 use App\Http\Requests\UpdatePatientsRequest;
 
@@ -49,9 +50,10 @@ class PatientsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePatientsRequest $request)
+    public function store(StorePatientRequest $request)
     {
         //
+        return new PatientResource(Patient::create($request->all()));
     }
 
     /**
