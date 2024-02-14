@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use Illuminate\Http\Request;
 use App\Filters\DoctorFilter;
+use App\Http\Resources\DoctorResource;
 use App\Http\Resources\DoctorCollection;
 use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
-use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
@@ -48,6 +49,7 @@ class DoctorController extends Controller
     public function store(StoreDoctorRequest $request)
     {
         //
+        return new DoctorResource(Doctor::create($request->all()));
     }
 
     /**
@@ -56,6 +58,7 @@ class DoctorController extends Controller
     public function show(Doctor $doctor)
     {
         //
+        return new DoctorResource($doctor);
     }
 
     /**
