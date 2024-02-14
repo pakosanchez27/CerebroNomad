@@ -9,8 +9,8 @@ use App\Filters\PatientsFilter;
 use App\Http\Resources\PatientResource;
 use App\Http\Resources\PatientCollection;
 use App\Http\Requests\StorePatientRequest;
-use App\Http\Requests\StorePatientsRequest;
-use App\Http\Requests\UpdatePatientsRequest;
+use App\Http\Requests\UpdatePatientRequest;
+
 
 
 class PatientsController extends Controller
@@ -79,9 +79,9 @@ class PatientsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePatientsRequest $request, Patient $patients)
+    public function update(UpdatePatientRequest $request, Patient $patient)
     {
-        //
+        $patient->update($request->all());
     }
 
     /**
