@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Insurance;
+use App\Http\Resources\InsuranceResource;
 use App\Http\Resources\InsuranceCollection;
 use App\Http\Requests\StoreInsuranceRequest;
 use App\Http\Requests\UpdateInsuranceRequest;
@@ -16,6 +17,7 @@ class InsuranceController extends Controller
     {
         $insurances = Insurance::all();
         return new InsuranceCollection($insurances);
+
     }
 
     /**
@@ -32,6 +34,7 @@ class InsuranceController extends Controller
     public function store(StoreInsuranceRequest $request)
     {
         //
+        return new InsuranceResource(Insurance::create($request->all()));
     }
 
     /**
@@ -40,6 +43,7 @@ class InsuranceController extends Controller
     public function show(Insurance $insurance)
     {
         //
+        return new InsuranceResource($insurance);
     }
 
     /**
@@ -56,6 +60,8 @@ class InsuranceController extends Controller
     public function update(UpdateInsuranceRequest $request, Insurance $insurance)
     {
         //
+        $insurance->update($request->all());
+
     }
 
     /**
@@ -64,5 +70,6 @@ class InsuranceController extends Controller
     public function destroy(Insurance $insurance)
     {
         //
+        $insurance->delete();
     }
 }

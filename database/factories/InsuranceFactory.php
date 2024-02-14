@@ -18,7 +18,7 @@ class InsuranceFactory extends Factory
     {
         return [
             //
-            'nombre' => $this->faker->company(),
+            'name' => $this->faker->company(),
         ];
     }
 }

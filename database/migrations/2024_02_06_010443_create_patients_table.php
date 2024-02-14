@@ -28,14 +28,14 @@ return new class extends Migration
 
             //llaves foraneas
            
-            $table->unsignedBigInteger('insurance_id');
-            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('insurance_id')->nullable();
+            $table->unsignedBigInteger('doctor_id')->nullable();
             
 
             //Relaciones}
            
-            $table->foreign('insurance_id')->references('id')->on('insurances');
-            $table->foreign('doctor_id')->references('id')->on('doctors');
+            $table->foreign('insurance_id')->references('id')->on('insurances')->onDelete('set null');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('set null');
             
 
 
