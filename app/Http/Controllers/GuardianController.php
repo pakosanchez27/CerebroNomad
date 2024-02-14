@@ -7,6 +7,7 @@ use App\Models\Guardian;
 use App\Http\Resources\GuardianCollection;
 use App\Http\Requests\StoreGuardianRequest;
 use App\Http\Requests\UpdateGuardianRequest;
+use App\Http\Resources\GuardianResource;
 use Illuminate\Http\Request;
 
 class GuardianController extends Controller
@@ -22,14 +23,17 @@ class GuardianController extends Controller
         // Verificar si hay criterios de filtrado Familiar o tutores
         if (!empty($queryItems)) {
             // Aplicar los criterios de filtrado a la consulta de pacientes
-            $patients = Guardian::where($queryItems);
+            $guardianQuery = Guardian::where($queryItems);
         } else {
             // Si no hay criterios de filtrado, obtener todos los pacientes
-            $patients = Guardian::query();
+            $guardianQuery = Guardian::query();
         }
 
+        // Cargar la relación 'patient' en la consulta antes de la paginación
+        $guardian = $guardianQuery->with('Patient')->paginate(10);
+
         // Paginar los resultados y añadir los parámetros de la solicitud
-        return new GuardianCollection($patients->with('Patient')->paginate(10)->appends($request->query()));
+        return new GuardianCollection($guardian->appends($request->query()));
     }
 
     /**
@@ -46,6 +50,7 @@ class GuardianController extends Controller
     public function store(StoreGuardianRequest $request)
     {
         //
+        return new GuardianResource(Guardian::create($request->all()));
     }
 
     /**
@@ -54,6 +59,8 @@ class GuardianController extends Controller
     public function show(Guardian $guardian)
     {
         //
+        $guardian->load('Patient');
+        return new GuardianResource($guardian);
     }
 
     /**

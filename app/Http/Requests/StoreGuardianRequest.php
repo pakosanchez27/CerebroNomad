@@ -11,7 +11,7 @@ class StoreGuardianRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class StoreGuardianRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'apellido_paterno' => ['required', 'string', 'max:255'],
+            'apellido_materno' => ['required', 'string', 'max:255'],
+            'edad' => ['required', 'integer'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'telefono' => ['required', 'string', 'max:255'],
+            'parentesco' => ['required', 'string', 'max:255'],
+            'patient_id' => ['required', 'integer'],
         ];
     }
 }

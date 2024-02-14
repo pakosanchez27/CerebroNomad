@@ -30,7 +30,7 @@ class Patient extends Model
 
     public function guardian()
     {
-        return $this->hasOne(Guardian::class);
+    return $this->hasOne(Patient::class);
     }
 
     public function doctor()

@@ -22,14 +22,14 @@ class AddressController extends Controller
         // Verificar si hay criterios de filtrado direcciones
         if (!empty($queryItems)) {
             // Aplicar los criterios de filtrado a la consulta de direcciones
-            $patients = Address::where($queryItems);
+            $address = Address::where($queryItems);
         } else {
             // Si no hay criterios de filtrado, obtener todos los direcciones
-            $patients = Address::query();
+            $address = Address::query();
         }
 
         // Paginar los resultados y añadir los parámetros de la solicitud
-        return new AddressCollection($patients->with('Patient')->paginate(10)->appends($request->query()));
+        return new AddressCollection($address->with('Patient')->paginate(10)->appends($request->query()));
     }
 
     /**
