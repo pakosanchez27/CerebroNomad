@@ -9,7 +9,7 @@ class Insurance extends Model
 {
     use HasFactory;
     protected $fillable = [
-      
+      'name',
     ];
 
     public function patient()

@@ -10,7 +10,15 @@ class Address extends Model
     use HasFactory;
 
     protected $fillable = [
-        
+        'calle',
+        'numero',
+        'colonia',
+        'ciudad',
+        'estado',
+        'codigo_postal',
+        'pais',
+        'referencias',
+        'patient_id',
     ];
 
     public function patient()

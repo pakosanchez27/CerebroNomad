@@ -75,6 +75,7 @@ class DoctorController extends Controller
     public function update(UpdateDoctorRequest $request, Doctor $doctor)
     {
         //
+        $doctor->update($request->all());
     }
 
     /**
@@ -83,5 +84,7 @@ class DoctorController extends Controller
     public function destroy(Doctor $doctor)
     {
         //
+        $doctor->delete();  
+
     }
 }

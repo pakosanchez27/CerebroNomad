@@ -11,7 +11,7 @@ class UpdateDoctorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,31 @@ class UpdateDoctorRequest extends FormRequest
      */
     public function rules(): array
     {
+      $method = $this->method();
+      if ($method === 'PUT') {
         return [
-            //
+          'name' => ['required', 'string', 'max:35'],
+          'apellido_paterno' => ['required', 'string', 'max:35'],
+          'apellido_materno' => ['required', 'string', 'max:35'],
+          'sexo' => ['required', 'string', 'in:Masculino,Femenino'],
+          'email' => ['required', 'string', 'email', 'max:50'],
+          'telefono' => ['required', 'string', 'max:10'],
+          'especialidad' => ['required', 'string', 'max:50'],
+          'cedula' => ['required', 'string', 'max:20'],
+          'nombre_clinica' => ['required', 'string', 'max:50'],
         ];
+      }else{
+        return [
+            'name' => ['sometimes', 'string', 'max:35'],
+            'apellido_paterno' => ['sometimes', 'string', 'max:35'],
+            'apellido_materno' => ['sometimes', 'string', 'max:35'],
+            'sexo' => ['sometimes', 'string', 'in:Masculino,Femenino'],
+            'email' => ['sometimes', 'string', 'email', 'max:50'],
+            'telefono' => ['sometimes', 'string', 'max:10'],
+            'especialidad' => ['sometimes', 'string', 'max:50'],
+            'cedula' => ['sometimes', 'string', 'max:20'],
+            'nombre_clinica' => ['sometimes', 'string', 'max:50'],
+        ];
+      }
     }
 }

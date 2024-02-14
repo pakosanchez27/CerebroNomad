@@ -9,7 +9,14 @@ class Guardian extends Model
 {
     use HasFactory;
     protected $fillable = [
-       
+        'name',
+        'apellido_paterno',
+        'apellido_materno',
+        'edad',
+        'email',
+        'telefono',
+        'parentesco',
+        'patient_id',
     ];
 
     public function patient()
