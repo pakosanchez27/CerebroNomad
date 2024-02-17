@@ -5,7 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Address;
-use App\Models\Rols;
+use App\Models\Test;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             PatientSeeder::class,
             GuardianSeeder::class,
             AddressSeeder::class,
+            TestSeeder::class,
             
 
 

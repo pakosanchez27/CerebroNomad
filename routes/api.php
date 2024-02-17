@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AddressController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\GuardianController;
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\InsuranceController;
@@ -32,7 +33,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::apiResource('doctors', DoctorController::class);
     Route::apiResource('guardians', GuardianController::class);
     Route::apiResource('address', AddressController::class);
-
+    Route::apiResource('tests', TestController::class);
 
 });
 
