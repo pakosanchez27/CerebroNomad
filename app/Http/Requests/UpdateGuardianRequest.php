@@ -11,7 +11,7 @@ class UpdateGuardianRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,30 @@ class UpdateGuardianRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        
+        if ($method === 'PUT') {
+            return [
+                'name' => ['required', 'string', 'max:255'],
+                'apellido_paterno' => ['required', 'string', 'max:255'],
+                'apellido_materno' => ['required', 'string', 'max:255'],
+                'edad' => ['required', 'max:3'],
+                'email' => ['required', 'email'],
+                'telefono' => ['required', 'string', 'max:10'],
+                'parentesco' => ['required', 'string', 'max:255'],
+                'patient_id' => ['required', 'integer']
+            ];
+        } else {
+            return [
+                'name' => ['sometimes', 'string', 'max:255'],
+                'apellido_paterno' => ['sometimes', 'string', 'max:255'],
+                'apellido_materno' => ['sometimes', 'string', 'max:255'],
+                'edad' => ['sometimes', 'max:3'],
+                'email' => ['sometimes', 'email'],
+                'telefono' => ['sometimes', 'string', 'max:10'],
+                'parentesco' => ['sometimes', 'string', 'max:255'],
+                'patient_id' => ['sometimes', 'integer']
+            ];
+        }
     }
 }

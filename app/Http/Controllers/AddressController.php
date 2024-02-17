@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\AddressFilter;
 use App\Models\Address;
+use Illuminate\Http\Request;
+use App\Filters\AddressFilter;
+use App\Http\Resources\AddressResource;
+use App\Http\Resources\AddressCollection;
 use App\Http\Requests\StoreAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
-use App\Http\Resources\AddressCollection;
-use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
@@ -29,7 +30,7 @@ class AddressController extends Controller
         }
 
         // Paginar los resultados y añadir los parámetros de la solicitud
-        return new AddressCollection($address->with('Patient')->paginate(10)->appends($request->query()));
+        return new AddressCollection($address->with('patient')->paginate(10)->appends($request->query()));
     }
 
     /**
@@ -45,7 +46,8 @@ class AddressController extends Controller
      */
     public function store(StoreAddressRequest $request)
     {
-        //
+        $address = Address::create($request->all());
+        return new AddressResource($address);
     }
 
     /**
@@ -53,7 +55,7 @@ class AddressController extends Controller
      */
     public function show(Address $address)
     {
-        //
+        return new AddressResource($address);
     }
 
     /**
@@ -69,7 +71,7 @@ class AddressController extends Controller
      */
     public function update(UpdateAddressRequest $request, Address $address)
     {
-        //
+        $address->update($request->all());
     }
 
     /**

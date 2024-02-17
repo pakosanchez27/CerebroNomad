@@ -3,11 +3,12 @@
 namespace Database\Factories;
 
 use App\Models\Doctor;
-use App\Models\Address;
-use App\Models\Patient;
 use App\Models\Insurance;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
+ */
 class PatientFactory extends Factory
 {
     /**
@@ -28,9 +29,8 @@ class PatientFactory extends Factory
             'telefono' => $this->faker->phoneNumber(),
             'tipo_sangre' => $this->faker->randomElement(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
             'descripcion_medica' => $this->faker->text(),
-            'insurance_id' => Insurance::factory(),
-            'doctor_id' => Doctor::factory(),
-            
+            'insurance_id' => Insurance::factory()->create()->id,
+            'doctor_id' => Doctor::factory()->create()->id,
         ];
     }
 }

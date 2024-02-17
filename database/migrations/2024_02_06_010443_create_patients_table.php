@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('telefono');
             $table->string('tipo_sangre');
             $table->text('descripcion_medica');
+           
 
             //llaves foraneas
            

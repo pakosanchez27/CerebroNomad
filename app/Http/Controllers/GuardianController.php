@@ -31,7 +31,6 @@ class GuardianController extends Controller
 
         // Cargar la relación 'patient' en la consulta antes de la paginación
         $guardian = $guardianQuery->with('Patient')->paginate(10);
-
         // Paginar los resultados y añadir los parámetros de la solicitud
         return new GuardianCollection($guardian->appends($request->query()));
     }
@@ -77,6 +76,7 @@ class GuardianController extends Controller
     public function update(UpdateGuardianRequest $request, Guardian $guardian)
     {
         //
+        $guardian->update($request->all());
     }
 
     /**
@@ -85,5 +85,6 @@ class GuardianController extends Controller
     public function destroy(Guardian $guardian)
     {
         //
+        $guardian->delete();
     }
 }

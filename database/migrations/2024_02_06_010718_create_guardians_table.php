@@ -23,12 +23,10 @@ return new class extends Migration
             $table->string('telefono');
             $table->string('parentesco');
 
-            //llaves foraneas
-            $table->unsignedBigInteger('patient_id');
+            // Llave foránea corregida
+            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
 
-            //Relaciones
-            $table->foreign('patient_id')->references('id')->on('patients');
-
+          
             $table->timestamps();
         });
     }
