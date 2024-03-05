@@ -1,0 +1,42 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+html {
+  font-size: 62.5%; // 1rem = 10px
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: v.$fuente;
+    font-size: 1.8rem;
+}
+
+a{
+    text-decoration: none;
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+p{
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+h1{
+    font-size: 3.6rem;
+    margin: 0;
+}
+h2{
+    font-size: 3rem;
+    margin: 0;
+}
+h3{
+    font-size: 2.4rem;
+    margin: 0;
+}

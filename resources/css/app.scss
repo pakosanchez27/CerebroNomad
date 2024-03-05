@@ -1,3 +1,11 @@
-@import 'bootstrap/scss/bootstrap';
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+@import "node_modules/bootstrap/scss/bootstrap";
 
+
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+// Variables
 @import 'base';
+@import 'auth';
