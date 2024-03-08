@@ -9,10 +9,24 @@
     border: 1px solid red;
 }
 
-.fondo-verde{
-    background-color: v.$fondo;
+.btn-primary{
+    background-color: v.$verde;
+    &:hover{
+        background-color: darken(v.$verde, 10%);
+    }
 }
 
 .fondo{
     background-color: v.$fondo;
+}
+
+.gris-texto{
+    color: v.$gris;
+}
+.grisClaro-texto{
+    color: lighten(v.$gris, 20%);
+}
+
+.active{
+    background-color: rgba($color: v.$blanco, $alpha: 0.5);
 }

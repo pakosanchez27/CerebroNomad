@@ -1,0 +1,26 @@
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
+
+.perfil-menu{
+
+    .dropdown{
+        background-color: transparent;
+        padding: 0;
+        img{
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+        }
+        button{
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+        }
+        svg{
+            width: 2rem;
+        }
+
+    }
+}

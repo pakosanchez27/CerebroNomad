@@ -1,13 +1,21 @@
 @import "resources/css/base/_variables.scss";
-@import "resources/css/base/_mixins.scss";
+@import "resources/css/base/_mixins.scss" ;
 .contenedor{
  
     
     height: 100vh;
     display: grid;
-    grid-template-columns: repeat(2, 35% 65%);
-    
+    grid-template-columns: 1;
 
+    // media query
+    @include tablet(){
+        grid-template-columns: repeat(2, 50% 50%);
+    }
+
+    @include desktop(){
+        grid-template-columns: repeat(2, 35% 65%);
+    }
+    
     &__form{
        
         height: 100vh;
@@ -17,23 +25,21 @@
 
     &__img{
         
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        padding: 2rem;
-        
-        
+        background-image: url('../../../public/img/img-login-tablet.png');
+        background-size: cover;
+        margin: 1rem;
+        background-repeat: no-repeat;
+        background-position: right center;
+        border-radius: 2rem;
 
-        img{
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-            border-radius: 2rem;
-            filter: brightness(0.7);
+        @include desktop{
+            background-image: url('../../../public/img/img-login.png');
+            background-size: cover;
         }
+        }
+        
     }
-}
+
 
 .logo-login{
     padding: 2rem 5rem; 

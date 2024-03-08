@@ -1,0 +1,69 @@
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
+
+// Estructura de la página
+
+.contenedor {
+    @include m.tablet {
+        display: grid;
+        grid-template-columns: repeat(2, 30% 70%);
+    }
+    @include m.desktop {
+        display: grid;
+        grid-template-columns: repeat(2, 15% 85%);
+    }
+
+    &__menu {
+        background-color: v.$azul;
+        display: none;
+        color: v.$blanco;
+        text-align: center;
+        @include m.tablet {
+            display: grid;
+            grid-template-rows: repeat(4, 2% 15% 79% 2%); 
+        }
+
+
+
+        
+    }
+
+    &__panel {
+        background-color: v.$fondo;
+        display: flex;
+        flex-direction: column;
+
+        &--header{
+            width: 100%;
+            background-color: v.$blanco;
+            height: 5rem;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &--portada{
+            background-color: red;
+            height: 16rem;
+        }
+        &--contenido{
+            background-color: yellow;
+            height: 100%;
+        }
+    }
+}
+
+
+.nav-mobil{
+    @include m.tablet {
+        display: none;
+    }
+}
+
+.dropdown-menu{
+    width: 25rem;
+
+    & li > a > img{
+        width: 1;
+    }
+}
