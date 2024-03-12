@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.scss')
     @vite('resources/js/app.js')
+    @vite('resources/js/APIs/clima.js')
     <title>CerebroNomad - @yield('titulo')</title>
 
 </head>
@@ -35,44 +36,50 @@
             {{-- Menu --}}
             <div class="menu-lateral mt-5">
                 <ul class=" list-unstyled ">
-                    <li class="active">
+                    <li class="{{ $path === 'home' ? 'active' : '' }}">
                         <a href="{{route('home')}}">
                             <img src="{{ asset('img/home.png') }}" alt="">
                             Home
                         </a>
                     </li>
-                    <li>
+                    <li class="{{ $path === 'finanzas' ? 'active' : '' }}">
+                        <a href="{{route('finanzas')}}">
+                            <img src="{{ asset('img/finansas.png') }}" alt="">
+                            Finanzas
+                        </a>
+                    </li>
+                    <li class="{{ $path === 'pacientes' ? 'active' : '' }}">
                         <a href="{{route('pacientes')}}">
                             <img src="{{ asset('img/paciente.png') }}" alt="">
                             Pacientes
                         </a>
                     </li>
-                    <li>
-                        <a href="">
+                    <li class="{{ $path === 'roles' ? 'active' : '' }}">
+                        <a href="{{route('roles')}}">
                             <img src="{{ asset('img/roles.png') }}" alt="">
                             Roles
                         </a>
                     </li>
-                    <li>
-                        <a href="">
-                            <img src="{{ asset('img/finansas.png') }}" alt="">
-                            Finanzas
+                    <li class="{{ $path === 'aseguradoras' ? 'active' : '' }}">
+                        <a href="{{route('aseguradoras')}}">
+                            <img src="{{ asset('img/aseguradoras.png') }}" alt="">
+                            Aseguradoras
                         </a>
                     </li>
-                    <li>
-                        <a href="">
+                    <li class="{{ $path === 'pacientes' ? 'vendedores' : '' }}">
+                        <a href="{{route('vendedores')}}">
                             <img src="{{ asset('img/vendedores.png') }}" alt="">
                             Vendedores
                         </a>
                     </li>
-                    <li>
-                        <a href="">
+                    <li class="{{ $path === 'doctores' ? 'active' : '' }}">
+                        <a href="{{route('doctores')}}">
                             <img src="{{ asset('img/doctores.png') }}" alt="">
                             Doctores
                         </a>
                     </li>
-                    <li>
-                        <a href="">
+                    <li class="{{ $path === 'pruebas' ? 'active' : '' }}">
+                        <a href="{{route('pruebas')}}">
                             <img src="{{ asset('img/pruebas.png') }}" alt="">
                             Pruebas
                         </a>
@@ -113,50 +120,56 @@
                             {{-- Menu --}}
                             <div class="menu-lateral mt-5">
                                 <ul class=" list-unstyled ">
-                                    <li>
-                                        <a href="">
+                                    <li class="{{ $path === 'home' ? 'active' : '' }}">
+                                        <a href="{{route('home')}}">
                                             <img src="{{ asset('img/home.png') }}" alt="">
                                             Home
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="">
-                                            <img src="{{ asset('img/paciente.png') }}" alt="">
-                                            Pacientes
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <img src="{{ asset('img/roles.png') }}" alt="">
-                                            Roles
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
+                                    <li class="{{ $path === 'finanzas' ? 'active' : '' }}">
+                                        <a href="{{route('finanzas')}}">
                                             <img src="{{ asset('img/finansas.png') }}" alt="">
                                             Finanzas
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="">
+                                    <li class="{{ $path === 'pacientes' ? 'active' : '' }}">
+                                        <a href="{{route('pacientes')}}">
+                                            <img src="{{ asset('img/paciente.png') }}" alt="">
+                                            Pacientes
+                                        </a>
+                                    </li>
+                                    <li class="{{ $path === 'roles' ? 'active' : '' }}">
+                                        <a href="{{route('roles')}}">
+                                            <img src="{{ asset('img/roles.png') }}" alt="">
+                                            Roles
+                                        </a>
+                                    </li>
+                                    <li class="{{ $path === 'aseguradoras' ? 'active' : '' }}">
+                                        <a href="{{route('aseguradoras')}}">
+                                            <img src="{{ asset('img/aseguradoras.png') }}" alt="">
+                                            Aseguradoras
+                                        </a>
+                                    </li>
+                                    <li class="{{ $path === 'pacientes' ? 'vendedores' : '' }}">
+                                        <a href="{{route('vendedores')}}">
                                             <img src="{{ asset('img/vendedores.png') }}" alt="">
                                             Vendedores
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="">
+                                    <li class="{{ $path === 'doctores' ? 'active' : '' }}">
+                                        <a href="{{route('doctores')}}">
                                             <img src="{{ asset('img/doctores.png') }}" alt="">
                                             Doctores
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="">
+                                    <li class="{{ $path === 'pruebas' ? 'active' : '' }}">
+                                        <a href="{{route('pruebas')}}">
                                             <img src="{{ asset('img/pruebas.png') }}" alt="">
                                             Pruebas
                                         </a>
                                     </li>
                                 </ul>
-
+                
                             </div>
                             <div class="copy post text-center ">
                                 <p class="h5">© 2021 CerebroNomad</p>
@@ -225,28 +238,6 @@
             </div>
         </div>
 </body>
-<script>
-    function actualizarHora() {
-        // Obtener la hora actual
-        var ahora = new Date();
-        var horas = ahora.getHours();
-        var minutos = ahora.getMinutes();
-        var segundos = ahora.getSeconds();
 
-        // Formatear la hora
-        horas = (horas < 10 ? "0" : "") + horas;
-        minutos = (minutos < 10 ? "0" : "") + minutos;
-        segundos = (segundos < 10 ? "0" : "") + segundos;
-
-        // Mostrar la hora en el elemento con id 'hora'
-        document.getElementById("hora").innerHTML = horas + ":" + minutos + ":" + segundos + " PM";
-    }
-
-    // Llamar a la función actualizarHora cada segundo
-    setInterval(actualizarHora, 1000);
-
-    // Llamar a la función una vez para que se muestre la hora inmediatamente
-    actualizarHora();
-</script>
 
 </html>

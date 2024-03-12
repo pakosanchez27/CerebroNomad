@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('vistas/home');
+        
+        $path = $request->path(); // Obtener la parte de la URL después del dominio
+        
+        return view('vistas/home' , ['path' => $path]);
     }
 }

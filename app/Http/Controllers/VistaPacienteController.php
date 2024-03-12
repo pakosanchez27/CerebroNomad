@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 class VistaPacienteController extends Controller
 {
-    public function index()
+    public function index(request $request)
     {
-        return view('vistas/pacientes');
+        $path = $request->path();
+        return view('vistas/pacientes', ['path' => $path]);
     }
 }

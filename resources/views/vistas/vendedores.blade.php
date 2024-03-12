@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Pacientes
+    Vendedores
 @endsection
 
 @section('contenido')
-    <h1>Pacientes</h1>
+    <h1>Vendedores</h1>
     
 @endsection
 
