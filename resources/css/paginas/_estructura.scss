@@ -4,6 +4,7 @@
 // Estructura de la página
 
 .contenedor {
+    height: 100vh;
     @include m.tablet {
         display: grid;
         grid-template-columns: repeat(2, 30% 70%);
@@ -37,17 +38,17 @@
             width: 100%;
             background-color: v.$blanco;
             height: 5rem;
-            padding: 1rem 2rem;
+            padding: 1rem  3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            @include m.tablet {
+                padding: 1rem 3rem;
+            }
         }
-        &--portada{
-            background-color: red;
-            height: 16rem;
-        }
+     
         &--contenido{
-            background-color: yellow;
+            background-color: rgb(88, 36, 77);
             height: 100%;
         }
     }

@@ -11,14 +11,17 @@
 </head>
 
 <body class="fondo">
-    <div class="contenedor">
-        <div class="contenedor__form">
+    <div class="contenedor-login">
+        <div class="contenedor-login__form">
             <div class="logo-login ">
                 <a href="#"><img src="{{ asset('img/logo.png') }}" alt="Logo"></a>
             </div>
             <div action="" class="formulario-login">
-                <h1 class="w-75 fw-normal mb-3 ">Bienvenido a Cerebro Nomad.</h1>
-                <p>Ingresa tus datos para iniciar sesión en cerebro Nomad. </p>
+                <div class="formulario-login__texto">
+                    <h1 class="w-75 fw-normal mb-3 ">Bienvenido a Cerebro Nomad.</h1>
+                    <p>Ingresa tus datos para iniciar sesión en cerebro Nomad. </p>
+                </div>
+                
                 <form action="{{ route('login') }}" class="mt-5 formulario" method="POST" novalidate>
                     @csrf
                     @if (session('status'))
@@ -26,7 +29,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="exampleFormControlInput1" class="form-label">Correo Electronico</label>
                             <input type="email"
                                 class="form-control form-control-lg @error('email') border-danger   @enderror "
@@ -38,7 +41,7 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
                             <input type="password"
                                 class="form-control form-control-lg  @error('email') border-danger   @enderror  "
@@ -65,7 +68,7 @@
                 </form>
             </div>
         </div>
-        <div class="contenedor__img">
+        <div class="contenedor-login__img">
 
         </div>
     </div>

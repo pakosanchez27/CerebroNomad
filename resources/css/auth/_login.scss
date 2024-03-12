@@ -1,6 +1,6 @@
 @import "resources/css/base/_variables.scss";
 @import "resources/css/base/_mixins.scss" ;
-.contenedor{
+.contenedor-login{
  
     
     height: 100vh;
@@ -46,6 +46,9 @@
 }
 
 .formulario-login {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
     padding: 5rem; 
     h1{
         font-size: 4rem;

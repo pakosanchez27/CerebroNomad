@@ -58,9 +58,37 @@
             border-radius: 50%;
         }
     }
+
+    &__datos{
+        line-height: 1;
+        p{
+            font-size: 1.6rem;
+            margin: 0;
+        }
+        span{
+            font-size: 1.4rem;
+        }
+    }
 }
 
 .offcanvas-body{
     background-color: v.$azul;
     color: v.$blanco;
 }
+
+.menu-perfil {
+    width: 15rem;
+
+    li {
+        margin-bottom: .5rem;
+        a {
+            color: v.$gris;
+            font-size: 1.3rem;
+            transition: color 0.3s ease; // Agrega una transición suave al color
+            &:hover {
+                color:  #666666; // Cambia el color al pasar el mouse sobre el enlace
+            }
+        }
+    }
+}
+
