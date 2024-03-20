@@ -232,10 +232,8 @@
                 </div>
             </div>
 
-
-            <div class="contenedor__panel--contenido">
-               @yield('contenido')
-            </div>
+            @yield('contenido')
+            
         </div>
 </body>
 

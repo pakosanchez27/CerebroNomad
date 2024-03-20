@@ -22,7 +22,7 @@ class LoginController extends Controller
             return back()->with('status', 'Credenciales incorrectas');
         }
 
-        dd('ok');
+        return redirect()->route('home');           
 
     }
 }

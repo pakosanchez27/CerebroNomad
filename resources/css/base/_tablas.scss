@@ -1,0 +1,35 @@
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
+
+.tabla{
+   
+    &__header{
+        background-color: v.$azul;
+        height: 5rem;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        padding: 0rem 2rem;
+
+        p{
+            font-weight: v.$delgada;
+            color: v.$blanco;
+
+            span{
+                
+                font-weight: v.$bold;
+            }
+
+            a{
+                color: v.$azulTexto;
+            }
+        }
+    }
+
+    &__body{
+        
+        
+    }
+
+
+}
