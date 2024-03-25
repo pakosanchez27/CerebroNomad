@@ -4,6 +4,8 @@
 .tabla{
    
     &__header{
+        border-top-left-radius: .5rem;
+        border-top-right-radius: .5rem;
         background-color: v.$azul;
         height: 5rem;
         display: flex;
@@ -26,10 +28,31 @@
         }
     }
 
-    &__body{
-        
-        
+   
+
+
+}
+
+
+.tabla__body {
+    /* Estilos para el contenedor de la tabla */
+
+   
+        width: 100%;
+        overflow-x: auto; /* Activar scroll horizontal si la tabla sobrepasa el ancho */
+        overflow-y: hidden; /* Ocultar scroll vertical */
+  
+
+    th {
+        font-size: 1.8rem;
     }
 
+    td {
+        font-size: 1.6rem;
+        padding: 1rem 0;
+    }
 
+    a {
+        font-size: 1.6rem;
+    }
 }

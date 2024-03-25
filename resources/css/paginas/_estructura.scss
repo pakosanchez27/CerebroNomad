@@ -5,6 +5,7 @@
 
 .contenedor {
     height: 100vh;
+    
     @include m.tablet {
         display: grid;
         grid-template-columns: repeat(2, 30% 70%);

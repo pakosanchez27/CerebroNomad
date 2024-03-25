@@ -11,4 +11,7 @@ export default defineConfig({
             refresh: ['resources/views/**', 'resources/sass/**', 'resources/js/**'],
         }),
     ],
+    optimizeDeps: {
+        include: ['chart.js']
+    }
 });

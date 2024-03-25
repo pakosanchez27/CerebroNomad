@@ -28,8 +28,8 @@
                     <img src="{{ asset('img/fotoPerfil.jpg') }}" alt="foto de perfil">
                 </div>
                 <div class="card-perfil__datos">
-                    <p class=" fw-bold ">Juan Peres</p>
-                    <span class=" fw-light ">Administrador</span>
+                    <p class=" fw-bold ">{{auth()->user()->name}} {{auth()->user()->apellido_paterno}}</p>
+                    <span class=" fw-light ">{{auth()->user()->rol}}</span>
                 </div>
             </div>
 
@@ -37,51 +37,72 @@
             <div class="menu-lateral mt-5">
                 <ul class=" list-unstyled ">
                     <li class="{{ $path === 'home' ? 'active' : '' }}">
-                        <a href="{{route('home')}}">
-                            <img src="{{ asset('img/home.png') }}" alt="">
-                            Home
+                        <a href="{{route('home')}}" class="d-flex align-items-center  gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+                              </svg>
+                              <p>Home</p>
                         </a>
                     </li>
                     <li class="{{ $path === 'finanzas' ? 'active' : '' }}">
-                        <a href="{{route('finanzas')}}">
-                            <img src="{{ asset('img/finansas.png') }}" alt="">
-                            Finanzas
+                        <a href="{{route('finanzas')}}" class="d-flex align-items-center  gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
+                                <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542s.987-.254 1.194-.542C9.42 6.644 9.5 6.253 9.5 6a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2z"/>
+                                <path d="M16 6.5h-5.551a2.7 2.7 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5s-1.613-.412-2.006-.958A2.7 2.7 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5z"/>
+                              </svg>
+                              <p>Finanzas</p>
                         </a>
                     </li>
                     <li class="{{ $path === 'pacientes' ? 'active' : '' }}">
-                        <a href="{{route('pacientes')}}">
-                            <img src="{{ asset('img/paciente.png') }}" alt="">
-                            Pacientes
+                        <a href="{{route('pacientes')}}" class="d-flex align-items-center  gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+                              </svg>
+                              <p>Pacientes</p>
                         </a>
                     </li>
                     <li class="{{ $path === 'roles' ? 'active' : '' }}">
-                        <a href="{{route('roles')}}">
-                            <img src="{{ asset('img/roles.png') }}" alt="">
-                            Roles
+                        <a href="{{route('roles')}}" class="d-flex align-items-center  gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                              </svg>
+                              <p>Colaboradores</p>
                         </a>
                     </li>
                     <li class="{{ $path === 'aseguradoras' ? 'active' : '' }}">
-                        <a href="{{route('aseguradoras')}}">
-                            <img src="{{ asset('img/aseguradoras.png') }}" alt="">
-                            Aseguradoras
+                        <a href="{{route('aseguradoras')}}" class="d-flex align-items-center  gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hospital-fill" viewBox="0 0 16 16">
+                                <path d="M6 0a1 1 0 0 0-1 1v1a1 1 0 0 0-1 1v4H1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h6v-2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5V16h6a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-3V3a1 1 0 0 0-1-1V1a1 1 0 0 0-1-1zm2.5 5.034v1.1l.953-.55.5.867L9 7l.953.55-.5.866-.953-.55v1.1h-1v-1.1l-.953.55-.5-.866L7 7l-.953-.55.5-.866.953.55v-1.1zM2.25 9h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 2 9.75v-.5A.25.25 0 0 1 2.25 9m0 2h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5a.25.25 0 0 1 .25-.25M2 13.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zM13.25 9h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5a.25.25 0 0 1 .25-.25M13 11.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm.25 1.75h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5a.25.25 0 0 1 .25-.25"/>
+                              </svg>
+                              <p>Aseguradoras</p>
                         </a>
                     </li>
-                    <li class="{{ $path === 'pacientes' ? 'vendedores' : '' }}">
-                        <a href="{{route('vendedores')}}">
-                            <img src="{{ asset('img/vendedores.png') }}" alt="">
-                            Vendedores
+                    <li class="{{ $path === 'vendedores' ? 'vendedores' : '' }}">
+                        <a href="{{route('vendedores')}}" class="d-flex align-items-center  gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-person-vcard" viewBox="0 0 16 16">
+                                <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5"/>
+                                <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z"/>
+                              </svg>
+                              <p>Vendedores</p>
                         </a>
                     </li>
                     <li class="{{ $path === 'doctores' ? 'active' : '' }}">
-                        <a href="{{route('doctores')}}">
-                            <img src="{{ asset('img/doctores.png') }}" alt="">
-                            Doctores
+                        <a href="{{route('doctores')}}" class="d-flex align-items-center  gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
+                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0m2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755"/>
+                              </svg>
+                              <p>Doctores</p>
                         </a>
                     </li>
                     <li class="{{ $path === 'pruebas' ? 'active' : '' }}">
-                        <a href="{{route('pruebas')}}">
-                            <img src="{{ asset('img/pruebas.png') }}" alt="">
-                            Pruebas
+                        <a href="{{route('pruebas')}}" class="d-flex align-items-center  gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-data-fill" viewBox="0 0 16 16">
+                                <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5zM10 8a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1"/>
+                              </svg>
+                              <p>Pruebas</p>
                         </a>
                     </li>
                 </ul>
@@ -121,51 +142,72 @@
                             <div class="menu-lateral mt-5">
                                 <ul class=" list-unstyled ">
                                     <li class="{{ $path === 'home' ? 'active' : '' }}">
-                                        <a href="{{route('home')}}">
-                                            <img src="{{ asset('img/home.png') }}" alt="">
-                                            Home
+                                        <a href="{{route('home')}}" class="d-flex align-items-center  gap-2 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                                                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                                                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+                                              </svg>
+                                              <p>Home</p>
                                         </a>
                                     </li>
                                     <li class="{{ $path === 'finanzas' ? 'active' : '' }}">
-                                        <a href="{{route('finanzas')}}">
-                                            <img src="{{ asset('img/finansas.png') }}" alt="">
-                                            Finanzas
+                                        <a href="{{route('finanzas')}}" class="d-flex align-items-center  gap-2 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
+                                                <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542s.987-.254 1.194-.542C9.42 6.644 9.5 6.253 9.5 6a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2z"/>
+                                                <path d="M16 6.5h-5.551a2.7 2.7 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5s-1.613-.412-2.006-.958A2.7 2.7 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5z"/>
+                                              </svg>
+                                              <p>Finanzas</p>
                                         </a>
                                     </li>
                                     <li class="{{ $path === 'pacientes' ? 'active' : '' }}">
-                                        <a href="{{route('pacientes')}}">
-                                            <img src="{{ asset('img/paciente.png') }}" alt="">
-                                            Pacientes
+                                        <a href="{{route('pacientes')}}" class="d-flex align-items-center  gap-2 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                                <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+                                              </svg>
+                                              <p>Pacientes</p>
                                         </a>
                                     </li>
                                     <li class="{{ $path === 'roles' ? 'active' : '' }}">
-                                        <a href="{{route('roles')}}">
-                                            <img src="{{ asset('img/roles.png') }}" alt="">
-                                            Roles
+                                        <a href="{{route('roles')}}" class="d-flex align-items-center  gap-2 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                                              </svg>
+                                              <p>Colaboradores</p>
                                         </a>
                                     </li>
                                     <li class="{{ $path === 'aseguradoras' ? 'active' : '' }}">
-                                        <a href="{{route('aseguradoras')}}">
-                                            <img src="{{ asset('img/aseguradoras.png') }}" alt="">
-                                            Aseguradoras
+                                        <a href="{{route('aseguradoras')}}" class="d-flex align-items-center  gap-2 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hospital-fill" viewBox="0 0 16 16">
+                                                <path d="M6 0a1 1 0 0 0-1 1v1a1 1 0 0 0-1 1v4H1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h6v-2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5V16h6a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-3V3a1 1 0 0 0-1-1V1a1 1 0 0 0-1-1zm2.5 5.034v1.1l.953-.55.5.867L9 7l.953.55-.5.866-.953-.55v1.1h-1v-1.1l-.953.55-.5-.866L7 7l-.953-.55.5-.866.953.55v-1.1zM2.25 9h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 2 9.75v-.5A.25.25 0 0 1 2.25 9m0 2h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5a.25.25 0 0 1 .25-.25M2 13.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zM13.25 9h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5a.25.25 0 0 1 .25-.25M13 11.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm.25 1.75h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5a.25.25 0 0 1 .25-.25"/>
+                                              </svg>
+                                              <p>Aseguradoras</p>
                                         </a>
                                     </li>
-                                    <li class="{{ $path === 'pacientes' ? 'vendedores' : '' }}">
-                                        <a href="{{route('vendedores')}}">
-                                            <img src="{{ asset('img/vendedores.png') }}" alt="">
-                                            Vendedores
+                                    <li class="{{ $path === 'vendedores' ? 'vendedores' : '' }}">
+                                        <a href="{{route('vendedores')}}" class="d-flex align-items-center  gap-2 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-person-vcard" viewBox="0 0 16 16">
+                                                <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5"/>
+                                                <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z"/>
+                                              </svg>
+                                              <p>Vendedores</p>
                                         </a>
                                     </li>
                                     <li class="{{ $path === 'doctores' ? 'active' : '' }}">
-                                        <a href="{{route('doctores')}}">
-                                            <img src="{{ asset('img/doctores.png') }}" alt="">
-                                            Doctores
+                                        <a href="{{route('doctores')}}" class="d-flex align-items-center  gap-2 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
+                                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0m2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755"/>
+                                              </svg>
+                                              <p>Doctores</p>
                                         </a>
                                     </li>
                                     <li class="{{ $path === 'pruebas' ? 'active' : '' }}">
-                                        <a href="{{route('pruebas')}}">
-                                            <img src="{{ asset('img/pruebas.png') }}" alt="">
-                                            Pruebas
+                                        <a href="{{route('pruebas')}}" class="d-flex align-items-center  gap-2 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-data-fill" viewBox="0 0 16 16">
+                                                <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
+                                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5zM10 8a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1"/>
+                                              </svg>
+                                              <p>Pruebas</p>
                                         </a>
                                     </li>
                                 </ul>

@@ -36,7 +36,12 @@ Route::post('/login', [LoginController::class, 'store']); // login page
 
 Route::get('/home',[HomeController::class, 'index'])->name('home'); //dashboard page
 Route::get('/pacientes',[VistaPacienteController::class, 'index'])->name('pacientes'); //pacientes page
+
+//Roles
 Route::get('/roles', [VistaRolesController::class, 'index'])->name('roles'); //roles page
+Route::post('/roles', [VistaRolesController::class, 'store'])->name('roles.store'); //roles page 
+
+
 Route::get('/finanzas', [VistaFinanzasController::class, 'index'])->name('finanzas'); //finanzas page
 Route::get('/vendedores',[VistaVendedoresController::class, 'index'])->name('vendedores'); //vendedores page
 Route::get('/doctores',[VistaDoctoresController::class, 'index'])->name('doctores'); //doctores page
