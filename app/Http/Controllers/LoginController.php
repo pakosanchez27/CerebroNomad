@@ -17,12 +17,21 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        
+
         if (!auth()->attempt($request->only('email', 'password'))) {
             return back()->with('status', 'Credenciales incorrectas');
         }
 
-        return redirect()->route('home');           
+        // Obtener al usuario autenticado
+        $user = auth()->user();
 
+        // Verificar si la contraseña del usuario es la predeterminada
+        if (password_verify('Nomad2024', $user->password)) {
+            
+            // Redirigir al usuario a la vista para cambiar la contraseña
+            return redirect()->route('cambiar-contraseña', ['user' => $user = auth()->user()]);
+        }
+
+        return redirect()->route('home');
     }
 }

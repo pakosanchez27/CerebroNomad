@@ -1,0 +1,46 @@
+@use "../base/variables"as v;
+@use "../base/mixins"as m;
+
+.contenido-roles {
+    padding: 5rem 3rem;
+
+    &__texto {
+        h2 {
+            font-size: 3rem;
+            color: v.$azul;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.6rem;
+            color: v.$gris;
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__tablas {
+        
+    }
+
+}
+
+.tabla__cards {
+    height: 60rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Estilo del scroll */
+.tabla__cards::-webkit-scrollbar {
+    width: 8px; /* Ancho del scrollbar */
+}
+
+.tabla__cards::-webkit-scrollbar-thumb {
+    background-color: v.$azulTexto; /* Color del thumb del scrollbar */
+    border-radius: 4px; /* Bordes redondeados del thumb */
+}
+
+/* Estilo del scrollbar solo cuando se requiera */
+.tabla__cards:hover::-webkit-scrollbar-thumb {
+    background-color: v.$azulTexto; /* Cambiar color cuando se haga hover */
+}

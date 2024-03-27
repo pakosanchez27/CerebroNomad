@@ -6,17 +6,7 @@
 
 @section('contenido')
     <div class="contenedor__panel--contenido vista__home d-flex flex-column ">
-        <div class="vista__home--portada p-5 d-flex justify-content-between align-items-center text-white">
-            <div class="bienvenida-texto">
-                <h2>Bienvenido <span>{{auth()->user()->name}}</span></h2>
-                <p class="fw-light">¿Cómo estás el día de hoy?</p>
-            </div>
-            <div class="hora-clima" id="hora-clima">
-                <p id="hora" class="hora"></p>
-
-            </div>
-
-        </div>
+      
         <div class="vista__home--contenido  ">
             <div class="contenedor__cards ">
                 <button class="card card-opcRapida shadow borde-azul" data-bs-toggle="modal" data-bs-target="#AgregarColaborador">
@@ -168,45 +158,39 @@
                 </a>
             </div>
             <div class="contenedor__tablas ">
+
+               
                 <div class="contenedor__tablas--principal row gap-5  ">
-                    <div class="tabla tabla-colaboradores col   ">
+                    <div class="tabla tabla-colaboradores col-12  ">
                         <div class="tabla__header ">
                             <p><span>Colaboradores </span> <a href="{{ route('roles') }}"> Ver mas</a></p>
                         </div>
 
-                        <div class="tabla__body">
-                            <table class="table   table-striped table-hover  ">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Apellidos</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">rol</th>
-                                        <th scope="col"></th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($users as $user)
-                                        <tr>
-                                            <td scope="row">{{ $user->id }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->apellido_paterno }}</td>
-                                            <td>{{$user->email}}</td>
-
-                                            <td>
-                                                <span class="badge text-bg-dark w-100 ">{{ $user->rol }}</span>
-                                            </td>
-
-                                        </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
+                        <div class="tabla__cards">
+                            @foreach ($users as $user)
+                                <div
+                                    class=" card card-rol d-flex flex-row justify-content-between align-items-center gap-5 px-5 py-3 ">
+    
+                                    <div class="img-rol ">
+                                        <img src="{{ asset('img/usuario.svg') }}" alt="" width="100px">
+                                    </div>
+    
+                                    <div class="card-rol__datos w-75  ">
+                                        <p>{{ $user->name }} {{ $user->apellido_paterno }} </p>
+                                        <span class="h5">{{ $user->email }}</span>
+                                    </div>
+    
+                                    <div class="badge bg-success w-25  ">
+                                        <span>{{ $user->rol }}</span>
+                                    </div>
+    
+                                   
+    
+                                </div> <!-- card -->
+                            @endforeach
                         </div>
                     </div>
-                    <div class="tabla tabla-vendedores col">
+                    <div class="tabla tabla-vendedores col-12 ">
                         <div class="tabla__header">
                             <p><span>Vendedores </span> <a href="{{ route('vendedores') }}"> Ver mas</a></p>
                         </div>
@@ -253,15 +237,22 @@
                         <div class="tabla__body">
                             <canvas id="ventasPorMes"></canvas>
 
-                            
                                
                         </div>
                     </div>
 
                 </div>
+                
             </div>
         </div>
     </div>
 
     </div>
+    @if (@session('success'))
+        
+        <script>
+            alert('{{ session('success') }}');
+        </script>
+        
+    @endif
 @endsection

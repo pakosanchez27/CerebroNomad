@@ -273,7 +273,17 @@
                     </div>
                 </div>
             </div>
+  <div class="vista__home--portada p-5 d-flex justify-content-between align-items-center text-white">
+            <div class="bienvenida-texto">
+                <h2>Bienvenido <span>{{auth()->user()->name}}</span></h2>
+                <p class="fw-light">¿Cómo estás el día de hoy?</p>
+            </div>
+            <div class="hora-clima" id="hora-clima">
+                <p id="hora" class="hora"></p>
 
+            </div>
+
+        </div>
             @yield('contenido')
             
         </div>
