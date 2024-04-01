@@ -7,6 +7,10 @@
     &__contenedor{
         width: 100  ;
         @include m.tablet{
+            width: 90%;
+        }
+
+        @include m.desktop{
             width: 75%;
         }
         
@@ -23,5 +27,14 @@
     width: 100%;
     @include m.tablet{
         width: 50%;
+    }
+}
+
+.card_paciente{
+    border-radius: 1rem;
+    width: 30rem;
+    img{
+        margin-top: -6rem;
+        
     }
 }

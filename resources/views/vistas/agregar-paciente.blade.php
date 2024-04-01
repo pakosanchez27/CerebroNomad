@@ -11,32 +11,46 @@
                 <h2>Datos del Paciente</h2>
                 <p>Ingresa los datos del paciente </p>
             </div>
-            <form class="agregar-paciente__datosPersonales">
-                <h3 class="mb-4 h3">Nombre completo</h3>
+            <form class="agregar-paciente__datosPersonales" action="{{route('pacientes.store')}}" method="post" novalidate>
+                @csrf
+                <h3 class="mb-4">Nombre completo</h3>
                 <div class="row">
                     <div class="mb-3 col-12 col-md-12 col-lg">
-                        <label for="nombre" class="form-label h4">Nombre</label>
-                        <input type="text" class="form-control mb-2" id="nombre" placeholder="Juan" name="name">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Juan" name="name">
+                        @error('name')
+                            <div class="text-danger h5 mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg">
-                        <label for="apellido_paterno" class="form-label h4">Apellido Paterno</label>
-                        <input type="text" class="form-control mb-2" id="apellido_paterno" placeholder="Perez"
+                        <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="apellido_paterno" placeholder="Perez"
                             name="apellido_paterno">
+                        @error('apellido_paterno')
+                            <div class="text-danger h5 mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg">
-                        <label for="apellido_materno" class="form-label h4">Apellido Materno</label>
-                        <input type="text" class="form-control mb-2" id="apellido_materno" placeholder="Perez"
+                        <label for="apellido_materno" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control" id="apellido_materno" placeholder="Perez"
                             name="apellido_materno">
+                        @error('apellido_materno')
+                            <div class="text-danger h5 mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <h3 class="mb-4 h3">Fecha nacimiento</h3>
+                    <div class="col-12 col-lg">
+                        <h3 class="mb-4">Fecha de nacimiento</h3>
                         <input class="form-control w-100 mb-4" type="date" name="fecha_nacimiento" id="fecha_nacimiento">
+                        @error('fecha_nacimiento')
+                            <div class="text-danger h5 mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div class="col-12 col-lg-6">
-                        <h3 class="mb-4 h3">Tipo de Sangre</h3>
-                        <select name="tipo_sangre" id="tipo_sangre" class="form-select form-select-lg ">
+                    <div class="col-12 col-lg">
+                        <h3 class="mb-4">Tipo de Sangre</h3>
+                        <select name="tipo_sangre" id="tipo_sangre" class="form-select form-select-lg">
                             <option selected disabled>--Seleccione--</option>
                             <option value="A+">A+</option>
                             <option value="A-">A-</option>
@@ -47,14 +61,27 @@
                             <option value="O+">O+</option>
                             <option value="O-">O-</option>
                         </select>
+                        @error('tipo_sangre')
+                            <div class="text-danger h5 mt-2">{{ $message }}</div>
+                        @enderror
+                        
+                    </div>
+                    <div class="mb-3 col-12 col-lg">
+                        <h3 class="mb-4">Sexo</h3>
+                        <select class="form-select form-select-lg" id="sexo" name="sexo">
+                            <option selected disabled>--Selecciona--</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                            <option value="O">Otro</option>
+                        </select>
                     </div>
                 </div>
 
-                <h3 class="mb-4 h3">Identificación</h3>
+                <h3 class="mb-4">Identificación</h3>
                 <div class="row">
-                    <div class="mb-3 col-12 col-md-6 ">
-                        <label for="tipo_identificacion" class="form-label h4">Tipo de Identificación</label>
-                        <select name="tipo_identificacion" id="tipo_identificacion" class="form-select form-select-lg ">
+                    <div class="mb-3 col-12 col-md-6">
+                        <label for="tipo_identificacion" class="form-label">Tipo de Identificación</label>
+                        <select class="form-select" id="tipo_identificacion" name="tipo_identificacion">
                             <option selected disabled>--Seleccione--</option>
                             <option value="INE">INE</option>
                             <option value="DNI">Documento Nacional de Identidad (DNI)</option>
@@ -68,51 +95,73 @@
                             <option value="Número de Seguro Social (NSS)">Número de Seguro Social (NSS)</option>
                             <option value="Otro">Otro</option>
                         </select>
+                        @error('tipo_identificacion')
+                            <div class="text-danger h5 mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div class="mb-3 col-12 col-md-6 ">
-                        <label for="numero_identificacion" class="form-label h4">Número Identificación</label>
-                        <input type="text" class="form-control mb-2" id="numero_identificacion" placeholder="Perez"
-                            name="numero_identificacion">
+                    <div class="mb-3 col-12 col-md-6">
+                        <label for="numero_identificacion" class="form-label">Número de Identificación</label>
+                        <input type="text" class="form-control" id="numero_identificacion" name="numero_identificacion">
+                        @error('numero_identificacion')
+                            <div class="text-danger h5 mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
-                <h3 class="mb-4 h3">Datos de contacto</h3>
+                <h3 class="mb-4">Datos de contacto</h3>
                 <div class="row">
-                    <div class="mb-3 col-12 col-lg-6 ">
-                        <label for="telefono" class="form-label h4">Teléfono</label>
-                        <input type="tel" class="form-control  mb-2" id="telefono" placeholder="555-555-555"
-                            name="telefono">
+                    <div class="mb-3 col-12 col-lg-6">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" class="form-control" id="telefono" placeholder="555-555-555" name="telefono">
+                        @error('telefono')
+                            <div class="text-danger h5 mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div class="mb-3 col-12 col-lg-6 ">
-                        <label for="email" class="form-label h4">Email</label>
-                        <input type="email" class="form-control mb-2" id="email" placeholder="correo@correo.com"
+                    <div class="mb-3 col-12 col-lg-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="correo@correo.com"
                             name="email">
+                        @error('email')
+                            <div class="text-danger h5 mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
-
-                <h3 class="mb-4 h3">Aseguradora</h3>
-                <select name="aseguradora" id="aseguradora" class="form-select form-select-lg ">
+                <h3 class="mb-4">Aseguradora</h3>
+                <select name="aseguradora" id="aseguradora" class="form-select form-select-lg">
                     <option disabled selected>--Elige una aseguradora--</option>
                     @foreach ($aseguradoras as $aseguradora)
-                        <option value="{{ $aseguradora->name }}">{{ $aseguradora->name }}</option>
+                        <option value="{{ $aseguradora->id }}">{{ $aseguradora->name }}</option>
                     @endforeach
                     <option value="Ninguna">Ninguna</option>
                 </select>
+                @error('aseguradora')
+                    <div class="text-danger h5 mt-2">{{ $message }}</div>
+                @enderror
 
-                <h3 class="mb-4 h3">Datos Médicos</h3>
-                <label for="doctor" class="form-label h4">Doctor</label>
-                <select name="doctor" id="doctor" class="form-select form-select-lg">
-                    <option disabled selected>--Elige un doctor--</option>
-                    @foreach ($doctor as $doc)
-                        <option value="{{ $doc->name }}">{{ $doc->name }}</option>
-                    @endforeach
-                    <option value="Ninguno">Ninguno</option>
-                </select>
+                <h3 class="mb-4">Datos Médicos</h3>
+                <div class="mb-3">
+                    <label for="doctor" class="form-label">Doctor</label>
+                    <select name="doctor" id="doctor" class="form-select form-select-lg">
+                        <option disabled selected>--Elige un doctor--</option>
+                        @foreach ($doctores as $doctor)
+                            <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                        @endforeach
+                        <option value="Ninguno">Ninguno</option>
+                    </select>
+                    @error('doctor')
+                        <div class="text-danger h5 mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
 
-                <label for="descripcion_medica" class="form-label h4 mt-5">Descripción Médica</label>
-                <textarea name="descripcion_medica" id="descripcion_medica" cols="30" rows="10" class="form-control"></textarea>
+                <div class="mb-3">
+                    <label for="descripcion_medica" class="form-label">Descripción Médica</label>
+                    <textarea name="descripcion_medica" id="descripcion_medica" cols="30" rows="10" class="form-control"></textarea>
+                    @error('descripcion_medica')
+                        <div class="text-danger h5 mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
 
-                <input type="submit" value="Registrar Paciente" class="btn btn-success  mt-5">
+                <input type="submit" value="Registrar Paciente" class="btn btn-success mt-5">
             </form>
 
 
