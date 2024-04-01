@@ -8,6 +8,50 @@
     <div class="contenedor__panel--contenido vista__home d-flex flex-column ">
 
         <div class="vista__home--contenido  ">
+            <div class="contenedor-resumen row  gap-5  gap-lg-0  p-5  ">
+
+                <div class="contenedor-resumen__cards row gap-5 justify-content-center   ">
+                    <div
+                        class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card col-12 col-md-6 col-lg ">
+                        <h3 class="fw-bold fs-4 ">Venta del Mes</h3>
+                        <p class=" fs-1 fw-bold ">$10,250 <span class=" fs-4 text-success  ">+2.5%</span></p>
+                        <p class="fs-5 text-secondary ">Venta hasta el dia de hoy @php
+                            echo date('d-m-Y');
+                        @endphp</p>
+                    </div> <!-- card -->
+
+                    <div
+                        class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card   card col-12 col-md-6 col-lg">
+                        <h3 class="fw-bold fs-4 ">Total pacientes</h3>
+                        <p class=" fs-1 fw-bold ">{{ $totalPacientes }} <span class=" fs-4 text-success  ">pacientes</span>
+                        </p>
+                        <p class="fs-5 text-secondary ">Pacientes hasta @php
+                            echo date('d-m-Y');
+                        @endphp</p>
+                    </div> <!-- card -->
+                    <div
+                        class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card  card col-12 col-md-6 col-lg">
+                        <h3 class="fw-bold fs-4 ">Doctores</h3>
+                        <p class=" fs-1 fw-bold ">{{ $totalDoctores }} <span class=" fs-4 text-success  ">Doctores</span>
+                        </p>
+                        <p class="fs-5 text-secondary ">Doctores afiliados hasta @php
+                            echo date('d-m-Y');
+                        @endphp</p>
+                    </div> <!-- card -->
+
+                    <div
+                        class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card  card col-12 col-md-6 col-lg">
+                        <h3 class="fw-bold fs-4 ">Vendedores</h3>
+                        <p class=" fs-1 fw-bold ">{{ $totalVendedores }} <span
+                                class=" fs-4 text-success  ">Vendedores</span></p>
+                        <p class="fs-5 text-secondary ">Venta hasta el dia de hoy @php
+                            echo date('d-m-Y');
+                        @endphp</p>
+                    </div> <!-- card -->
+                </div>
+
+            </div>
+       
             <div class="contenedor__cards ">
                 <button class="card card-opcRapida shadow borde-azul" data-bs-toggle="modal"
                     data-bs-target="#AgregarColaborador">
@@ -115,33 +159,105 @@
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                            <div class="tabla__header   ">
+                                <p><span class="">Agregar Vendedor </span></p>
                             </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
+                            <form action="{{ route('vendedores.store') }}" method="POST" class="p-4 shadow  rounded-2 " novalidate id="miFormulario">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}">
+                                    @error('nombre')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class=" row">
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Apellido Paterno</label>
+                                        <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno"
+                                            value="{{ old('apellido_paterno') }}">
+                                        @error('apellido_paterno')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="message-text" class="col-form-label">Message:</label>
-                                        <textarea class="form-control" id="message-text"></textarea>
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Apellido Materno</label>
+                                        <input type="text" class="form-control" id="apellido_materno" name="apellido_materno"
+                                            value="{{ old('apellido_materno') }}">
+                
                                     </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Send message</button>
-                            </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+                                    @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class=" row">
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Télefono</label>
+                                        <input type="tel" class="form-control" id="telefono" name="telefono"
+                                            value="{{ old('telefono') }}">
+                                        @error('telefono')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="Zona">Zona designada</label>
+                                        <select id="zona" name="zona" class="form-select form-select-lg">
+                                            <option selected disabled>Selecciona una zona</option>
+                                            <option value="Aguascalientes">Aguascalientes</option>
+                                            <option value="Baja California">Baja California</option>
+                                            <option value="Baja California Sur">Baja California Sur</option>
+                                            <option value="Campeche">Campeche</option>
+                                            <option value="Chiapas">Chiapas</option>
+                                            <option value="Chihuahua">Chihuahua</option>
+                                            <option value="Ciudad de México">Ciudad de México</option>
+                                            <option value="Coahuila">Coahuila</option>
+                                            <option value="Colima">Colima</option>
+                                            <option value="Durango">Durango</option>
+                                            <option value="Guanajuato">Guanajuato</option>
+                                            <option value="Guerrero">Guerrero</option>
+                                            <option value="Hidalgo">Hidalgo</option>
+                                            <option value="Jalisco">Jalisco</option>
+                                            <option value="México">México</option>
+                                            <option value="Michoacán">Michoacán</option>
+                                            <option value="Morelos">Morelos</option>
+                                            <option value="Nayarit">Nayarit</option>
+                                            <option value="Nuevo León">Nuevo León</option>
+                                            <option value="Oaxaca">Oaxaca</option>
+                                            <option value="Puebla">Puebla</option>
+                                            <option value="Querétaro">Querétaro</option>
+                                            <option value="Quintana Roo">Quintana Roo</option>
+                                            <option value="San Luis Potosí">San Luis Potosí</option>
+                                            <option value="Sinaloa">Sinaloa</option>
+                                            <option value="Sonora">Sonora</option>
+                                            <option value="Tabasco">Tabasco</option>
+                                            <option value="Tamaulipas">Tamaulipas</option>
+                                            <option value="Tlaxcala">Tlaxcala</option>
+                                            <option value="Veracruz">Veracruz</option>
+                                            <option value="Yucatán">Yucatán</option>
+                                            <option value="Zacatecas">Zacatecas</option>
+                                        </select>
+                                        @error('zona')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                
+                
+                
+                                <button type="submit" class="btn btn-success  ">Agregar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                onclick="document.querySelector('#miFormulario').reset()">Cerrar</button>
+                            </form>
                         </div>
                     </div>
                 </div>
 
-                <a href="" class="card card-opcRapida shadow borde-verde"  data-bs-toggle="modal"
-                data-bs-target="#AgregarAseguradora">
+                <a href="" class="card card-opcRapida shadow borde-verde" data-bs-toggle="modal"
+                    data-bs-target="#AgregarAseguradora">
                     <div class="card-opcRapida__img verde">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white"
                             class="bi bi-hospital" viewBox="0 0 16 16">
@@ -158,7 +274,7 @@
                 </a>
 
                 <!-- Modal -->
-                <div class="modal fade" id="AgregarAseguradora" tabindex="-1" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" id="AgregarAseguradora" tabindex="-1" aria-labelledby="modal"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -168,53 +284,57 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="{{route('aseguradoras.store')}}" method="POST" class="p-4 " novalidate id="miFormulario">
+                                <form action="{{ route('aseguradoras.store') }}" method="POST" class="p-4 " novalidate
+                                    id="miFormulario">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="nombre" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{old('nombre')}}" >
+                                        <input type="text" class="form-control" id="nombre" name="nombre"
+                                            value="{{ old('nombre') }}">
                                         @error('nombre')
                                             <div class="alert alert-danger">{{ $message }}</div>
-                                            
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="representante" class="form-label
+                                        <label for="representante"
+                                            class="form-label
                                     ">Representante</label>
-                                        <input type="text" class="form-control" id="representante" name="representante" value="{{old('representante')}}">
+                                        <input type="text" class="form-control" id="representante"
+                                            name="representante" value="{{ old('representante') }}">
                                         @error('representante')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        
-                                    @enderror
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}">
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            value="{{ old('email') }}">
                                         @error('email')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        
-                                    @enderror
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="telefono" class="form-label">Teléfono</label>
-                                        <input type="tel" class="form-control" id="telefono" name="telefono" value="{{old('telefono')}}" >
+                                        <input type="tel" class="form-control" id="telefono" name="telefono"
+                                            value="{{ old('telefono') }}">
                                         @error('telefono')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        
-                                    @enderror
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="modal-footer mt-5">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="document.querySelector('#miFormulario').reset()">Cerrar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                            onclick="document.querySelector('#miFormulario').reset()">Cerrar</button>
                                         <button type="submit" class="btn btn-primary">Agregar</button>
                                     </div>
-                            </form>
+                                </form>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
 
-                <a href="" class="card card-opcRapida shadow borde-morado">
+                <a href="" class="card card-opcRapida shadow borde-morado " data-bs-toggle="modal"
+                data-bs-target="#AgregarDoctor">
                     <div class="card-opcRapida__img morado">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white"
                             class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
@@ -227,107 +347,133 @@
                         <p>Da de alta a un doctor colaborador nuevo</p>
                     </div>
                 </a>
-            </div>
-            <div class="contenedor__tablas  ">
 
-
-                <div class="contenedor__tablas--principal row gap-5  ">
-                    <div class="tabla tabla-colaboradores col-12  ">
-                        <div class="tabla__header ">
-                            <p><span>Colaboradores </span> <a href="{{ route('roles') }}"> Ver mas</a></p>
-                        </div>
-
-                        <div class="tabla__cards">
-                            @foreach ($users as $user)
-                                <div
-                                    class=" card card-rol d-flex flex-row justify-content-between align-items-center gap-5 px-5 py-3 ">
-
-                                    <div class="img-rol ">
-                                        <img src="{{ asset('img/usuario.svg') }}" alt="" width="100px">
+                <div class="modal fade" id="AgregarDoctor" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="tabla__header   ">
+                                <p><span class="">Agregar Vendedor </span></p>
+                            </div>
+                            <form action="{{ route('doctores.store') }}" method="POST" class="p-4 shadow  rounded-2 " novalidate>
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}">
+                                    @error('nombre')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class=" row">
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Apellido Paterno</label>
+                                        <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno"
+                                            value="{{ old('apellido_paterno') }}">
+                                        @error('apellido_paterno')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-
-                                    <div class="card-rol__datos w-75  ">
-                                        <p>{{ $user->name }} {{ $user->apellido_paterno }} </p>
-                                        <span class="h5">{{ $user->email }}</span>
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Apellido Materno</label>
+                                        <input type="text" class="form-control" id="apellido_materno" name="apellido_materno"
+                                            value="{{ old('apellido_materno') }}">
+                
                                     </div>
-
-                                    <div class="badge bg-success w-25  ">
-                                        <span>{{ $user->rol }}</span>
+                
+                                </div>
+                
+                                <div class="row">
+                                    <div class="mb-3 col col-md-6">
+                                        <label for="sexo" class="form-label">Sexo</label>
+                                        <select class="form-select form-select-lg " id="sexo" name="sexo">
+                                            <option value="M" {{ old('sexo') == 'M' ? 'selected' : '' }}>Masculino</option>
+                                            <option value="F" {{ old('sexo') == 'F' ? 'selected' : '' }}>Femenino</option>
+                                        </select>
+                                        @error('sexo')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-
-
-
-                                </div> <!-- card -->
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="tabla tabla-vendedores col-12 ">
-                        <div class="tabla__header">
-                            <p><span>Vendedores </span> <a href="{{ route('vendedores') }}"> Ver mas</a></p>
-                        </div>
-
-                        <div class="table-responsive">
-
-                            <table class="table table-striped ">
-                                <thead>
-                                    <tr>
-                                        <th>Vendedor</th>
-                                        <th>Email</th>
-                                        <th>Telefono</th>
-                                       
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($vendedores as $vendedor)
-                                        <tr class="">
-                                            <td class="d-flex  gap-5 p-3">
-                                                <img src="{{ asset('img/usuario.svg') }}" alt="" width="40px">
-                                                <div class="d-flex flex-column ">
-                                                    {{ $vendedor->name }} {{ $vendedor->apellido_paterno }}
-                                                    {{ $vendedor->apellido_materno }}
-                                                    <span class="text-success fw-normal">{{ $vendedor->zona }}</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                {{ $vendedor->email }}
-                                            </td>
-                                            <td>
-                                                {{ $vendedor->telefono }}
-                                            </td>
-            
-            
-                                          
-            
-            
-            
-                                        </tr>
-                                    @endforeach
-            
-            
-            
-            
-                                </tbody>
-                            </table>
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Email </label>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            value="{{ old('email') }}">
+                                        @error('email')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                
+                                <div class=" row">
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Télefono</label>
+                                        <input type="tel" class="form-control" id="telefono" name="telefono"
+                                            value="{{ old('telefono') }}">
+                                        @error('telefono')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Especialidad</label>
+                                        <input type="text" class="form-control" id="especialidad" name="especialidad"
+                                            value="{{ old('especialidad') }}">
+                                        @error('especialidad')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class=" row">
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Cedula</label>
+                                        <input type="text" class="form-control" id="cedula" name="cedula"
+                                            value="{{ old('cedula') }}">
+                                        @error('cedula')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Clinia o Hospital</label>
+                                        <input type="text" class="form-control" id="nombre_clinica" name="nombre_clinica"
+                                            value="{{ old('nombre_clinica') }}">
+                                    </div>
+                                    @error('nombre_clinica')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Asistente</label>
+                                    <input type="text" class="form-control" id="asistente" name="asistente"
+                                        value="{{ old('asistente') }}">
+                                  
+                                </div>
+                
+                                <div class=" row">
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Télefono Asistente</label>
+                                        <input type="tel" class="form-control" id="telefono_asistente" name="telefono_asistente"
+                                            value="{{ old('telefono_asistente') }}">
+                                      
+                                    </div>
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="nombre" class="form-label">Email Asistente</label>
+                                        <input type="email" class="form-control" id="email_asistente" name="email_asistente"
+                                            value="{{ old('email_asistente') }}">
+                                      
+                                    </div>
+                                </div>
+                
+                                <button type="submit" class="btn btn-success  ">Agregar</button>
+                
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="contenedor__tablas--secundaria ">
-                    <div class="tabla tabla-Grafica ">
-                        <div class="tabla__header">
-                            <p><span> Ganancias </span> <a href="{{ route('finanzas') }}"> Ver mas</a></p>
-                        </div>
-
-                        <div class="tabla__body">
-                            <canvas id="ventasPorMes"></canvas>
-
-
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
+
         </div>
+
+
+    </div>
     </div>
 
     </div>

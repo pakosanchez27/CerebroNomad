@@ -106,29 +106,7 @@
     background-color: v.$morado;
 }
 
-.contenedor__tablas{
-    // border: solid 1px blue;
-    height: 100%;
-    padding: 2rem 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-   
 
-    @include m.desktop {
-        
-        display: grid;
-        grid-template-columns: repeat(2, 50% 50%);
-        
-    }
-
-
- 
-
-       
-        
-    
-}
 .borde-azul{
     border-top: solid 2px v.$azulClaro;
 }
@@ -140,4 +118,48 @@
 }
 .borde-morado{
     border-top: solid 2px v.$morado;
+}
+
+canvas#ventasPorMes{
+    width: 100%;
+    height: 30rem;
+    margin: 0 auto;
+    display: block;
+}
+
+.contenedor-resumen__cards--card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    width: 30rem;
+    height: 15rem;
+    transition: all 0.3s ease; /* Agregamos una transición para suavizar el efecto */
+    
+    &:hover {
+        transform: scale(1.05); /* Escalamos ligeramente la tarjeta en hover */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Agregamos una sombra */
+    }
+
+    &__texto {
+        color: v.$azulTexto;
+        text-align: right;
+        
+        h4 {
+            color: v.$azulTexto;
+            font-size: 2rem;
+            font-weight: v.$delgada;
+            span {
+                font-weight: v.$bold;
+            }
+        }
+
+        p {
+            text-align: right;
+            font-size: 1.2rem;
+            color: v.$negro;
+            font-weight: v.$delgada;
+        }
+    }
 }
