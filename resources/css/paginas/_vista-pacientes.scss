@@ -1,0 +1,27 @@
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
+
+
+.agregar-paciente{
+
+    &__contenedor{
+        width: 100  ;
+        @include m.tablet{
+            width: 75%;
+        }
+        
+        h3{
+           
+            color: v.$azul;
+            margin-top: 3rem;
+        }
+    }
+
+}
+
+#aseguradora{
+    width: 100%;
+    @include m.tablet{
+        width: 50%;
+    }
+}

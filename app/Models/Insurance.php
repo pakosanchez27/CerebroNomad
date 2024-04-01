@@ -10,6 +10,10 @@ class Insurance extends Model
     use HasFactory;
     protected $fillable = [
       'name',
+      'representante',
+      'telefono',
+      'email'
+      
     ];
 
     public function patient()

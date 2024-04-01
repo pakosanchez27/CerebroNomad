@@ -25,7 +25,7 @@
             {{-- Perfil --}}
             <div class="card-perfil d-flex justify-content-center align-items-center mt-5 gap-3">
                 <div class="card-perfil__img">
-                    <img src="{{ asset('img/fotoPerfil.jpg') }}" alt="foto de perfil">
+                    <img src="{{ asset('img/usuario.svg') }}" alt="foto de perfil">
                 </div>
                 <div class="card-perfil__datos">
                     <p class=" fw-bold ">{{auth()->user()->name}} {{auth()->user()->apellido_paterno}}</p>
@@ -131,7 +131,7 @@
                             {{-- Perfil --}}
                             <div class="card-perfil d-flex justify-content-center align-items-center gap-3">
                                 <div class="card-perfil__img">
-                                    <img src="{{ asset('img/fotoPerfil.jpg') }}" alt="foto de perfil">
+                                    <img src="{{ asset('img/usuario.svg') }}" alt="foto de perfil">
                                 </div>
                                 <div class="card-perfil__datos">
                                     <p class=" fw-bold ">Juan Peres</p>
@@ -223,7 +223,7 @@
                 <div class="perfil-menu">
                     <div class="dropdown">
                         <button class=" border-0 " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ asset('img/fotoPerfil.jpg') }}" alt="">
+                            <img src="{{ asset('img/usuario.svg') }}" alt="">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -259,15 +259,13 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
-                                    </svg>
-
-                                    Cerrar Sesión
-                                </a>
+                                <form action="{{route('logout')}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class=" border-0 text-danger p-0"><p class="h4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+                                      </svg>
+                                       Cerrar Sesión</p></button>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -287,6 +285,8 @@
             @yield('contenido')
             
         </div>
+        
+        
 </body>
 
 

@@ -53,9 +53,9 @@
 
 
 
-                        <div class="form-check text-start my-5">
-                            <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                            <label class="form-check-label h5" for="flexCheckDefault">
+                        <div class="form-check mb-5 ">
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                            <label class="form-check-label" for="remember">
                                 Recordar contraseña
                             </label>
                         </div>

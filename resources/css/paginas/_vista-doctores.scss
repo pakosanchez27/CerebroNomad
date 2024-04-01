@@ -1,0 +1,31 @@
+.container-doctor-info {
+    margin-top: 50px;
+}
+.card-doctor-info {
+    border: none;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+.card-header-doctor-info {
+    background-color: #f8f9fa;
+    border-bottom: none;
+    font-weight: bold;
+}
+.card-body-doctor-info {
+    padding: 30px;
+}
+.card-body-doctor-info p {
+    margin-bottom: 10px;
+}
+.card-body-doctor-info h5 {
+    margin-bottom: 20px;
+}
+.btn-regresar-doctor-info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+@media (max-width: 576px) {
+    .card-body-doctor-info {
+        padding: 20px;
+    }
+}

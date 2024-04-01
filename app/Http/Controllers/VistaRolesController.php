@@ -40,7 +40,7 @@ class VistaRolesController extends Controller
 
         // enviar correo de alta de usuario
         Mail::to($request->email)->send(new AltaColaboradorMailable());
-      
+
 
 
         return redirect()->back()->with('message', 'Usuario creado correctamente la contraseña temporal es:  Nomad2024');
@@ -78,7 +78,6 @@ class VistaRolesController extends Controller
 
         // Redirigir a la página deseada después de la actualización
         return redirect()->route('roles')->with('success', 'Usuario actualizado correctamente');
-
     }
 
     function destroy(Request $request, $id)
@@ -92,6 +91,24 @@ class VistaRolesController extends Controller
 
         // Redirigir a la página deseada después de la eliminación
         return redirect()->route('roles')->with('success', 'Usuario eliminado correctamente');
-        
-}
+    }
+
+    function resetPassword(Request $request, $id)
+    {
+    
+        $password = bcrypt('Nomad2024');
+
+        // Buscar el usuario por su ID
+        $user = User::findOrFail($id);
+
+    
+        // Actualizar la contraseña del usuario
+        $user->password = $password;
+
+        // Guardar los cambios en la base de datos
+        $user->save();
+
+        // Redirigir a la página deseada después de la actualización
+        return back()->with('success', 'Contraseña restablecida correctamente');
+    }
 }
