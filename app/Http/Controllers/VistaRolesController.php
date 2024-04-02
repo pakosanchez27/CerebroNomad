@@ -24,6 +24,7 @@ class VistaRolesController extends Controller
 
     function store(Request $request)
     {
+        
 
         $password = bcrypt('Nomad2024');
 

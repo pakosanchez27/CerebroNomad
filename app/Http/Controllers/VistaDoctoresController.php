@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class VistaDoctoresController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('auth');    
+    }
+    
     function index(Request $request)
     {
         $path = $request->path();
