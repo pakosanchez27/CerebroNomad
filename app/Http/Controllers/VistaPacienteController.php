@@ -24,7 +24,8 @@ class VistaPacienteController extends Controller
     public function show(request $request, $id)
     {
         $path = $request->path();
-        return view('vistas.pacientes', ['path' => $path]);
+        $paciente = Patient::find($id);
+        return view('vistas.ver-paciente', ['path' => $path, 'paciente' => $paciente]);
     }
 
     public function create(request $request)
@@ -72,4 +73,5 @@ class VistaPacienteController extends Controller
 
         return redirect()->route('pacientes')->with('agregado', 'Paciente creado correctamente');
     }
+
 }

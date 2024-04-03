@@ -70,8 +70,8 @@
                         <h3 class="mb-4">Sexo</h3>
                         <select class="form-select form-select-lg" id="sexo" name="sexo">
                             <option selected disabled>--Selecciona--</option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenido">Femenino</option>
                             <option value="O">Otro</option>
                         </select>
                     </div>
