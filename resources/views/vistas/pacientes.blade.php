@@ -81,6 +81,41 @@
                     </div>
                 </div>
             @endforeach
+            <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination justify-content-center  pagination-lg">
+                    <!-- Botón de "Previous" -->
+                    @if ($pacientes->onFirstPage())
+                        <li class="page-item disabled">
+                            <span class="page-link">Previous</span>
+                        </li>
+                    @else
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $pacientes->previousPageUrl() }}" tabindex="-1">Previous</a>
+                        </li>
+                    @endif
+                    @foreach ($pacientes as $index => $pagina)
+                    <li class="page-item {{ $index + 1 == $current_page ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $pacientes->url($index + 1) }}">{{ $index + 1 }}</a>
+                    </li>
+                @endforeach
+                
+
+
+
+                    <!-- Botón de "Next" -->
+                    @if ($pacientes->hasMorePages())
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $pacientes->nextPageUrl() }}">Next</a>
+                        </li>
+                    @else
+                        <li class="page-item disabled">
+                            <span class="page-link">Next</span>
+                        </li>
+                    @endif
+                </ul>
+            </nav>
+
+
 
         </div>
 

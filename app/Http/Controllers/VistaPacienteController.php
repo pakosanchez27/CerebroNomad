@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
-use App\Models\Insurance;
+use App\Models\Address;
+use App\Models\Guardian;
 use App\Models\Patient;
+use App\Models\Insurance;
 use Illuminate\Http\Request;
 
 class VistaPacienteController extends Controller
@@ -17,15 +19,20 @@ class VistaPacienteController extends Controller
     public function index(request $request)
     {
         $path = $request->path();
-        $pacientes = Patient::all();
-        return view('vistas.pacientes', ['path' => $path , 'pacientes' => $pacientes]);
+        $pacientes = Patient::orderBy('created_at', 'desc')->paginate(10);
+        $current_page = $pacientes->currentPage();
+        return view('vistas.pacientes', ['path' => $path , 'pacientes' => $pacientes, 'current_page' => $current_page]);
     }
 
     public function show(request $request, $id)
     {
         $path = $request->path();
         $paciente = Patient::find($id);
-        return view('vistas.ver-paciente', ['path' => $path, 'paciente' => $paciente]);
+        $aseguradora = Insurance::find($paciente->insurance_id);
+        $doctor = Doctor::find($paciente->doctor_id);
+        $direccion = Address::where('patient_id', $paciente->id)->first();
+        $responsable = Guardian::where('patient_id', $paciente->id)->first();
+        return view('vistas.ver-paciente', ['path' => $path, 'paciente' => $paciente , 'aseguradora' => $aseguradora, 'doctor' => $doctor, 'direccion' => $direccion, 'responsable' => $responsable]);
     }
 
     public function create(request $request)
