@@ -7,9 +7,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\logoutController;
 use App\Http\Controllers\VistaAseguradorasController;
+use App\Http\Controllers\VistaDireccionesController;
 use App\Http\Controllers\VistaRolesController;
 use App\Http\Controllers\VistaDoctoresController;
 use App\Http\Controllers\VistaFinanzasController;
+use App\Http\Controllers\VistaGuardiansController;
 use App\Http\Controllers\VistaPacienteController;
 use App\Http\Controllers\VistaPruebasController;
 use App\Http\Controllers\VistaVendedoresController;
@@ -51,8 +53,7 @@ Route::get('/pacientes/{id}', [VistaPacienteController::class, 'show'])->name('p
 Route::post('/pacientes/crear', [VistaPacienteController::class, 'store'])->name('pacientes.store'); //pacientes page
 Route::get('/pacientes/editar/{id}', [VistaPacienteController::class, 'edit'])->name('pacientes.edit'); //pacientes page
 Route::put('/pacientes/editar/{id}', [VistaPacienteController::class, 'update'])->name('pacientes.update'); //pacientes page
-Route::delete('/pacientes/{id}', [VistaPacienteController::class, 'destroy'])->name('pacientes.destroy'); //pacientes page
-
+Route::delete('/pacientes/{id}', [VistaPacienteController::class, 'destroy'])->name('pacientes.destroy'); //pacientes page)
 
 
 //Roles
@@ -100,3 +101,12 @@ Route::put('/aseguradoras/editar/{id}', [VistaAseguradorasController::class, 'up
 Route::delete('/aseguradoras/{id}', [VistaAseguradorasController::class, 'destroy'])->name('aseguradoras.destroy'); //aseguradoras page 
 
 
+// Direcciones
+
+Route::post('/direcciones', [VistaDireccionesController::class, 'store'])->name('direcciones.store'); //pacientes page
+Route::put('/direcciones/editar/{id}', [VistaDireccionesController::class, 'update'])->name('direcciones.update'); //pacientes page
+
+
+// Guardian
+Route::post('/guardianes', [VistaGuardiansController::class, 'store'])->name('guardianes.store'); //pacientes page
+Route::put('/guardianes/editar/{id}', [VistaGuardiansController::class, 'update'])->name('guardianes.update'); //pacientes page

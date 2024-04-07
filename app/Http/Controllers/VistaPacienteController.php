@@ -81,4 +81,54 @@ class VistaPacienteController extends Controller
         return redirect()->route('pacientes')->with('agregado', 'Paciente creado correctamente');
     }
 
+    public function edit(request $request, $id)
+    {
+        $path = $request->path();
+        $paciente = Patient::find($id);
+        $aseguradoras = Insurance::all();
+        $doctores = Doctor::all();
+        return view('vistas.editar-paciente', ['path' => $path , 'paciente' => $paciente, 'aseguradoras' => $aseguradoras , 'doctores' => $doctores]);
+    }
+
+    public function update(request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'apellido_paterno' => 'required',
+            'fecha_nacimiento' => 'required',
+            'tipo_sangre' => 'required',
+            'tipo_identificacion' => 'required',
+            'numero_identificacion' => 'required',
+            'telefono' => 'required',
+            'email' => 'required|email',   
+            'aseguradora' => 'required',
+            'doctor' => 'required',
+            'descripcion_medica' => 'required',
+        ]);
+
+        $paciente = Patient::find($id);
+        $paciente->name = $request->name;
+        $paciente->apellido_paterno = $request->apellido_paterno;
+        $paciente->apellido_materno = $request->apellido_materno;
+        $paciente->fecha_nacimiento = $request->fecha_nacimiento;
+        $paciente->sexo = $request->sexo;
+        $paciente->tipo_sangre = $request->tipo_sangre;
+        $paciente->tipo_identificacion = $request->tipo_identificacion;
+        $paciente->num_identificacion = $request->numero_identificacion;
+        $paciente->telefono = $request->telefono;
+        $paciente->email = $request->email;
+        $paciente->insurance_id = $request->aseguradora;
+        $paciente->doctor_id = $request->doctor;
+        $paciente->descripcion_medica = $request->descripcion_medica;
+        $paciente->save();
+
+        return redirect()->route('pacientes')->with('editado', 'Paciente editado correctamente');
+    }
+
+    public function destroy($id)
+    {
+        $paciente = Patient::find($id);
+        $paciente->delete();
+        return redirect()->route('pacientes')->with('eliminado', 'Paciente eliminado correctamente');
+    }
 }
