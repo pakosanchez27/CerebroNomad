@@ -19,4 +19,8 @@ class Vendor extends Model
         'password'
     ];
     
+    public function ventas()
+    {
+        return $this->hasMany(Venta::class);
+    }
 }

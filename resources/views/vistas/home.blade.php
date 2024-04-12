@@ -333,6 +333,8 @@
                     </div>
                 </div>
 
+              
+              
                 <a href="" class="card card-opcRapida shadow borde-morado " data-bs-toggle="modal"
                 data-bs-target="#AgregarDoctor">
                     <div class="card-opcRapida__img morado">
@@ -468,6 +470,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
 
         </div>

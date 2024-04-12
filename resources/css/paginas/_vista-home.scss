@@ -105,6 +105,10 @@
 .morado{
     background-color: v.$morado;
 }
+.turquesa{
+    background-color: #40E0D0;
+
+}
 
 
 .borde-azul{
@@ -118,6 +122,10 @@
 }
 .borde-morado{
     border-top: solid 2px v.$morado;
+}
+
+.borde-turquesa{
+    border-top: solid 2px #40E0D0;
 }
 
 canvas#ventasPorMes{

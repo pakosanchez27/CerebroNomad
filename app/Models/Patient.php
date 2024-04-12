@@ -44,4 +44,10 @@ class Patient extends Model
         return $this->hasOne(Address::class); // Asumiendo que la relación se establece correctamente en el modelo Address
     }
 
+    public function ventas()
+    {
+        return $this->hasMany(Venta::class);
+    }
+
+    
 }

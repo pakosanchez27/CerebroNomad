@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Auth\Events\Login;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\VentaController;
 use App\Http\Controllers\logoutController;
-use App\Http\Controllers\VistaAseguradorasController;
 use App\Http\Controllers\VistaRolesController;
+use App\Http\Controllers\VistaPruebasController;
 use App\Http\Controllers\VistaDoctoresController;
 use App\Http\Controllers\VistaFinanzasController;
 use App\Http\Controllers\VistaPacienteController;
-use App\Http\Controllers\VistaPruebasController;
 use App\Http\Controllers\VistaVendedoresController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\VistaAseguradorasController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,3 +101,6 @@ Route::put('/aseguradoras/editar/{id}', [VistaAseguradorasController::class, 'up
 Route::delete('/aseguradoras/{id}', [VistaAseguradorasController::class, 'destroy'])->name('aseguradoras.destroy'); //aseguradoras page 
 
 
+// ventas
+Route::get('/ventas/crear/{patient_id}', [VentaController::class, 'create'])->name('venta.create'); //ventas page
+Route::post('/ventas/crear/{patient_id}', [VentaController::class, 'store'])->name('venta.store'); //ventas page
