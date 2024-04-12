@@ -11,6 +11,7 @@ use App\Http\Controllers\VistaRolesController;
 use App\Http\Controllers\VistaPruebasController;
 use App\Http\Controllers\VistaDoctoresController;
 use App\Http\Controllers\VistaFinanzasController;
+use App\Http\Controllers\VistaGuardiansController;
 use App\Http\Controllers\VistaPacienteController;
 use App\Http\Controllers\VistaVendedoresController;
 use App\Http\Controllers\VistaAseguradorasController;
@@ -52,8 +53,7 @@ Route::get('/pacientes/{id}', [VistaPacienteController::class, 'show'])->name('p
 Route::post('/pacientes/crear', [VistaPacienteController::class, 'store'])->name('pacientes.store'); //pacientes page
 Route::get('/pacientes/editar/{id}', [VistaPacienteController::class, 'edit'])->name('pacientes.edit'); //pacientes page
 Route::put('/pacientes/editar/{id}', [VistaPacienteController::class, 'update'])->name('pacientes.update'); //pacientes page
-Route::delete('/pacientes/{id}', [VistaPacienteController::class, 'destroy'])->name('pacientes.destroy'); //pacientes page
-
+Route::delete('/pacientes/{id}', [VistaPacienteController::class, 'destroy'])->name('pacientes.destroy'); //pacientes page)
 
 
 //Roles
@@ -100,6 +100,16 @@ Route::get('/aseguradoras/editar/{id}', [VistaAseguradorasController::class, 'ed
 Route::put('/aseguradoras/editar/{id}', [VistaAseguradorasController::class, 'update'])->name('aseguradoras.update'); //aseguradoras page 
 Route::delete('/aseguradoras/{id}', [VistaAseguradorasController::class, 'destroy'])->name('aseguradoras.destroy'); //aseguradoras page 
 
+
+// Direcciones
+
+Route::post('/direcciones', [VistaDireccionesController::class, 'store'])->name('direcciones.store'); //pacientes page
+Route::put('/direcciones/editar/{id}', [VistaDireccionesController::class, 'update'])->name('direcciones.update'); //pacientes page
+
+
+// Guardian
+Route::post('/guardianes', [VistaGuardiansController::class, 'store'])->name('guardianes.store'); //pacientes page
+Route::put('/guardianes/editar/{id}', [VistaGuardiansController::class, 'update'])->name('guardianes.update'); //pacientes page
 
 // ventas
 Route::get('/ventas/crear/{patient_id}', [VentaController::class, 'create'])->name('venta.create'); //ventas page

@@ -17,14 +17,14 @@
                 <div class="row">
                     <div class="mb-3 col-12 col-md-12 col-lg">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" placeholder="Juan" name="name">
+                        <input type="text" class="form-control" id="nombre"  name="name">
                         @error('name')
                             <div class="text-danger h5 mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg">
                         <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
-                        <input type="text" class="form-control" id="apellido_paterno" placeholder="Perez"
+                        <input type="text" class="form-control" id="apellido_paterno" 
                             name="apellido_paterno">
                         @error('apellido_paterno')
                             <div class="text-danger h5 mt-2">{{ $message }}</div>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg">
                         <label for="apellido_materno" class="form-label">Apellido Materno</label>
-                        <input type="text" class="form-control" id="apellido_materno" placeholder="Perez"
+                        <input type="text" class="form-control" id="apellido_materno" 
                             name="apellido_materno">
                         @error('apellido_materno')
                             <div class="text-danger h5 mt-2">{{ $message }}</div>
@@ -80,8 +80,8 @@
                 <h3 class="mb-4">Identificación</h3>
                 <div class="row">
                     <div class="mb-3 col-12 col-md-6">
-                        <label for="tipo_identificacion" class="form-label">Tipo de Identificación</label>
-                        <select class="form-select" id="tipo_identificacion" name="tipo_identificacion">
+                        <label for="tipo_identificacion" class="form-label ">Tipo de Identificación</label>
+                        <select class="form-select form-select-lg " id="tipo_identificacion" name="tipo_identificacion">
                             <option selected disabled>--Seleccione--</option>
                             <option value="INE">INE</option>
                             <option value="DNI">Documento Nacional de Identidad (DNI)</option>
@@ -112,14 +112,14 @@
                 <div class="row">
                     <div class="mb-3 col-12 col-lg-6">
                         <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="telefono" placeholder="555-555-555" name="telefono">
+                        <input type="tel" class="form-control" id="telefono"  name="telefono">
                         @error('telefono')
                             <div class="text-danger h5 mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3 col-12 col-lg-6">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="correo@correo.com"
+                        <input type="email" class="form-control" id="email" 
                             name="email">
                         @error('email')
                             <div class="text-danger h5 mt-2">{{ $message }}</div>

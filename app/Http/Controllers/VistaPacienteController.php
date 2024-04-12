@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
-use App\Models\Insurance;
+use App\Models\Address;
+use App\Models\Guardian;
 use App\Models\Patient;
+use App\Models\Insurance;
 use Illuminate\Http\Request;
 
 class VistaPacienteController extends Controller
@@ -17,15 +19,20 @@ class VistaPacienteController extends Controller
     public function index(request $request)
     {
         $path = $request->path();
-        $pacientes = Patient::all();
-        return view('vistas.pacientes', ['path' => $path , 'pacientes' => $pacientes]);
+        $pacientes = Patient::orderBy('created_at', 'desc')->paginate(10);
+        $current_page = $pacientes->currentPage();
+        return view('vistas.pacientes', ['path' => $path , 'pacientes' => $pacientes, 'current_page' => $current_page]);
     }
 
     public function show(request $request, $id)
     {
         $path = $request->path();
         $paciente = Patient::find($id);
-        return view('vistas.ver-paciente', ['path' => $path, 'paciente' => $paciente]);
+        $aseguradora = Insurance::find($paciente->insurance_id);
+        $doctor = Doctor::find($paciente->doctor_id);
+        $direccion = Address::where('patient_id', $paciente->id)->first();
+        $responsable = Guardian::where('patient_id', $paciente->id)->first();
+        return view('vistas.ver-paciente', ['path' => $path, 'paciente' => $paciente , 'aseguradora' => $aseguradora, 'doctor' => $doctor, 'direccion' => $direccion, 'responsable' => $responsable]);
     }
 
     public function create(request $request)
@@ -74,4 +81,54 @@ class VistaPacienteController extends Controller
         return redirect()->route('pacientes')->with('agregado', 'Paciente creado correctamente');
     }
 
+    public function edit(request $request, $id)
+    {
+        $path = $request->path();
+        $paciente = Patient::find($id);
+        $aseguradoras = Insurance::all();
+        $doctores = Doctor::all();
+        return view('vistas.editar-paciente', ['path' => $path , 'paciente' => $paciente, 'aseguradoras' => $aseguradoras , 'doctores' => $doctores]);
+    }
+
+    public function update(request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'apellido_paterno' => 'required',
+            'fecha_nacimiento' => 'required',
+            'tipo_sangre' => 'required',
+            'tipo_identificacion' => 'required',
+            'numero_identificacion' => 'required',
+            'telefono' => 'required',
+            'email' => 'required|email',   
+            'aseguradora' => 'required',
+            'doctor' => 'required',
+            'descripcion_medica' => 'required',
+        ]);
+
+        $paciente = Patient::find($id);
+        $paciente->name = $request->name;
+        $paciente->apellido_paterno = $request->apellido_paterno;
+        $paciente->apellido_materno = $request->apellido_materno;
+        $paciente->fecha_nacimiento = $request->fecha_nacimiento;
+        $paciente->sexo = $request->sexo;
+        $paciente->tipo_sangre = $request->tipo_sangre;
+        $paciente->tipo_identificacion = $request->tipo_identificacion;
+        $paciente->num_identificacion = $request->numero_identificacion;
+        $paciente->telefono = $request->telefono;
+        $paciente->email = $request->email;
+        $paciente->insurance_id = $request->aseguradora;
+        $paciente->doctor_id = $request->doctor;
+        $paciente->descripcion_medica = $request->descripcion_medica;
+        $paciente->save();
+
+        return redirect()->route('pacientes')->with('editado', 'Paciente editado correctamente');
+    }
+
+    public function destroy($id)
+    {
+        $paciente = Patient::find($id);
+        $paciente->delete();
+        return redirect()->route('pacientes')->with('eliminado', 'Paciente eliminado correctamente');
+    }
 }

@@ -33,7 +33,7 @@
                             <label for="exampleFormControlInput1" class="form-label">Correo Electronico</label>
                             <input type="email"
                                 class="form-control form-control-lg @error('email') border-danger   @enderror "
-                                id="exampleFormControlInput1" name="email" placeholder="name@example.com"
+                                id="exampleFormControlInput1" name="email"
                                 value="{{ old('email') }}">
                             @error('email')
                                 <span
@@ -45,7 +45,7 @@
                             <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
                             <input type="password"
                                 class="form-control form-control-lg  @error('email') border-danger   @enderror  "
-                                id="exampleFormControlInput1" placeholder="********" name="password">
+                                id="exampleFormControlInput1" name="password">
                             @error('password')
                                 <span class="text-danger h5">{{ $message }}</span>
                             @enderror

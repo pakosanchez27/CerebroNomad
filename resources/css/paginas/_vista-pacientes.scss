@@ -38,3 +38,8 @@
         
     }
 }
+
+.form-control::placeholder{
+    color: v.$negro;
+    font-weight: v.$bold;
+}
