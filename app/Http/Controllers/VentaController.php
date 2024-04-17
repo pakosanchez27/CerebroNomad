@@ -53,6 +53,7 @@ class VentaController extends Controller
                         'prueba_id' => $pruebaId,
                         'subtotal' => $prueba->price,
                         'precio' => $prueba->price,
+                        'cantidad' => 1,
                     ]);
                 }
             }
@@ -63,6 +64,6 @@ class VentaController extends Controller
             'estado' => 'Muestras',
         ]);
 
-        return back()->with('success', 'Venta creada con éxito, ahora puedes agendar la toma de muestras.');
+        return view('pruebas-paciente', $id)->with('success', 'Venta creada con éxito, ahora puedes agendar la toma de muestras.');
     }
 }

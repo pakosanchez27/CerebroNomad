@@ -75,7 +75,7 @@
                         </a>
                     </div>
                     <div class="estudios-historial ">
-                        <a href="#" class="btn btn-secondary  w-100 mt-5">
+                        <a href="{{route('pruebas-paciente', $paciente->id)}}" class="btn btn-secondary  w-100 mt-5">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-card-checklist" viewBox="0 0 16 16">
                                 <path

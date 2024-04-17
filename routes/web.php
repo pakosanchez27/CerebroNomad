@@ -17,6 +17,7 @@ use App\Http\Controllers\VistaVendedoresController;
 use App\Http\Controllers\VistaDireccionesController;
 use App\Http\Controllers\VistaAseguradorasController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\ProcesoMuetrasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,3 +116,8 @@ Route::put('/guardianes/editar/{id}', [VistaGuardiansController::class, 'update'
 // ventas
 Route::get('/ventas/crear/{patient_id}', [VentaController::class, 'create'])->name('venta.create'); //ventas page
 Route::post('/ventas/crear/{patient_id}', [VentaController::class, 'store'])->name('venta.store'); //ventas page
+
+
+// verpuebas 
+
+Route::get('/pruebas-paciente/{id}', [ProcesoMuetrasController::class, 'show'])->name('pruebas-paciente'); //pruebas page
