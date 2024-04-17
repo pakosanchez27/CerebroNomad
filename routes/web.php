@@ -11,9 +11,10 @@ use App\Http\Controllers\VistaRolesController;
 use App\Http\Controllers\VistaPruebasController;
 use App\Http\Controllers\VistaDoctoresController;
 use App\Http\Controllers\VistaFinanzasController;
-use App\Http\Controllers\VistaGuardiansController;
 use App\Http\Controllers\VistaPacienteController;
+use App\Http\Controllers\VistaGuardiansController;
 use App\Http\Controllers\VistaVendedoresController;
+use App\Http\Controllers\VistaDireccionesController;
 use App\Http\Controllers\VistaAseguradorasController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 

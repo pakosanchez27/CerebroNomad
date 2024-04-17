@@ -66,10 +66,20 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Método de Pago</label>
+                        <select name="metodo_pago" id="metodo_pago" class="form-select form-select-lg mb-3 w-25" aria-label="Large select example">
+                            <option disabled selected>--Selecciona un método de pago--</option>
+                            <option value="efectivo">Efectivo</option>
+                            <option value="TDC">Tarjeta de Crédito</option>
+                            <option value="TDD">Tarjeta de Débito</option>
+                            <option value="aseguradora">Aseguradora</option>
+                        </select>
+                    </div>
                     <div class="mb-3 w-50 ">
                         <label class="form-label">Pruebas</label>
                         <div class="input-group d-flex  align-items-center gap-3 ">
-                            <select name="prueba" id="prueba" class="form-select form-select-lg mb-3 w-25"
+                            <select name="" id="prueba" class="form-select form-select-lg mb-3 w-25"
                                 aria-label="Large select example">
                                 <option disabled selected>--Selecciona una prueba--</option>
                                 @foreach ($pruebas as $prueba)
@@ -82,8 +92,8 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th>Prueba</th>
                                     <th>Precio</th>
@@ -95,38 +105,69 @@
                             <tfoot>
                                 <tr>
                                     <td><strong>Subtotal</strong></td>
-                                    <td id="subtotal">0</td>
+                                    <td id="subtotal" class="text-success">0</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>IVA 16%</strong></td>
+                                    <td id="iva" class="text-success">0</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <td id="total" class="text-primary">0</td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
+                    
+                    <select name="pruebas[]" id="pruebasArray" multiple style="display: none;"></select>
+
 
                     <!-- Agregar campo oculto para enviar el subtotal al controlador -->
                     <input type="hidden" name="subtotal" id="subtotalInput">
+                    {{-- Total --}}
+                    <input type="hidden" name="total" id="totalInput">
 
                 </fieldset>
 
                 <button type="submit" class="btn btn-success">Registrar venta</button>
             </form>
-
             <script>
                 document.getElementById('agregarPrueba').addEventListener('click', function() {
                     var pruebaSelect = document.getElementById('prueba');
                     var pruebaId = pruebaSelect.value;
                     var pruebaNombre = pruebaSelect.options[pruebaSelect.selectedIndex].text;
                     var precio = parseFloat(pruebaSelect.options[pruebaSelect.selectedIndex].getAttribute('data-precio'));
-
+            
                     // Agregar la prueba a la tabla
                     var fila = `<tr><td>${pruebaNombre}</td><td>${precio}</td></tr>`;
                     document.getElementById('tablaPruebas').innerHTML += fila;
-
+            
                     // Calcular subtotal
                     var subtotal = parseFloat(document.getElementById('subtotal').textContent);
                     subtotal += parseFloat(precio);
                     document.getElementById('subtotal').textContent = subtotal.toFixed(2);
-
+            
+                    // Calcular IVA
+                    var iva = subtotal * 0.16;
+                    document.getElementById('iva').textContent = iva.toFixed(2);
+            
+                    // Calcular total
+                    var total = subtotal + iva;
+                    document.getElementById('total').textContent = total.toFixed(2);
+            
+                    // Agregar el ID de la prueba al array de pruebas
+                    var pruebasArray = document.getElementById('pruebasArray');
+                    var option = document.createElement('option');
+                    option.value = pruebaId;
+                    option.selected = true; // Añadir la prueba seleccionada al array
+                    pruebasArray.appendChild(option);
+            
                     // Actualizar el valor del campo oculto subtotal
                     document.getElementById('subtotalInput').value = subtotal.toFixed(2);
+                    document.getElementById('totalInput').value = total.toFixed(2);
                 });
             </script>
+            
+            
+            
         @endsection

@@ -14,6 +14,7 @@ class venta extends Model
         'vendor_id',
         'fecha_venta',
         'total',
+        'metodo_pago',
     ];
 
     public function patient()

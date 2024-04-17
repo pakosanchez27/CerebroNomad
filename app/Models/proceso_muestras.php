@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class proceso_muetras extends Model
+class proceso_muestras extends Model
 {
     use HasFactory;
 

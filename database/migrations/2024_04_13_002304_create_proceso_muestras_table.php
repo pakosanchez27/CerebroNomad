@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('proceso-muetras', function (Blueprint $table) {
+        Schema::create('proceso_muestras', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('venta_id')->unsigned();
             $table->foreign('venta_id')->references('id')->on('ventas');
-            $table->date('fecha_toma_muestra');
-            $table->date('fecha_envio_lab');
-            $table->date('fecha_resultado');
+            $table->date('fecha_toma_muestra')->nullable();
+            $table->date('fecha_envio_lab')->nullable();
+            $table->date('fecha_resultado')->nullable();
             $table->string('estado');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('proceso-muetras');
+        Schema::dropIfExists('proceso_muestras');
     }
 };
