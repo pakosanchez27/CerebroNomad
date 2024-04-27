@@ -35,8 +35,9 @@ Route::get('/', function () {
 });
 
 // Login
-Route::get('/login', [LoginController::class, 'index'])->name('login'); // login page  
-Route::post('/login', [LoginController::class, 'store']); // login page  
+Route::get('/login', [LoginController::class, 'index'])->name('login'); // login page
+Route::post('/login', [LoginController::class, 'store']); // login page
+Route::post('/verificar-token', [LoginController::class, 'verificarToken'])->name('verificar-token'); // login page
 
 Route::post('/logout', [logoutController::class, 'logout'], '')->name('logout');
 
@@ -64,7 +65,7 @@ Route::get('/roles', [VistaRolesController::class, 'index'])->name('roles'); //r
 Route::get('/roles/{colaborador}', [VistaRolesController::class, 'edit'])->name('roles.edit'); //roles page
 Route::put('/roles/{colaborador}', [VistaRolesController::class, 'update'])->name('roles.update'); //roles page
 Route::delete('/roles/{colaborador}', [VistaRolesController::class, 'destroy'])->name('roles.destroy'); //roles page
-Route::post('/roles', [VistaRolesController::class, 'store'])->name('roles.store'); //roles page 
+Route::post('/roles', [VistaRolesController::class, 'store'])->name('roles.store'); //roles page
 Route::put('/roles/resetPassword/{colaborador}', [VistaRolesController::class, 'resetPassword'])->name('roles.resetPassword'); //roles page
 
 
@@ -75,16 +76,16 @@ Route::get('/vendedores/crear', [VistaVendedoresController::class, 'create'])->n
 Route::post('/vendedores/crear', [VistaVendedoresController::class, 'store'])->name('vendedores.store'); //vendedores page
 Route::get('/vendedores/editar/{id}', [VistaVendedoresController::class, 'edit'])->name('vendedores.edit'); //vendedores page
 Route::put('/vendedores/editar/{id}', [VistaVendedoresController::class, 'update'])->name('vendedores.update'); //vendedores page
-Route::delete('/vendedores/{id}', [VistaVendedoresController::class, 'destroy'])->name('vendedores.destroy'); //vendedores page                                                                                             
+Route::delete('/vendedores/{id}', [VistaVendedoresController::class, 'destroy'])->name('vendedores.destroy'); //vendedores page
 
 
 Route::get('/doctores',[VistaDoctoresController::class, 'index'])->name('doctores'); //doctores page
-Route::get('/doctores/crear', [VistaDoctoresController::class, 'create'])->name('doctores.create'); //doctores page            
-Route::post('/doctores/crear', [VistaDoctoresController::class, 'store'])->name('doctores.store'); //doctores page 
+Route::get('/doctores/crear', [VistaDoctoresController::class, 'create'])->name('doctores.create'); //doctores page
+Route::post('/doctores/crear', [VistaDoctoresController::class, 'store'])->name('doctores.store'); //doctores page
 Route::get('/doctores/{id}', [VistaDoctoresController::class, 'show'])->name('doctores.show'); //doctores page
 Route::get('/doctores/editar/{id}', [VistaDoctoresController::class, 'edit'])->name('doctores.edit'); //doctores page
 Route::put('/doctores/editar/{id}', [VistaDoctoresController::class, 'update'])->name('doctores.update'); //doctores page
-Route::delete('/doctores/{id}', [VistaDoctoresController::class, 'destroy'])->name('doctores.destroy'); //doctores page                        
+Route::delete('/doctores/{id}', [VistaDoctoresController::class, 'destroy'])->name('doctores.destroy'); //doctores page
 
 
 Route::get('/pruebas', [VistaPruebasController::class, 'index'])->name('pruebas'); //pruebas page
@@ -98,9 +99,9 @@ Route::delete('/pruebas/{id}', [VistaPruebasController::class, 'destroy'])->name
 Route::get('/aseguradoras', [VistaAseguradorasController::class, 'index'])->name('aseguradoras'); //aseguradoras page
 Route::get('/aseguradoras/agregar', [VistaAseguradorasController::class, 'create'])->name('aseguradoras.create'); //aseguradoras page
 Route::post('/aseguradoras/agregar', [VistaAseguradorasController::class, 'store'])->name('aseguradoras.store'); //aseguradoras page
-Route::get('/aseguradoras/editar/{id}', [VistaAseguradorasController::class, 'edit'])->name('aseguradoras.edit'); //aseguradoras page 
-Route::put('/aseguradoras/editar/{id}', [VistaAseguradorasController::class, 'update'])->name('aseguradoras.update'); //aseguradoras page 
-Route::delete('/aseguradoras/{id}', [VistaAseguradorasController::class, 'destroy'])->name('aseguradoras.destroy'); //aseguradoras page 
+Route::get('/aseguradoras/editar/{id}', [VistaAseguradorasController::class, 'edit'])->name('aseguradoras.edit'); //aseguradoras page
+Route::put('/aseguradoras/editar/{id}', [VistaAseguradorasController::class, 'update'])->name('aseguradoras.update'); //aseguradoras page
+Route::delete('/aseguradoras/{id}', [VistaAseguradorasController::class, 'destroy'])->name('aseguradoras.destroy'); //aseguradoras page
 
 
 // Direcciones
@@ -118,6 +119,6 @@ Route::get('/ventas/crear/{patient_id}', [VentaController::class, 'create'])->na
 Route::post('/ventas/crear/{patient_id}', [VentaController::class, 'store'])->name('venta.store'); //ventas page
 
 
-// verpuebas 
+// verpuebas
 
 Route::get('/pruebas-paciente/{id}', [ProcesoMuetrasController::class, 'show'])->name('pruebas-paciente'); //pruebas page
