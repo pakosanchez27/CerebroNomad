@@ -48,14 +48,14 @@ class VistaPacienteController extends Controller
         
 
         $request->validate([
-            'name' => 'required',
-            'apellido_paterno' => 'required',
-            'apellido_materno' => 'required',
+            'name' => 'required|alpha|min:3',
+            'apellido_paterno' => 'required|alpha|min:3',
+            'apellido_materno' => 'required|alpha|min:3',
             'fecha_nacimiento' => 'required',
             'tipo_sangre' => 'required',
             'tipo_identificacion' => 'required',
             'numero_identificacion' => 'required',
-            'telefono' => 'required',
+            'telefono' => 'required|digits_between:8,15',
             'email' => 'required|email',   
             'aseguradora' => 'required',
             'doctor' => 'required',

@@ -36,34 +36,43 @@ class VentaController extends Controller
     function store(Request $request, $id)
     {
 
-        venta::create([
+        // obtener id del paciente
+        $paciente = Patient::find($id);
+
+        $venta = venta::create([
             'patient_id' => $id,
             'vendor_id' => $request->vendedor,
             'total' => $request->total,
             'fecha_venta' => date('Y-m-d'),
             'metodo_pago' => $request->metodo_pago,
         ]);
-
-        if ($request->has('pruebas')) {
-            foreach ($request->pruebas as $pruebaId) {
-                $prueba = Test::find($pruebaId);
-                if ($prueba) {
-                    prueba_venta::create([
-                        'venta_id' => venta::max('id'),
-                        'prueba_id' => $pruebaId,
-                        'subtotal' => $prueba->price,
-                        'precio' => $prueba->price,
-                        'cantidad' => 1,
-                    ]);
+        
+        if ($venta) {
+            if ($request->has('pruebas')) {
+                foreach ($request->pruebas as $pruebaId) {
+                    $prueba = Test::find($pruebaId);
+                    if ($prueba) {
+                        prueba_venta::create([
+                            'venta_id' => $venta->id,
+                            'prueba_id' => $pruebaId,
+                            'subtotal' => $prueba->price,
+                            'precio' => $prueba->price,
+                            'cantidad' => 1,
+                        ]);
+        
+                        proceso_muestras::create([
+                            'venta_id' => $venta->id,
+                            'prueba_id' => $pruebaId,
+                            'estado' => 'Muestras',
+                        ]);
+                    }
                 }
             }
+        } else {
+            // Manejar el caso en el que la venta no se creó correctamente
         }
         
-        proceso_muestras::create([
-            'venta_id' => venta::max('id'),
-            'estado' => 'Muestras',
-        ]);
 
-        return view('pruebas-paciente', $id)->with('success', 'Venta creada con éxito, ahora puedes agendar la toma de muestras.');
-    }
+        return redirect()->route('pruebas-paciente', $id)->with('agregado', 'Venta creada correctamente');
+}
 }

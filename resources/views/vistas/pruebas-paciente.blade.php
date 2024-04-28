@@ -42,43 +42,48 @@
             <div class="contenido-perfilPaciente__datos col-12 col-lg-8 p-5">
 
                 <div class="mb-5">
-                    <div class="texto_hader">
-                        <h3>Pruebas en curso</h3>
+                    <div class="tabla__header ">
+                        <p><span>Pruebas Ac </span></p>
                     </div>
-    
-                    <div class="card cardPaciente p-3 shadow  border-black ">
+
+                    <div class=" border-black ">
                         <div class="d-flex flex-row align-items-center gap-5 ">
-                        <div class="card shadow p-3 w-100 ">
-                            <h3 class="mb-5">Pruebas</h3>
-                            <div class="d-flex flex-row align-items-center gap-5 ">
-                               
-                                <div class="datosPaciente d-flex  gap-5  justify-content-between align-items-center ">
-                                    <h3>Nombre de la prueba</h3>
-                                 <div class="d-block">
-                                    <p><span class=" fw-bold ">Fecha de inicio</span>: 12/12/2021</p>
-                                    <p><span class=" fw-bold ">Fecha de fin</span>: 12/12/2021</p>
-                                 </div>
-                                    <p><span class=" fw-bold ">Estado</span>: Toma de muestras</p>
-                                </div>
-                                {{-- boton agendar cita --}}
-                                <div class="">
-                                    <a href="" class="btn btn-info">
-                                        Agendar    
-                                    </a>
-                                </div>
-                        </div>
+                            <div class="card shadow p-3 w-100 ">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Nombre de la prueba</th>
+                                            <th>Fecha de inicio</th>
+                                            <th>Fecha de finalización</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Prueba de 5 elementos</td>
+                                            <td>Sin asignar</td>
+                                            <td>Sin asignar</td>
+                                            <td>En espera</td>
+                                            {{-- btn de agendar --}}
+                                            <td><a class="btn btn-success">Agendar</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-               
+
                 <div class="mb-5 mt-5">
                     <div class="texto_hader">
                         <h3>Pruebas completadas</h3>
                     </div>
-    
+
                     <div class="card cardPaciente p-3 shadow  border-black ">
                         <div class="d-flex flex-row align-items-center gap-5 ">
-                          
+
                         </div>
                     </div>
                 </div>
@@ -87,6 +92,4 @@
         </div>
 
     </div>
-
-
 @endsection

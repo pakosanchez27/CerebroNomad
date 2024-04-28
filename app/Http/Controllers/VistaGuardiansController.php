@@ -44,7 +44,7 @@ class VistaGuardiansController extends Controller
             'name' => 'required',
             'apellido_paterno' => 'required',
             'parentesco' => 'required',
-            'edad' => 'required', 
+            'edad' => 'required|min:18', 
             'telefono' => 'required',
             'email' => 'required|email',
         ]);

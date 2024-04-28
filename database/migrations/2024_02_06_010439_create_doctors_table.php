@@ -16,14 +16,14 @@ return new class extends Migration
             //Atributos de la tabla
             $table->id();
             $table->string('name');
-            $table->string('apellido_paterno');
-            $table->string('apellido_materno');
-            $table->string('sexo');
-            $table->string('email');
-            $table->string('telefono');
-            $table->string('especialidad');
-            $table->string('cedula');
-            $table->string('nombre_clinica');
+            $table->string('apellido_paterno')->nullable();
+            $table->string('apellido_materno')->nullable();
+            $table->string('sexo')->nullable();
+            $table->string('email')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('especialidad')->nullable();
+            $table->string('cedula')->nullable();
+            $table->string('nombre_clinica')->nullable();
             $table->timestamps();
                 
         });
