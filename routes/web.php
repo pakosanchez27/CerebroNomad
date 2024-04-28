@@ -38,6 +38,7 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'index'])->name('login'); // login page
 Route::post('/login', [LoginController::class, 'store']); // login page
 Route::post('/verificar-token', [LoginController::class, 'verificarToken'])->name('verificar-token'); // login page
+Route::get('/reenviar-token', [LoginController::class, 'reenviarToken'])->name('reenviarToken'); // login page
 
 Route::post('/logout', [logoutController::class, 'logout'], '')->name('logout');
 

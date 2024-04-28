@@ -89,9 +89,9 @@
                         <input type="text" id="tokenLogin" name="tokenLogin" class="form-control">
                         <div class="d-flex gap-3 mt-3">
                             <input type="submit" value="Enviar" class="btn btn-success">
-                            <input type="submit" value="Reenviar" class="btn btn-info">
+                            <a href="{{route('reenviarToken')}}" class="btn btn-info">Reenviar</a>
                         </div>
-                    </form>
+                    </form>     
                 </div>
             </div>
         </div>
@@ -115,7 +115,7 @@
                         <span class="alert text-danger">Token incorrecto</span>
                         <div class="d-flex gap-3 mt-3">
                             <input type="submit" value="Enviar" class="btn btn-success">
-                            <input type="submit" value="Reenviar" class="btn btn-info">
+                            <a href="{{route('reenviarToken')}}" class="btn btn-info">Reenviar</a>
                         </div>
                     </form>
                 </div>
@@ -124,12 +124,42 @@
     </div>
 @endif
 
+@if (@session('reenviartoken'))
+
+        <!-- Modal para mostrar el error de token incorrecto -->
+        <div id="errorModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Token de Confirmación</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('verificar-token') }}" method="POST">
+                            @csrf
+                            <label for="tokenLogin" class="form-label">Ingresa el token que se envió a tu correo</label>
+                            <input type="text" id="tokenLogin" name="tokenLogin" class="form-control">
+                            <span class="alert text-success ">Token reenviado</span>
+                            <div class="d-flex gap-3 mt-3">
+                                <input type="submit" value="Enviar" class="btn btn-success">
+                                <a href="{{route('reenviarToken')}}" class="btn btn-info">Reenviar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+@endif
+
 <script>
     // Mostrar el modal correspondiente si existe un token o un error de token en la sesión
     @if(session('token'))
         var tokenModal = document.getElementById('tokenModal');
         tokenModal.style.display = "block";
     @elseif(session('errorToken'))
+        var errorModal = document.getElementById('errorModal');
+        errorModal.style.display = "block";
+    @elseif(session('reenviartoken'))
         var errorModal = document.getElementById('errorModal');
         errorModal.style.display = "block";
     @endif

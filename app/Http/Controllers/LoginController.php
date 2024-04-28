@@ -48,9 +48,11 @@ class LoginController extends Controller
     }
     public function verificarToken(Request $request)
     {
-        $this->validate($request, [
-            'tokenLogin' => 'required'
-        ]);
+    
+       
+        if (!$request->tokenLogin || $request->tokenLogin === 'null') {
+            return back()->with('errorToken', 'No puede estar vacio');
+        }
 
         // Buscar al usuario por el token
         $user = User::where('tokenLogin', $request->tokenLogin)->first();
@@ -64,11 +66,27 @@ class LoginController extends Controller
             return back()->with('errorToken', 'Token incorrecto');
         }
 
+       
         // Si el token es correcto, no lo eliminamos de la base de datos,
         // sino que simplemente redirigimos al usuario a la página de inicio.
         return redirect()->route('home');
     }
 
+
+    public function reenviarToken( ){
+        // Generar token de autenticación de 8 digitos alfanumerico
+        $token = bin2hex(random_bytes(4));
+
+        // recuperar el email
+        $email = auth()->user()->email;
+
+        // Guardar el tiken en la base de datos
+       User::where('email', $email)->update(['tokenLogin' => $token]);
+        //    Enviar token por el email
+        Mail::to($email)->send(new TokenLogin($token));
+
+        return redirect()->back()->with('reenviartoken', true);
+    }
 
 
 

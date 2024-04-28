@@ -3,8 +3,8 @@ import {actualizarHora} from './hora'
 import {validateForm} from './validacionRol'
 import {chartHome} from './charts'
 import {Alpine, Livewire} from '../../vendor/livewire/livewire/dist/livewire.esm';
-import ToastComponent from '../../vendor/usernotnull/tall-toasts/resources/js/tall-toasts'
-// Funcion de hora
+
+
 
 // Llamar a la función actualizarHora cada segundo
 setInterval(actualizarHora, 1000);
@@ -19,3 +19,4 @@ chartHome();
 Alpine.plugin(ToastComponent)
 
 Livewire.start()
+
