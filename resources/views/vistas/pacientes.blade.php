@@ -105,7 +105,7 @@
                         <a class="page-link" href="{{ $pacientes->url($index + 1) }}">{{ $index + 1 }}</a>
                     </li>
                 @endforeach
-                
+
 
 
 

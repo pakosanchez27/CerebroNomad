@@ -8,7 +8,7 @@ use App\Models\Guardian;
 use App\Models\Patient;
 use App\Models\Insurance;
 use App\Models\venta;
-use RealRashid\SweetAlert\Facades\Alert;
+
 
 
 
@@ -16,7 +16,7 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
 {
     function __construct()
     {
-        $this->middleware('auth');    
+        $this->middleware('auth');
     }
 
     public function index(request $request)
@@ -48,7 +48,7 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
 
     public function store(request $request)
     {
-        
+
 
         $request->validate([
             'name' => 'required|alpha|min:3',
@@ -59,12 +59,12 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
             'tipo_identificacion' => 'required',
             'numero_identificacion' => 'required',
             'telefono' => 'required|digits_between:8,15',
-            'email' => 'required|email',   
+            'email' => 'required|email',
             'aseguradora' => 'required',
             'doctor' => 'required',
             'descripcion_medica' => 'required',
         ]);
-       
+
         Patient::create([
             'name' => $request->name,
             'apellido_paterno' => $request->apellido_paterno,
@@ -103,7 +103,7 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
             'tipo_identificacion' => 'required',
             'numero_identificacion' => 'required',
             'telefono' => 'required',
-            'email' => 'required|email',   
+            'email' => 'required|email',
             'aseguradora' => 'required',
             'doctor' => 'required',
             'descripcion_medica' => 'required',
@@ -133,7 +133,6 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
         $paciente = Patient::find($id);
         $paciente->delete();
         venta::where('patient_id', $paciente)->delete();
-        Alert::success('Paciente eliminado correctamente');
         return redirect()->route('pacientes')->with('eliminado', 'Paciente eliminado correctamente');
     }
 }
