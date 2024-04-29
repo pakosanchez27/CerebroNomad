@@ -7,9 +7,12 @@ use App\Models\Address;
 use App\Models\Guardian;
 use App\Models\Patient;
 use App\Models\Insurance;
-use Illuminate\Http\Request;
+use App\Models\venta;
+use RealRashid\SweetAlert\Facades\Alert;
 
-class VistaPacienteController extends Controller
+
+
+use Illuminate\Http\Request;class VistaPacienteController extends Controller
 {
     function __construct()
     {
@@ -129,6 +132,8 @@ class VistaPacienteController extends Controller
     {
         $paciente = Patient::find($id);
         $paciente->delete();
+        venta::where('patient_id', $paciente)->delete();
+        Alert::success('Paciente eliminado correctamente');
         return redirect()->route('pacientes')->with('eliminado', 'Paciente eliminado correctamente');
     }
 }

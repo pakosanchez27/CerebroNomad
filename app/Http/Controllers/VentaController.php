@@ -36,43 +36,31 @@ class VentaController extends Controller
     function store(Request $request, $id)
     {
 
-        // obtener id del paciente
-        $paciente = Patient::find($id);
+        
+     
+        
+        foreach ($request->pruebas as $prueba) {
+            venta::create([
+                'patient_id' => $id,
+                'vendor_id' => $request->vendedor,
+                'prueba_id' => $prueba,
+                'total' => $request->total,
+                'fecha_venta' => date('Y-m-d'),
+                'metodo_pago' => $request->metodo_pago,
+            ]);
 
-        $venta = venta::create([
-            'patient_id' => $id,
-            'vendor_id' => $request->vendedor,
-            'total' => $request->total,
-            'fecha_venta' => date('Y-m-d'),
-            'metodo_pago' => $request->metodo_pago,
-        ]);
-        
-        if ($venta) {
-            if ($request->has('pruebas')) {
-                foreach ($request->pruebas as $pruebaId) {
-                    $prueba = Test::find($pruebaId);
-                    if ($prueba) {
-                        prueba_venta::create([
-                            'venta_id' => $venta->id,
-                            'prueba_id' => $pruebaId,
-                            'subtotal' => $prueba->price,
-                            'precio' => $prueba->price,
-                            'cantidad' => 1,
-                        ]);
-        
-                        proceso_muestras::create([
-                            'venta_id' => $venta->id,
-                            'prueba_id' => $pruebaId,
-                            'estado' => 'Muestras',
-                        ]);
-                    }
-                }
-            }
-        } else {
-            // Manejar el caso en el que la venta no se creó correctamente
+            proceso_muestras::create([
+                'venta_id' => venta::latest('id')->first()->id,
+                'patient_id' => $id,
+                'fecha_toma_muestra' => null,
+                'fecha_envio_lab' => null,
+                'fecha_resultado' => null ,
+                'estado' => 'En proceso',
+            ]);
         }
-        
 
+
+       
         return redirect()->route('pruebas-paciente', $id)->with('agregado', 'Venta creada correctamente');
 }
 }

@@ -12,6 +12,7 @@ class venta extends Model
     protected $fillable = [
         'patient_id',
         'vendor_id',
+        'prueba_id', // Cambiar 'test_id' por 'prueba_id' si es el nombre correcto de la columna en la tabla 'ventas'
         'fecha_venta',
         'total',
         'metodo_pago',
@@ -27,5 +28,12 @@ class venta extends Model
         return $this->belongsTo(Vendor::class);
     }
 
+    public function proceso_muestras()
+    {
+        // uno a uno
+        return $this->hasOne(proceso_muestras::class);
+    }
+
     
+
 }

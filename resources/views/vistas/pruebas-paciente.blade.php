@@ -43,7 +43,7 @@
 
                 <div class="mb-5">
                     <div class="tabla__header ">
-                        <p><span>Pruebas Ac </span></p>
+                        <p><span>Pruebas</span></p>
                     </div>
 
                     <div class=" border-black ">
@@ -60,14 +60,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Prueba de 5 elementos</td>
-                                            <td>Sin asignar</td>
-                                            <td>Sin asignar</td>
-                                            <td>En espera</td>
-                                            {{-- btn de agendar --}}
-                                            <td><a class="btn btn-success">Agendar</a></td>
-                                        </tr>
+                                        @foreach ($pruebas as $prueba )
+                                            <tr>
+                                                <td>{{ $prueba->prueba }}</td>
+                                                <td>{{ $prueba->fecha_toma_muestra !== null ? $prueba->fecha_toma_muestra : 'Sin asignar' }}</td>
+                                                <td>{{ $prueba->fecha_resultado !== null ? $prueba->fecha_resultado : 'Sin asignar' }}</td>                                                
+                                                <td>{{ $prueba->estado }}</td>
+                                                {{-- btn de agendar --}}
+                                         
+                                                    <td>
+                                                        @if ($prueba->fecha_toma_muestra === null)
+                                                            <a href="" class="btn btn-info">Agendar</a>
+                                                        @elseif ($prueba->estado === 'completado')
+                                                            <button class="btn btn-success" disabled>Completado</button>
+                                                        @else
+                                                            <a href="" class="btn btn-warning">Entregar</a>
+                                                        @endif
+                                                    </td>
+                                                    
+                                              
+                                                
+                                            </tr>
+                                        @endforeach
+                                     
                                     </tbody>
                                 </table>
 
@@ -76,17 +91,7 @@
                     </div>
                 </div>
 
-                <div class="mb-5 mt-5">
-                    <div class="texto_hader">
-                        <h3>Pruebas completadas</h3>
-                    </div>
-
-                    <div class="card cardPaciente p-3 shadow  border-black ">
-                        <div class="d-flex flex-row align-items-center gap-5 ">
-
-                        </div>
-                    </div>
-                </div>
+            
 
             </div>
         </div>

@@ -49,5 +49,12 @@ class Patient extends Model
         return $this->hasMany(Venta::class);
     }
 
+    public function proceso_muestras()
+    {
+        return $this->hasMany(proceso_muestras::class);
+    }
+
+  
+    
     
 }

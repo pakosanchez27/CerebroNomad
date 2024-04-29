@@ -11,6 +11,7 @@ class proceso_muestras extends Model
 
     protected $fillable = [
         'venta_id',
+        'patient_id',
         'fecha_toma_muestra',
         'fecha_envio_lab',
         'fecha_resultado',
@@ -19,8 +20,17 @@ class proceso_muestras extends Model
 
     public function venta()
     {
-        return $this->belongsTo(Venta::class);
+        // uno a uno
+        return $this->belongsTo(venta::class);
     }
+
+    public function patient()
+    {
+        // uno a muchos
+        return $this->belongsTo(Patient::class);
+    }
+
+    
 
     
 }

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('patient_id')->references('id')->on('patients');
             $table->bigInteger('vendor_id')->unsigned();
             $table->foreign('vendor_id')->references('id')->on('vendors');
+            $table->bigInteger('prueba_id')->unsigned();
+            $table->foreign('prueba_id')->references('id')->on('tests');
             $table->date('fecha_venta');
             $table->decimal('total', 8, 2);
             $table->timestamps();
