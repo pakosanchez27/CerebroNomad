@@ -2,7 +2,7 @@ import './bootstrap';
 import {actualizarHora} from './hora'
 import {validateForm} from './validacionRol'
 import {chartHome} from './charts'
-import './Alertas'
+
 
 // import {Alpine, Livewire} from '../../vendor/livewire/livewire/dist/livewire.esm';
 

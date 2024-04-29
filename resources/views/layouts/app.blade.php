@@ -8,8 +8,7 @@
     @vite('resources/css/app.scss')
     @vite('resources/js/app.js')
     @vite('resources/js/APIs/clima.js')
-    @vite('resources/js/Alertas.js')
-    @include('sweetalert::alert')
+
     <title>CerebroNomad - @yield('titulo')</title>
 
 </head>
@@ -213,7 +212,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                
+
                             </div>
                             <div class="copy post text-center ">
                                 <p class="h5">© 2021 CerebroNomad</p>
@@ -285,13 +284,12 @@
 
         </div>
             @yield('contenido')
-            @include('sweetalert::alert')
+
 
         </div>
-        
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-       
-        
+
+
+
 
 </body>
 

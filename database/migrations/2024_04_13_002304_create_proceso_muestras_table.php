@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger(('patient_id'))->unsigned();
             $table->foreign('patient_id')->references('id')->on('patients');
             $table->date('fecha_toma_muestra')->nullable();
+            $table->time('hora_toma_muestra')->nullable();
             $table->date('fecha_envio_lab')->nullable();
             $table->date('fecha_resultado')->nullable();
             $table->string('estado');

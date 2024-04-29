@@ -54,35 +54,135 @@
                                         <tr>
                                             <th>Nombre de la prueba</th>
                                             <th>Fecha de inicio</th>
-                                            <th>Fecha de finalización</th>
+                                            <th>Fecha de Entrega</th>
                                             <th>Estado</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pruebas as $prueba )
+                                        @foreach ($pruebas as $prueba)
                                             <tr>
                                                 <td>{{ $prueba->prueba }}</td>
-                                                <td>{{ $prueba->fecha_toma_muestra !== null ? $prueba->fecha_toma_muestra : 'Sin asignar' }}</td>
-                                                <td>{{ $prueba->fecha_resultado !== null ? $prueba->fecha_resultado : 'Sin asignar' }}</td>                                                
+                                                <td>
+
+                                                    {{ $prueba->fecha_toma_muestra !== null ? $prueba->fecha_toma_muestra : 'Sin asignar' }}
+                                                    <span>Hora:{{  $prueba->hora_toma_muestra }}</span>
+                                                </td>
+                                                <td>{{ $prueba->fecha_resultado !== null ? $prueba->fecha_resultado : 'Sin asignar' }}
+                                                </td>
                                                 <td>{{ $prueba->estado }}</td>
                                                 {{-- btn de agendar --}}
-                                         
-                                                    <td>
-                                                        @if ($prueba->fecha_toma_muestra === null)
-                                                            <a href="" class="btn btn-info">Agendar</a>
-                                                        @elseif ($prueba->estado === 'completado')
-                                                            <button class="btn btn-success" disabled>Completado</button>
-                                                        @else
-                                                            <a href="" class="btn btn-warning">Entregar</a>
-                                                        @endif
-                                                    </td>
-                                                    
-                                              
-                                                
+
+                                                <td>
+                                                    @if ($prueba->fecha_toma_muestra === null)
+                                                        <a href="" class="btn btn-info" data-bs-toggle="modal"
+                                                            data-bs-target="#agendarToma({{ $prueba->id_proceso }})">Agendar</a>
+                                                    @elseif ($prueba->estado === 'completado')
+                                                        <button class="btn btn-success" disabled>Completado</button>
+                                                    @elseif ($prueba->estado === 'agendado')
+                                                        <a href="" class="btn btn-warning" data-bs-toggle="modal"
+                                                        data-bs-target="#fechaEntrega({{ $prueba->id_proceso }}">Entrega</a>
+                                                    @elseif ($prueba->estado === 'enviado')
+                                                    <form action="{{ route('completarEntrega',[$prueba->id_proceso, $paciente->id] )}}" method="POST">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-warning" onclick="confirm('Los resultados ya se entregaron al paciente')">Entregar</button>
+                                                    </form>
+
+                                                    @endif
+                                                </td>
+
+
+
                                             </tr>
+
+                                            <!-- Modal -->
+
+                                            {{-- modal agendar --}}
+                                            <div class="modal fade" id="agendarToma({{ $prueba->id_proceso }})"
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Agendar
+                                                                Visita</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{ route('agendar-toma', [$prueba->id_proceso, $paciente->id]) }}" method="POST">
+                                                                @csrf
+                                                                <div class="mb-3">
+                                                                    <h3 class=" fw-medium ">Toma de muestras del estudio
+                                                                        {{ $prueba->prueba }}</h3>
+                                                                        <label class=" form-label">Fecha</label>
+                                                                        <input type="date" name="visita" id="visita" class="form-control" min="<?php echo date('Y-m-d'); ?>">
+
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class=" form-label">Hora de la visita</label>
+                                                                    <input type="time" name="hora" id="hora" class="form-control" min="09:00" max="21:00">
+
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal" onclick="reseat()">Cerrar</button>
+                                                                <button type="submit" onclick="reseat()"
+                                                                    class="btn btn-primary">Enviar</button>
+                                                                </div>
+                                                            </form>
+
+
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {{-- modal fecha entrega --}}
+
+                                            <div class="modal fade" id="fechaEntrega({{ $prueba->id_proceso }}"
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Agendar
+                                                                Entrega</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{ route('agendar-resultados', [$prueba->id_proceso, $paciente->id]) }}" method="POST">
+                                                                @csrf
+                                                                <div class="mt-3">
+                                                                    <h3 class=" fw-medium ">Entrega de resultados del estudio
+                                                                        {{ $prueba->prueba }}</h3>
+                                                                        <label class=" form-label">Fecha</label>
+                                                                        <input type="date" name="visita" id="visita" class="form-control" min="<?php echo date('Y-m-d'); ?>">
+
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal" onclick="reseat()">Cerrar</button>
+                                                                <button type="submit" onclick="reseat()"
+                                                                    class="btn btn-primary">Enviar</button>
+                                                                </div>
+                                                            </form>
+
+
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
-                                     
+
                                     </tbody>
                                 </table>
 
@@ -91,10 +191,13 @@
                     </div>
                 </div>
 
-            
+
 
             </div>
         </div>
 
     </div>
 @endsection
+
+
+{{-- Modales --}}
