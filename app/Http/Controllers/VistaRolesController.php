@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AltaColaboradorMailController;
 use RealRashid\SweetAlert\Facades\Alert;
+
 class VistaRolesController extends Controller
 {
     public function __construct()
@@ -25,10 +26,14 @@ class VistaRolesController extends Controller
     function store(Request $request)
     {
 
+        // buscar que el correo no exista
+        $correo = User::where('email', $request->email)->first();
+        if ($correo) {
+            return back()->with('email', 'El correo ya existe');
+        }
+
 
         $password = bcrypt('Nomad2024');
-
-
 
         User::create([
             'name' => $request->name,
@@ -43,9 +48,7 @@ class VistaRolesController extends Controller
         Mail::to($request->email)->send(new AltaColaboradorMailable());
 
 
-        return redirect()->back()->withSuccess('Usuario creado correctamente la contraseña temporal es:  Nomad2024');
-
-
+        return redirect()->route('roles')->with('susses', 'Usuario creado correctamente, su contraseña temporal es : Nomad2024');
     }
 
     function edit(Request $request, $id)
@@ -79,7 +82,7 @@ class VistaRolesController extends Controller
         $user->save();
 
         // Redirigir a la página deseada después de la actualización
-        return redirect()->route('roles')->with('success', 'Usuario actualizado correctamente');
+        return redirect()->route('roles')->with('editado', 'Usuario actualizado correctamente');
     }
 
     function destroy(Request $request, $id)
@@ -89,10 +92,10 @@ class VistaRolesController extends Controller
         $user = User::findOrFail($id);
 
         // Eliminar el usuario de la base de datos
-         $user->delete();
+        $user->delete();
 
         // Redirigir a la página deseada después de la eliminación
-        return redirect()->route('roles')->with('success', 'Usuario eliminado correctamente');
+        return redirect()->route('roles')->with('eliminado', 'Usuario eliminado correctamente');
     }
 
     function resetPassword(Request $request, $id)
@@ -109,6 +112,8 @@ class VistaRolesController extends Controller
 
         // Guardar los cambios en la base de datos
         $user->save();
+
+
 
         // Redirigir a la página deseada después de la actualización
         return back()->with('success', 'Contraseña restablecida correctamente');

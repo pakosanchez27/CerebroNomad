@@ -73,11 +73,10 @@
                                             </svg>
                                         </a>
 
-                                        <form action="{{ route('vendedores.destroy', $vendedor->id) }}" method="POST">
+                                        <form action="{{ route('vendedores.destroy', $vendedor->id) }}" method="POST" class="deleteForm">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm "
-                                                onclick="return confirm('¿Estás seguro de que deseas eliminar a la aseguradora: {{ $vendedor->name }}?')">
+                                            <button type="submit" class="btn btn-danger btn-sm ">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                     <path
@@ -105,9 +104,51 @@
         </div>
     </div>
 
+
     @if (@session('success'))
-        <script>
-            alert('{{ session('success') }}');
-        </script>
-    @endif
+    <script>
+        Swal.fire({
+            icon: 'exito',
+            title: 'Registro Correcto',
+            text: '{{ session('success') }}',
+        });
+    </script>
+@endif
+@if (@session('editado'))
+    <script>
+        Swal.fire({
+
+            icon: "success",
+            title: "Colaborador actualizado correctamente",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+@endif
+@if (@session('eliminado'))
+    <script>
+        Swal.fire({
+
+            icon: "success",
+            title: "Colaborador eliminado correctamente",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+@endif
+@if (@session('reset'))
+    <script>
+        Swal.fire({
+
+            icon: "success",
+            title: "Contraseña restablecida correctamente",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+@endif
 @endsection
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+

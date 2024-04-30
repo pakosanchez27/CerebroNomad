@@ -39,7 +39,7 @@
                     <p class="h4 fw-bold ">Tipo de sangre: <span
                             class="h3  fw-normal  text-danger  ">{{ $paciente->tipo_sangre }}</span></p>
                     <hr>
-                    <div class="d-flex gap-5 justify-content-center ">
+                    <div class="d-flex gap-5 justify-content-center align-items-center  ">
                         <a href="{{ route('pacientes.show', $paciente->id) }}" class="btn btn-info"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                                 class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -56,10 +56,10 @@
                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                             </svg></a>
 
-                        <form id="miFormulario" action="{{ route('pacientes.destroy', $paciente->id) }}" method="POST">
+                        <form class="deleteForm" action="{{ route('pacientes.destroy', $paciente->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">
+                            <button type="submit" class="btn btn-danger" id="delete">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                                     class="bi bi-trash" viewBox="0 0 16 16">
                                     <path
@@ -68,10 +68,7 @@
                                         d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                                 </svg>
                             </button>
-
                         </form>
-
-
                     </div>
                     <div class="estudios-historial">
                         <a href="{{ route('venta.create', $paciente->id) }}"
@@ -142,53 +139,28 @@
     {{-- mensajes --}}
     @if (@session('agregado'))
         <script>
-            alert('{{ session('agregado') }}');
-        </script>
-    @endif
-    @if (@session('actualizado'))
-        <script>
-            alert('{{ session('actualizado') }}');
-        </script>
-    @endif
-    @if (@session('eliminado'))
-        <script>
             Swal.fire({
-                position: "top-end",
                 icon: "success",
-                title: "Eliminado con éxito",
+                title: "Paciente agregado correctamente",
                 showConfirmButton: false,
                 timer: 1500
             });
         </script>
     @endif
-@endsection
+    @if (@session('editado'))
+        <script>
+            Swal.fire({
 
-
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#miFormulario').submit(function(event) {
-                // Evita el comportamiento predeterminado del formulario
-                event.preventDefault();
-
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
-                    }
-                });
+                icon: "success",
+                title: "Paciente actualizado correctamente",
+                showConfirmButton: false,
+                timer: 1500
             });
-        });
-    </script>
+        </script>
+    @endif
+    @if (@session('eliminado'))
+        <script>
+            alert('{{ session('eliminado') }}');
+        </script>
+    @endif
 @endsection

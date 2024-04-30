@@ -8,7 +8,6 @@
     @vite('resources/css/app.scss')
     @vite('resources/js/app.js')
     @vite('resources/js/APIs/clima.js')
-
     <title>CerebroNomad - @yield('titulo')</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -338,13 +337,14 @@
                 </div>
 
             </div>
-
-            
             @yield('contenido')
             
         </div>
-        
-        
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

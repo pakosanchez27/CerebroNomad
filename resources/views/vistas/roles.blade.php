@@ -94,25 +94,27 @@
                                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                                         </svg></a>
 
-                                        <form action="{{ route('roles.destroy', $user->id) }}" method="POST" >
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="confirm('Desea Eliminar a Este Usuario')" >
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-trash" viewBox="0 0 16 16">
-                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                                                </svg>
-                                            </button>
-                                        </form>
+                                    <form action="{{ route('roles.destroy', $user->id) }}" method="POST" class="deleteForm">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="white" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                <path
+                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                            </svg>
+                                        </button>
+                                    </form>
 
 
 
-                                    <form id="resetPasswordForm{{ $user->id }}"
+                                    <form id="resetPasswordForm{{ $user->id }}" class="resetPasswordForm"
                                         action="{{ route('roles.resetPassword', $user->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <button type="submit" class="btn btn-info"
-                                            onclick=" confirEliminar('Seguro que deseas eliminar', 'Al usuario')">
+                                        <button type="submit" class="btn btn-info">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                 fill="white" class="bi bi-key-fill" viewBox="0 0 16 16">
                                                 <path
@@ -138,6 +140,58 @@
 
         </div>
     </div>
+    @if (@session('email'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ session('email') }}',
+            });
+        </script>
+    @endif
+    @if (@session('susses'))
+        <script>
+            Swal.fire({
+                icon: 'exito',
+                title: 'Registro Correcto',
+                text: '{{ session('susses') }}',
+            });
+        </script>
+    @endif
+    @if (@session('editado'))
+        <script>
+            Swal.fire({
+
+                icon: "success",
+                title: "Colaborador actualizado correctamente",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+    @endif
+    @if (@session('eliminado'))
+        <script>
+            Swal.fire({
+
+                icon: "success",
+                title: "Colaborador eliminado correctamente",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+    @endif
+    @if (@session('reset'))
+        <script>
+            Swal.fire({
+
+                icon: "success",
+                title: "Contraseña restablecida correctamente",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+    @endif
 @endsection
 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

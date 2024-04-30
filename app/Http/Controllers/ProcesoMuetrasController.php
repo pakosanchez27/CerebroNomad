@@ -68,7 +68,7 @@ class ProcesoMuetrasController extends Controller
         // actualizar la fecha de envio al laboratorio
         $proceso = proceso_muestras::find($idPM);
         $proceso->fecha_resultado = $request->visita;
-        $proceso->estado = 'enviado';
+        $proceso->estado = 'Enviado';
         $proceso->save();
 
         return back()->with('success', 'Envio al laboratorio agendado correctamente');
