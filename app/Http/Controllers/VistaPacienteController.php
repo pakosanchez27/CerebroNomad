@@ -130,9 +130,17 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
 
     public function destroy($id)
     {
+        // Encuentra al paciente por su ID
         $paciente = Patient::find($id);
+    
+        // Elimina al paciente
         $paciente->delete();
-        venta::where('patient_id', $paciente)->delete();
+    
+        // Elimina las ventas asociadas al paciente usando su ID
+        Venta::where('patient_id', $id)->delete();
+    
+        // Redirige con un mensaje de éxito
         return redirect()->route('pacientes')->with('eliminado', 'Paciente eliminado correctamente');
     }
+     
 }
