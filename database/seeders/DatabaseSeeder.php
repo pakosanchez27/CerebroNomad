@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Address;
 use App\Models\Test;
 use App\Models\User;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
             GuardianSeeder::class,
             AddressSeeder::class,
             TestSeeder::class,
+            CreateAdminUserSeeder::class,
             
 
 
