@@ -9,9 +9,9 @@ class VistaVendedoresController extends Controller
 {
     function __construct()
     {
-        $this->middleware('auth');    
+        $this->middleware('auth');
     }
-    
+
     function index(Request $request){
         $path = $request->path();
         $vendedores = Vendor::all();
@@ -24,7 +24,13 @@ class VistaVendedoresController extends Controller
     }
 
     function store(Request $request){
-        
+
+        $correo = Vendor::where('email', $request->email)->first();
+        if ($correo) {
+            return back()->with('email', 'El correo ya existe');
+        }
+
+
         $this->validate($request, [
             'nombre' => 'required',
             'apellido_paterno' => 'required',
@@ -47,7 +53,7 @@ class VistaVendedoresController extends Controller
 
         return redirect('vendedores')->with('success', 'Vendedor creado correctamente, la contraseña temporal es: Vendedor2024');
 
-       
+
     }
 
     function edit(Request $request, $id){

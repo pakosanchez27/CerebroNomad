@@ -64,7 +64,7 @@
                                             <path fill-rule="evenodd"
                                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                                         </svg></a>
-                                    <form action="{{ route('pruebas.destroy', $prueba->id) }}" method="POST">
+                                    <form action="{{ route('pruebas.destroy', $prueba->id) }}" method="POST" class="deleteForm">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">
@@ -88,20 +88,35 @@
         </div>
     </div>
 
-    {{-- mensajes --}}
-    @if (@session('agregado'))
-        <script>
-            alert('{{ session('agregado') }}');
-        </script>
-    @endif
-    @if (@session('actualizado'))
-        <script>
-            alert('{{ session('actualizado') }}');
-        </script>
-    @endif
-    @if (@session('eliminado'))
-        <script>
-            alert('{{ session('eliminado') }}');
-        </script>
-    @endif
+       {{-- mensajes --}}
+       @if (@session('agregado'))
+       <script>
+           Swal.fire(
+               'Agregado!',
+               '{{ session('agregado') }}',
+               'success'
+           )
+       </script>
+   @endif
+   @if (@session('editado'))
+       <script>
+           Swal.fire(
+               'Actualizado!',
+               '{{ session('actualizado') }}',
+               'success'
+           )
+       </script>
+   @endif
+   @if (@session('eliminado'))
+       <script>
+           Swal.fire(
+               'Eliminado!',
+               '{{ session('eliminado') }}',
+               'success'
+           )
+       </script>
+   @endif
+
+</div>
 @endsection
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

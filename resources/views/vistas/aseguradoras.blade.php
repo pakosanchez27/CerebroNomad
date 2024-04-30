@@ -57,11 +57,10 @@
                                         <path fill-rule="evenodd"
                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                                     </svg></a>
-                                <form action="{{ route('aseguradoras.destroy', $aseguradora->id) }}" method="POST">
+                                <form action="{{ route('aseguradoras.destroy', $aseguradora->id) }}" method="POST" class="deleteForm">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('¿Estás seguro de que deseas eliminar a la aseguradora: {{ $aseguradora->nombre }}?')">
+                                    <button type="submit" class="btn btn-danger btn-sm">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                             <path
@@ -84,19 +83,32 @@
         {{-- mensajes --}}
         @if (@session('agregado'))
             <script>
-                alert('{{ session('agregado') }}');
+                Swal.fire(
+                    'Agregado!',
+                    '{{ session('agregado') }}',
+                    'success'
+                )
             </script>
         @endif
         @if (@session('actualizado'))
             <script>
-                alert('{{ session('actualizado') }}');
+                Swal.fire(
+                    'Actualizado!',
+                    '{{ session('actualizado') }}',
+                    'success'
+                )
             </script>
         @endif
         @if (@session('eliminado'))
             <script>
-                alert('{{ session('eliminado') }}');
+                Swal.fire(
+                    'Eliminado!',
+                    '{{ session('eliminado') }}',
+                    'success'
+                )
             </script>
         @endif
 
     </div>
 @endsection
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
