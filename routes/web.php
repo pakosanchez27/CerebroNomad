@@ -37,6 +37,8 @@ Route::get('/', function () {
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login'); // login page
 Route::post('/login', [LoginController::class, 'store']); // login page
+Route::post('/verificar-token', [LoginController::class, 'verificarToken'])->name('verificar-token'); // login page
+Route::get('/reenviar-token', [LoginController::class, 'reenviarToken'])->name('reenviarToken'); // login page
 
 Route::post('/logout', [logoutController::class, 'logout'], '')->name('logout');
 
@@ -122,9 +124,3 @@ Route::post('/ventas/crear/{patient_id}', [VentaController::class, 'store'])->na
 // verpuebas
 
 Route::get('/pruebas-paciente/{id}', [ProcesoMuetrasController::class, 'show'])->name('pruebas-paciente'); //pruebas page
-
-
-// Agendar
-Route::post('/agendar-toma/{idPM}/{idP}', [ProcesoMuetrasController::class, 'AgendarToma'])->name('agendar-toma'); //pruebas page
-Route::post('/agendar-resultados/{idPM}/{idP}', [ProcesoMuetrasController::class, 'AgendarResultados'])->name('agendar-resultados'); //pruebas page
-Route::post('/completarEntrega/{idPM}/{idP}', [ProcesoMuetrasController::class, 'completarEntrega'])->name('completarEntrega'); //pruebas page

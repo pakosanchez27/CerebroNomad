@@ -12,6 +12,6 @@ export default defineConfig({
         }),
     ],
     optimizeDeps: {
-        include: ['chart.js']
+        include: ['jquery', 'chart.js']
     }
 });

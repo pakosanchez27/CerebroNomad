@@ -20,3 +20,5 @@ chartHome();
 
 // Funcion de hora
 
+Livewire.start()
+
