@@ -79,14 +79,14 @@
                                                             data-bs-target="#agendarToma({{ $prueba->id_proceso }})">Agendar</a>
                                                     @elseif ($prueba->estado === 'completado')
                                                         <button class="btn btn-success" disabled>Completado</button>
-                                                    @elseif ($prueba->estado === 'agendado')
-                                                        <a href="" class="btn btn-warning" data-bs-toggle="modal"
+                                                    @elseif ($prueba->estado === 'Agendado')
+                                                        <a href="" class="btn btn-warning" data-bs-toggle="modal" 
                                                         data-bs-target="#fechaEntrega({{ $prueba->id_proceso }}">Entrega</a>
-                                                    @elseif ($prueba->estado === 'enviado')
-                                                    <form action="{{ route('completarEntrega',[$prueba->id_proceso, $paciente->id] )}}" method="POST">
+                                                    @elseif ($prueba->estado === 'Enviado')
+                                                    <form class="EntregarResultado" action="{{ route('completarEntrega',[$prueba->id_proceso, $paciente->id] )}}" method="POST" >
                                                         @csrf
-                                                        <button type="submit" class="btn btn-warning" onclick="confirm('Los resultados ya se entregaron al paciente')">Entregar</button>
-                                                    </form>
+                                                        <button type="submit" class="btn btn-warning " >Entregar</button>
+                                                    </form>     
 
                                                     @endif
                                                 </td>
@@ -197,6 +197,7 @@
         </div>
 
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
 
 

@@ -51,7 +51,7 @@ class ProcesoMuetrasController extends Controller
         $proceso = proceso_muestras::find($idPM);
         $proceso->fecha_toma_muestra = $request->visita;
         $proceso->hora_toma_muestra = $request->hora;
-        $proceso->estado = 'agendado';
+        $proceso->estado = 'Agendado';
         $proceso->save();
 
 
@@ -81,6 +81,6 @@ class ProcesoMuetrasController extends Controller
         $proceso->estado = 'completado';
         $proceso->save();
 
-        return back()->with('success', 'Entrega completada correctamente');
+        return back()->with('Completado', 'Entrega completada correctamente');
     }
 }

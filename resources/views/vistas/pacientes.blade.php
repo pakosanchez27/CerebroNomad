@@ -160,7 +160,17 @@
     @endif
     @if (@session('eliminado'))
         <script>
-            alert('{{ session('eliminado') }}');
+            Swal.fire({
+
+                icon: "success",
+                title: "Paciente eliminado correctamente",
+                showConfirmButton: false,
+                timer: 1500
+            });
         </script>
     @endif
 @endsection
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
