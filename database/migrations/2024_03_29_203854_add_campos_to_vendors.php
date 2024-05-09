@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::table('vendors', function (Blueprint $table) {
             $table->string('foto-perfil')->nullable();
-            $table->string('password');
+            $table->bigInteger('id_usuario')->unsigned();
+            $table->foreign('id_usuario')->references('id')->on('users');
+
         });
     }
 
@@ -24,7 +26,7 @@ return new class extends Migration
     {
         Schema::table('vendors', function (Blueprint $table) {
             $table->dropColumn('foto-perfil');
-            $table->dropColumn('password');
+            $table->dropForeign('vendors_id_usuario_foreign');
         });
     }
 };
