@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class VistaVendedoresController extends Controller
 
     function store(Request $request){
 
-        $correo = Vendor::where('email', $request->email)->first();
+        $correo = User::where('email', $request->email)->first();
         if ($correo) {
             return back()->with('email', 'El correo ya existe');
         }
@@ -41,14 +42,20 @@ class VistaVendedoresController extends Controller
 
         $password = 'Vendedor2024';
 
-        Vendor::create([
+        User::create([
             'name' => $request->nombre,
             'apellido_paterno' => $request->apellido_paterno,
             'apellido_materno' => $request->apellido_materno,
+            'rol' => 'vendedor',
             'email' => $request->email,
+            'password' => bcrypt($password),
+        ]);
+
+        Vendor::create([
+            'id_usuario' => User::latest()->first()->id,
+
             'telefono' => $request->telefono,
             'zona' => $request->zona,
-            'password' => bcrypt($password),
         ]);
 
         return redirect('vendedores')->with('success', 'Vendedor creado correctamente, la contraseña temporal es: Vendedor2024');

@@ -10,15 +10,12 @@ class Vendor extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'apellido_paterno',
-        'apellido_materno',
-        'email',
+        'id_usuario',
         'telefono',
         'zona',
-        'password'
+
     ];
-    
+
     public function ventas()
     {
         return $this->hasMany(Venta::class);

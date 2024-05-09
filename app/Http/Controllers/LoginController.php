@@ -29,7 +29,8 @@ class LoginController extends Controller
         $user = auth()->user();
 
         // Verificar si la contraseña del usuario es la predeterminada
-        if (password_verify('Nomad2024', $user->password)) {
+        if (password_verify('Nomad2024', $user->password) || password_verify('Vendedor2024', $user->password)) {
+
 
             // Redirigir al usuario a la vista para cambiar la contraseña
             return redirect()->route('cambiar-contraseña', ['user' => $user = auth()->user()]);
@@ -48,8 +49,8 @@ class LoginController extends Controller
     }
     public function verificarToken(Request $request)
     {
-    
-       
+
+
         if (!$request->tokenLogin || $request->tokenLogin === 'null') {
             return back()->with('errorToken', 'No puede estar vacio');
         }
@@ -66,7 +67,7 @@ class LoginController extends Controller
             return back()->with('errorToken', 'Token incorrecto');
         }
 
-       
+
         // Si el token es correcto, no lo eliminamos de la base de datos,
         // sino que simplemente redirigimos al usuario a la página de inicio.
         return redirect()->route('home');
