@@ -11,8 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.4",
-        "uxweb/sweet-alert": "^2.1 *"
-
+        "rap2hpoutre/fast-excel": "^5.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

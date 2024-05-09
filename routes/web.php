@@ -140,3 +140,4 @@ Route::post('/completarEntrega/{idPM}/{idP}', [ProcesoMuetrasController::class, 
 // Carga Masiva
 
 Route::get('/carga-masiva', [CargaMasivaController::class, 'index'])->name('carga-masiva.index'); //pruebas page
+Route::post('/carga-masiva/pacientes', [CargaMasivaController::class, 'uploadPacientes'])->name('carga-masiva.uploadPacientes'); //pruebas page
