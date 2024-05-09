@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Insurance;
 use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,8 +25,33 @@ class CargaMasivaController extends Controller
 
     public function uploadPacientes(Request $request)
     {
-        $PacientesCompleto = Patient::all();
+      $aseguradoras = Insurance::all();
 
-        return (new FastExcel($PacientesCompleto))->download('Usuarios.xlsx');
+      (new FastExcel($aseguradoras))->download('file.xlsx');
+
+
+    }
+
+    public function uploadAseguradoras(Request $request)
+    {
+        $request->validate([
+            'fileAseguradora' => 'required',
+        ]);
+
+        $file = $request->file('fileAseguradora');
+
+        $collection = (new FastExcel)->import($file);
+
+        foreach ($collection as $row) {
+            Insurance::create([
+                'name' => $row['nombre'],
+                'representante' => $row['representante'],
+                'telefono' => $row['telefono'],
+                'email' => $row['email'],
+
+            ]);
+        }
+
+        return redirect()->route('carga-masiva.index')->with('success', 'Pacientes cargados correctamente');
     }
 }

@@ -58,9 +58,13 @@
                     <div class="card-body">
                         <form action="{{ route('carga-masiva.uploadPacientes') }}" method="post">
                             @csrf
+
                             <h5 class="card-title h3 mb-3">Importar Pacientes</h5>
-                            <input type="file" class="form-control mb-3">
+                            <input type="file" class="form-control mb-3" name="filePacientes">
                             <button type="submit" class="btn btn-primary">Importar</button>
+                            @error('filePacientes')
+                            <div class="alert text-danger">{{ $message }}</div>
+                        @enderror
                         </form>
                     </div>
                 </div>
@@ -68,9 +72,16 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title h3 mb-3">Importar Aseguradoras</h5>
-                        <input type="file" class="form-control mb-3">
-                        <button class="btn btn-primary">Importar</button>
+                    <form action="{{ route('carga-masiva.uploadAseguradoras') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+
+                        <h5 class="card-title h3 mb-3">Importar Aseguradora</h5>
+                        <input type="file" class="form-control mb-3" name="fileAseguradora">
+                        <button type="submit" class="btn btn-primary">Importar</button>
+                        @error('fileAseguradora')
+                        <div class="alert text-danger">{{ $message }}</div>
+                    @enderror
+                    </form>
                     </div>
                 </div>
             </div>
