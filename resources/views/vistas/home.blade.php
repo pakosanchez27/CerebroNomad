@@ -51,7 +51,7 @@
                 </div>
 
             </div>
-       
+
             <div class="contenedor__cards ">
                 <button class="card card-opcRapida shadow borde-azul" data-bs-toggle="modal"
                     data-bs-target="#AgregarColaborador">
@@ -184,7 +184,7 @@
                                         <label for="nombre" class="form-label">Apellido Materno</label>
                                         <input type="text" class="form-control" id="apellido_materno" name="apellido_materno"
                                             value="{{ old('apellido_materno') }}">
-                
+
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -245,9 +245,9 @@
                                         @enderror
                                     </div>
                                 </div>
-                
-                
-                
+
+
+
                                 <button type="submit" class="btn btn-success  ">Agregar</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                 onclick="document.querySelector('#miFormulario').reset()">Cerrar</button>
@@ -333,8 +333,8 @@
                     </div>
                 </div>
 
-              
-              
+
+
                 <a href="" class="card card-opcRapida shadow borde-morado " data-bs-toggle="modal"
                 data-bs-target="#AgregarDoctor">
                     <div class="card-opcRapida__img morado">
@@ -379,11 +379,11 @@
                                         <label for="nombre" class="form-label">Apellido Materno</label>
                                         <input type="text" class="form-control" id="apellido_materno" name="apellido_materno"
                                             value="{{ old('apellido_materno') }}">
-                
+
                                     </div>
-                
+
                                 </div>
-                
+
                                 <div class="row">
                                     <div class="mb-3 col col-md-6">
                                         <label for="sexo" class="form-label">Sexo</label>
@@ -404,7 +404,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                
+
                                 <div class=" row">
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="nombre" class="form-label">Télefono</label>
@@ -441,31 +441,31 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                
+
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Asistente</label>
                                     <input type="text" class="form-control" id="asistente" name="asistente"
                                         value="{{ old('asistente') }}">
-                                  
+
                                 </div>
-                
+
                                 <div class=" row">
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="nombre" class="form-label">Télefono Asistente</label>
                                         <input type="tel" class="form-control" id="telefono_asistente" name="telefono_asistente"
                                             value="{{ old('telefono_asistente') }}">
-                                      
+
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="nombre" class="form-label">Email Asistente</label>
                                         <input type="email" class="form-control" id="email_asistente" name="email_asistente"
                                             value="{{ old('email_asistente') }}">
-                                      
+
                                     </div>
                                 </div>
-                
+
                                 <button type="submit" class="btn btn-success  ">Agregar</button>
-                
+
                             </form>
                         </div>
                     </div>

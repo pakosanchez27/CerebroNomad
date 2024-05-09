@@ -17,6 +17,7 @@ use App\Http\Controllers\VistaVendedoresController;
 use App\Http\Controllers\VistaDireccionesController;
 use App\Http\Controllers\VistaAseguradorasController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\CargaMasivaController;
 use App\Http\Controllers\ProcesoMuetrasController;
 
 /*
@@ -38,7 +39,7 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'index'])->name('login'); // login page
 Route::post('/login', [LoginController::class, 'store']); // login page
 
-// VerificarToken 
+// VerificarToken
 Route::post('/verificar-token', [LoginController::class, 'verificarToken'])->name('verificar-token'); // login page
 
 // reenviarToken
@@ -134,3 +135,8 @@ Route::get('/pruebas-paciente/{id}', [ProcesoMuetrasController::class, 'show'])-
 Route::post('/agendar-toma/{idPM}/{idP}', [ProcesoMuetrasController::class, 'AgendarToma'])->name('agendar-toma'); //pruebas page
 Route::post('/agendar-resultados/{idPM}/{idP}', [ProcesoMuetrasController::class, 'AgendarResultados'])->name('agendar-resultados'); //pruebas page
 Route::post('/completarEntrega/{idPM}/{idP}', [ProcesoMuetrasController::class, 'completarEntrega'])->name('completarEntrega'); //pruebas page
+
+
+// Carga Masiva
+
+Route::get('/carga-masiva', [CargaMasivaController::class, 'index'])->name('carga-masiva.index'); //pruebas page
