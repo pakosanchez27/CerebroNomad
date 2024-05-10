@@ -14,8 +14,9 @@ class VistaVendedoresController extends Controller
 
     function index(Request $request){
         $path = $request->path();
+        $rol = $request->user()->role->name;
         $vendedores = Vendor::all();
-        return view('vistas.vendedores' , ['path' => $path, 'vendedores' => $vendedores]);
+        return view('vistas.vendedores' , ['path' => $path, 'vendedores' => $vendedores, 'rol' => $rol]);
     }
 
     function create(Request $request){

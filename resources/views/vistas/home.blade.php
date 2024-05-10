@@ -8,66 +8,76 @@
     <div class="contenedor__panel--contenido vista__home d-flex flex-column ">
 
         <div class="vista__home--contenido  ">
-            <div class="contenedor-resumen row  gap-5  gap-lg-0  p-5  ">
+            @if ($rol === 'admin')
+                <div class="contenedor-resumen row  gap-5  gap-lg-0  p-5  ">
 
-                <div class="contenedor-resumen__cards row gap-5 justify-content-center   ">
-                    <div
-                        class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card col-12 col-md-6 col-lg ">
-                        <h3 class="fw-bold fs-4 ">Venta del Mes</h3>
-                        <p class=" fs-1 fw-bold ">$10,250 <span class=" fs-4 text-success  ">+2.5%</span></p>
-                        <p class="fs-5 text-secondary ">Venta hasta el dia de hoy @php
-                            echo date('d-m-Y');
-                        @endphp</p>
-                    </div> <!-- card -->
+                    <div class="contenedor-resumen__cards row gap-5 justify-content-center   ">
+                        <div
+                            class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card col-12 col-md-6 col-lg ">
+                            <h3 class="fw-bold fs-4 ">Venta del Mes</h3>
+                            <p class=" fs-1 fw-bold ">$10,250 <span class=" fs-4 text-success  ">+2.5%</span></p>
+                            <p class="fs-5 text-secondary ">Venta hasta el dia de hoy @php
+                                echo date('d-m-Y');
+                            @endphp</p>
+                        </div> <!-- card -->
 
-                    <div
-                        class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card   card col-12 col-md-6 col-lg">
-                        <h3 class="fw-bold fs-4 ">Total pacientes</h3>
-                        <p class=" fs-1 fw-bold ">{{ $totalPacientes }} <span class=" fs-4 text-success  ">pacientes</span>
-                        </p>
-                        <p class="fs-5 text-secondary ">Pacientes hasta @php
-                            echo date('d-m-Y');
-                        @endphp</p>
-                    </div> <!-- card -->
-                    <div
-                        class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card  card col-12 col-md-6 col-lg">
-                        <h3 class="fw-bold fs-4 ">Doctores</h3>
-                        <p class=" fs-1 fw-bold ">{{ $totalDoctores }} <span class=" fs-4 text-success  ">Doctores</span>
-                        </p>
-                        <p class="fs-5 text-secondary ">Doctores afiliados hasta @php
-                            echo date('d-m-Y');
-                        @endphp</p>
-                    </div> <!-- card -->
+                        <div
+                            class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card   card col-12 col-md-6 col-lg">
+                            <h3 class="fw-bold fs-4 ">Total pacientes</h3>
+                            <p class=" fs-1 fw-bold ">{{ $totalPacientes }} <span
+                                    class=" fs-4 text-success  ">pacientes</span>
+                            </p>
+                            <p class="fs-5 text-secondary ">Pacientes hasta @php
+                                echo date('d-m-Y');
+                            @endphp</p>
+                        </div> <!-- card -->
+                        <div
+                            class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card  card col-12 col-md-6 col-lg">
+                            <h3 class="fw-bold fs-4 ">Doctores</h3>
+                            <p class=" fs-1 fw-bold ">{{ $totalDoctores }} <span
+                                    class=" fs-4 text-success  ">Doctores</span>
+                            </p>
+                            <p class="fs-5 text-secondary ">Doctores afiliados hasta @php
+                                echo date('d-m-Y');
+                            @endphp</p>
+                        </div> <!-- card -->
 
-                    <div
-                        class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card  card col-12 col-md-6 col-lg">
-                        <h3 class="fw-bold fs-4 ">Vendedores</h3>
-                        <p class=" fs-1 fw-bold ">{{ $totalVendedores }} <span
-                                class=" fs-4 text-success  ">Vendedores</span></p>
-                        <p class="fs-5 text-secondary ">Venta hasta el dia de hoy @php
-                            echo date('d-m-Y');
-                        @endphp</p>
-                    </div> <!-- card -->
+                        <div
+                            class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card  card col-12 col-md-6 col-lg">
+                            <h3 class="fw-bold fs-4 ">Vendedores</h3>
+                            <p class=" fs-1 fw-bold ">{{ $totalVendedores }} <span
+                                    class=" fs-4 text-success  ">Vendedores</span></p>
+                            <p class="fs-5 text-secondary ">Venta hasta el dia de hoy @php
+                                echo date('d-m-Y');
+                            @endphp</p>
+                        </div> <!-- card -->
+                    </div>
+
                 </div>
+            @endif
 
-            </div>
-       
+
             <div class="contenedor__cards ">
-                <button class="card card-opcRapida shadow borde-azul" data-bs-toggle="modal"
-                    data-bs-target="#AgregarColaborador">
-                    <div class="card-opcRapida__img azul">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white"
-                            class="bi bi-people" viewBox="0 0 16 16">
-                            <path
-                                d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
-                        </svg>
 
-                    </div>
-                    <div class="card-opcRapida__texto">
-                        <h4>Nuevo <span>Colaborador</span></h4>
-                        <p>Añade un Nuevo Colaborador</p>
-                    </div>
-                </button>
+                @if ($rol === 'admin')
+                    <button class="card card-opcRapida shadow borde-azul" data-bs-toggle="modal"
+                        data-bs-target="#AgregarColaborador">
+                        <div class="card-opcRapida__img azul">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white"
+                                class="bi bi-people" viewBox="0 0 16 16">
+                                <path
+                                    d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
+                            </svg>
+
+                        </div>
+                        <div class="card-opcRapida__texto">
+                            <h4>Nuevo <span>Colaborador</span></h4>
+                            <p>Añade un Nuevo Colaborador</p>
+                        </div>
+                    </button>
+                @endif
+                @if ($rol === 'admin' || $rol === 'editor')
+
 
                 <!-- Modal -->
                 <div class="modal fade" id="AgregarColaborador" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -162,11 +172,13 @@
                             <div class="tabla__header   ">
                                 <p><span class="">Agregar Vendedor </span></p>
                             </div>
-                            <form action="{{ route('vendedores.store') }}" method="POST" class="p-4 shadow  rounded-2 " novalidate id="miFormulario">
+                            <form action="{{ route('vendedores.store') }}" method="POST" class="p-4 shadow  rounded-2 "
+                                novalidate id="miFormulario">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}">
+                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                        value="{{ old('nombre') }}">
                                     @error('nombre')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -174,22 +186,23 @@
                                 <div class=" row">
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="nombre" class="form-label">Apellido Paterno</label>
-                                        <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno"
-                                            value="{{ old('apellido_paterno') }}">
+                                        <input type="text" class="form-control" id="apellido_paterno"
+                                            name="apellido_paterno" value="{{ old('apellido_paterno') }}">
                                         @error('apellido_paterno')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="nombre" class="form-label">Apellido Materno</label>
-                                        <input type="text" class="form-control" id="apellido_materno" name="apellido_materno"
-                                            value="{{ old('apellido_materno') }}">
-                
+                                        <input type="text" class="form-control" id="apellido_materno"
+                                            name="apellido_materno" value="{{ old('apellido_materno') }}">
+
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        value="{{ old('email') }}">
                                     @error('email')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -245,12 +258,12 @@
                                         @enderror
                                     </div>
                                 </div>
-                
-                
-                
+
+
+
                                 <button type="submit" class="btn btn-success  ">Agregar</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                onclick="document.querySelector('#miFormulario').reset()">Cerrar</button>
+                                    onclick="document.querySelector('#miFormulario').reset()">Cerrar</button>
                             </form>
                         </div>
                     </div>
@@ -284,8 +297,8 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="{{ route('aseguradoras.store') }}" method="POST" class="p-4 " novalidate
-                                    id="miFormulario">
+                                <form action="{{ route('aseguradoras.store') }}" method="POST" class="p-4 "
+                                    novalidate id="miFormulario">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="nombre" class="form-label">Nombre</label>
@@ -333,10 +346,10 @@
                     </div>
                 </div>
 
-              
-              
+
+
                 <a href="" class="card card-opcRapida shadow borde-morado " data-bs-toggle="modal"
-                data-bs-target="#AgregarDoctor">
+                    data-bs-target="#AgregarDoctor">
                     <div class="card-opcRapida__img morado">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white"
                             class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
@@ -357,11 +370,13 @@
                             <div class="tabla__header   ">
                                 <p><span class="">Agregar Vendedor </span></p>
                             </div>
-                            <form action="{{ route('doctores.store') }}" method="POST" class="p-4 shadow  rounded-2 " novalidate>
+                            <form action="{{ route('doctores.store') }}" method="POST" class="p-4 shadow  rounded-2 "
+                                novalidate>
                                 @csrf
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}">
+                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                        value="{{ old('nombre') }}">
                                     @error('nombre')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -369,27 +384,29 @@
                                 <div class=" row">
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="nombre" class="form-label">Apellido Paterno</label>
-                                        <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno"
-                                            value="{{ old('apellido_paterno') }}">
+                                        <input type="text" class="form-control" id="apellido_paterno"
+                                            name="apellido_paterno" value="{{ old('apellido_paterno') }}">
                                         @error('apellido_paterno')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="nombre" class="form-label">Apellido Materno</label>
-                                        <input type="text" class="form-control" id="apellido_materno" name="apellido_materno"
-                                            value="{{ old('apellido_materno') }}">
-                
+                                        <input type="text" class="form-control" id="apellido_materno"
+                                            name="apellido_materno" value="{{ old('apellido_materno') }}">
+
                                     </div>
-                
+
                                 </div>
-                
+
                                 <div class="row">
                                     <div class="mb-3 col col-md-6">
                                         <label for="sexo" class="form-label">Sexo</label>
                                         <select class="form-select form-select-lg " id="sexo" name="sexo">
-                                            <option value="M" {{ old('sexo') == 'M' ? 'selected' : '' }}>Masculino</option>
-                                            <option value="F" {{ old('sexo') == 'F' ? 'selected' : '' }}>Femenino</option>
+                                            <option value="M" {{ old('sexo') == 'M' ? 'selected' : '' }}>Masculino
+                                            </option>
+                                            <option value="F" {{ old('sexo') == 'F' ? 'selected' : '' }}>Femenino
+                                            </option>
                                         </select>
                                         @error('sexo')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -404,7 +421,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                
+
                                 <div class=" row">
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="nombre" class="form-label">Télefono</label>
@@ -434,44 +451,44 @@
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="nombre" class="form-label">Clinia o Hospital</label>
-                                        <input type="text" class="form-control" id="nombre_clinica" name="nombre_clinica"
-                                            value="{{ old('nombre_clinica') }}">
+                                        <input type="text" class="form-control" id="nombre_clinica"
+                                            name="nombre_clinica" value="{{ old('nombre_clinica') }}">
                                     </div>
                                     @error('nombre_clinica')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                
+
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Asistente</label>
                                     <input type="text" class="form-control" id="asistente" name="asistente"
                                         value="{{ old('asistente') }}">
-                                  
+
                                 </div>
-                
+
                                 <div class=" row">
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="nombre" class="form-label">Télefono Asistente</label>
-                                        <input type="tel" class="form-control" id="telefono_asistente" name="telefono_asistente"
-                                            value="{{ old('telefono_asistente') }}">
-                                      
+                                        <input type="tel" class="form-control" id="telefono_asistente"
+                                            name="telefono_asistente" value="{{ old('telefono_asistente') }}">
+
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="nombre" class="form-label">Email Asistente</label>
-                                        <input type="email" class="form-control" id="email_asistente" name="email_asistente"
-                                            value="{{ old('email_asistente') }}">
-                                      
+                                        <input type="email" class="form-control" id="email_asistente"
+                                            name="email_asistente" value="{{ old('email_asistente') }}">
+
                                     </div>
                                 </div>
-                
+
                                 <button type="submit" class="btn btn-success  ">Agregar</button>
-                
+
                             </form>
                         </div>
                     </div>
                 </div>
 
-
+                @endif
             </div>
 
         </div>

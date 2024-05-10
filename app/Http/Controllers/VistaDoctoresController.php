@@ -10,14 +10,15 @@ class VistaDoctoresController extends Controller
 
     function __construct()
     {
-        $this->middleware('auth');    
+        $this->middleware('auth');
     }
-    
+
     function index(Request $request)
     {
         $path = $request->path();
         $doctores = Doctor::all();
-        return view('vistas.doctores', ['path' => $path, 'doctores' => $doctores]);
+        $rol = $request->user()->role->name;
+        return view('vistas.doctores', ['path' => $path, 'doctores' => $doctores, 'rol' => $rol]);
     }
 
     function create(Request $request)
@@ -29,7 +30,7 @@ class VistaDoctoresController extends Controller
     function store(Request $request)
     {
 
-  
+
         $this->validate($request, [
             'nombre' => 'required',
             'apellido_paterno' => 'required',

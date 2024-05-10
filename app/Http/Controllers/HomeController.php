@@ -15,9 +15,12 @@ class HomeController extends Controller
     }
     public function index(Request $request)
     {
-        
+
         $path = $request->path(); // Obtener la parte de la URL después del dominio
+        $rol = $request->user()->role->name;
+
         $users = User::take(10)->get();
+
         $vendedores = Vendor::all();
         // Total de pacientes
         $totalPacientes = User::count();
@@ -25,6 +28,6 @@ class HomeController extends Controller
         $totalDoctores = Doctor::count();
         //total de vendedores
         $totalVendedores = Vendor::count();
-        return view('vistas/home' , ['path' => $path, 'users' => $users , 'vendedores' => $vendedores, 'totalPacientes' => $totalPacientes, 'totalDoctores' => $totalDoctores , 'totalVendedores' => $totalVendedores ] );
+        return view('vistas/home' , ['path' => $path, 'users' => $users , 'vendedores' => $vendedores, 'totalPacientes' => $totalPacientes, 'totalDoctores' => $totalDoctores , 'totalVendedores' => $totalVendedores, 'rol' => $rol ] );
     }
 }
