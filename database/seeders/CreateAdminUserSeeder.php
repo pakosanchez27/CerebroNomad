@@ -13,7 +13,7 @@ class CreateAdminUserSeeder extends Seeder
      * Run the database seeds.
      */
 
-    
+
 
     public function run()
     {
@@ -26,7 +26,7 @@ class CreateAdminUserSeeder extends Seeder
         $user->password = Hash::make('password');
         $user->apellido_paterno = 'ApellidoPaterno';
         $user->apellido_materno = 'ApellidoMaterno';
-        $user->rol = 'admin';
+        $user->role_id = 1;
         $user->save();
     }
 }

@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' =>  $password ?: $password = Hash::make('password'), // password
             'remember_token' => Str::random(10),
-            'rol' => fake()->randomElement(['admin', 'editor', 'analista']), // Pasar un array de elementos
+            'role_id' => fake()->randomElement(['1 ', '2', '3', '4']), // Pasar un array de elementos
         ];
     }
 
