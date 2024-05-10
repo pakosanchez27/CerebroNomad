@@ -24,7 +24,7 @@ class User extends Authenticatable
         'rol',
         'apellido_paterno',
         'apellido_materno',
-        
+
     ];
 
     /**
@@ -47,5 +47,15 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    // hasRole
+    public function hasRole($role)
+{
+    return $this->role->name === $role;
+}
 
 }

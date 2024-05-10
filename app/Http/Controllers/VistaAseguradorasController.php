@@ -10,13 +10,14 @@ class VistaAseguradorasController extends Controller
 
     function __construct()
     {
-        $this->middleware('auth');    
+        $this->middleware('auth');
     }
     function index(Request $request)
     {
         $path = $request->path();
+        $rol = $request->user()->role->name;
         $aseguradoras = Insurance::all();
-        return view('vistas.aseguradoras', ['path' => $path, 'aseguradoras' => $aseguradoras]);
+        return view('vistas.aseguradoras', ['path' => $path, 'aseguradoras' => $aseguradoras, 'rol' => $rol]);
     }
 
 

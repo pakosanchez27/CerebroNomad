@@ -22,9 +22,10 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
     public function index(request $request)
     {
         $path = $request->path();
+        $rol = $request->user()->role->name;
         $pacientes = Patient::orderBy('created_at', 'desc')->paginate(10);
         $current_page = $pacientes->currentPage();
-        return view('vistas.pacientes', ['path' => $path , 'pacientes' => $pacientes, 'current_page' => $current_page]);
+        return view('vistas.pacientes', ['path' => $path , 'pacientes' => $pacientes, 'current_page' => $current_page, 'rol' => $rol]);
     }
 
     public function show(request $request, $id)
@@ -132,15 +133,15 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
     {
         // Encuentra al paciente por su ID
         $paciente = Patient::find($id);
-    
+
         // Elimina al paciente
         $paciente->delete();
-    
+
         // Elimina las ventas asociadas al paciente usando su ID
         Venta::where('patient_id', $id)->delete();
-    
+
         // Redirige con un mensaje de éxito
         return redirect()->route('pacientes')->with('eliminado', 'Paciente eliminado correctamente');
     }
-     
+
 }

@@ -12,11 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-
-            //Atributos de la tabla
-            $table->string('apellido_paterno')->nullable();
-            $table->string('apellido_materno')->nullable();
-
+            $table->bigInteger('role_id')->unsigned()->nullable();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }
 
@@ -26,8 +23,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('apellido_paterno');
-            $table->dropColumn('apellido_materno');
+            //
+            $table->dropForeign(['role_id']);
+            $table->dropColumn('role_id');
 
         });
     }

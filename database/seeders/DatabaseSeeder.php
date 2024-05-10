@@ -20,14 +20,15 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
 
-
+            RolesSeeder::class,
             UsersSeeder::class,
             PatientSeeder::class,
             GuardianSeeder::class,
             AddressSeeder::class,
             TestSeeder::class,
             CreateAdminUserSeeder::class,
-            
+
+
 
 
         ]);

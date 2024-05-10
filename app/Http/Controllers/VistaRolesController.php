@@ -19,8 +19,11 @@ class VistaRolesController extends Controller
     function index(Request $request)
     {
         $path = $request->path();
+        $rol = $request->user()->role->name;
         $users = User::all();
-        return view('vistas.roles', ['path' => $path, 'users' => $users]);
+
+
+        return view('vistas.roles', ['path' => $path, 'users' => $users, 'rol' => $rol]);
     }
 
     function store(Request $request)

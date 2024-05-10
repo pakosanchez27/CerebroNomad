@@ -9,12 +9,13 @@ class VistaPruebasController extends Controller
 {
     function __construct()
     {
-        $this->middleware('auth');    
+        $this->middleware('auth');
     }
      function index(Request $request){
         $path = $request->path();
+        $rol = $request->user()->role->name;
         $pruebas = Test::all();
-        return view('vistas.pruebas' , ['path' => $path , 'pruebas' => $pruebas]);
+        return view('vistas.pruebas' , ['path' => $path , 'pruebas' => $pruebas,  'rol' => $rol]);
     }
 
      function create(Request $request){
