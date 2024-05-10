@@ -18,6 +18,8 @@ use App\Http\Controllers\VistaDireccionesController;
 use App\Http\Controllers\VistaAseguradorasController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\ProcesoMuetrasController;
+use App\Http\Middleware\CheckRole;
+use App\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +40,7 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'index'])->name('login'); // login page
 Route::post('/login', [LoginController::class, 'store']); // login page
 
-// VerificarToken 
+// VerificarToken
 Route::post('/verificar-token', [LoginController::class, 'verificarToken'])->name('verificar-token'); // login page
 
 // reenviarToken
@@ -74,7 +76,10 @@ Route::post('/roles', [VistaRolesController::class, 'store'])->name('roles.store
 Route::put('/roles/resetPassword/{colaborador}', [VistaRolesController::class, 'resetPassword'])->name('roles.resetPassword'); //roles page
 
 
-Route::get('/finanzas', [VistaFinanzasController::class, 'index'])->name('finanzas'); //finanzas page
+Route::group(['middleware' => 'checkRole:admin'], function () {
+    Route::get('/finanzas', [VistaFinanzasController::class, 'index'])->name('finanzas'); //finanzas page
+});
+
 
 Route::get('/vendedores',[VistaVendedoresController::class, 'index'])->name('vendedores'); //vendedores page
 Route::get('/vendedores/crear', [VistaVendedoresController::class, 'create'])->name('vendedores.create'); //vendedores page
@@ -122,7 +127,6 @@ Route::put('/guardianes/editar/{id}', [VistaGuardiansController::class, 'update'
 // ventas
 Route::get('/ventas/crear/{patient_id}', [VentaController::class, 'create'])->name('venta.create'); //ventas page
 Route::post('/ventas/crear/{patient_id}', [VentaController::class, 'store'])->name('venta.store'); //ventas page
-
 
 
 // verpuebas
