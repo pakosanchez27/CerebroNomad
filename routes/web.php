@@ -142,3 +142,5 @@ Route::post('/completarEntrega/{idPM}/{idP}', [ProcesoMuetrasController::class, 
 Route::get('/carga-masiva', [CargaMasivaController::class, 'index'])->name('carga-masiva.index'); //pruebas page
 Route::post('/carga-masiva/pacientes', [CargaMasivaController::class, 'uploadPacientes'])->name('carga-masiva.uploadPacientes'); //pruebas page
 Route::post('/carga-masiva/aseguradoras', [CargaMasivaController::class, 'uploadAseguradoras'])->name('carga-masiva.uploadAseguradoras'); //pruebas page
+Route::post('/carga-masiva/doctores', [CargaMasivaController::class, 'uploadDoctores'])->name('carga-masiva.uploadDoctores'); //pruebas page
+Route::post('/carga-masiva/pruebas', [CargaMasivaController::class, 'uploadPruebas'])->name('carga-masiva.uploadPruebas'); //pruebas page
