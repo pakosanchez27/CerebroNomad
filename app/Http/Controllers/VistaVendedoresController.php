@@ -47,7 +47,7 @@ class VistaVendedoresController extends Controller
             'name' => $request->nombre,
             'apellido_paterno' => $request->apellido_paterno,
             'apellido_materno' => $request->apellido_materno,
-            'rol' => 'vendedor',
+            'role_id' => 'vendedor',
             'email' => $request->email,
             'password' => bcrypt($password),
         ]);

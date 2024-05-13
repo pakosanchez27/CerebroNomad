@@ -81,7 +81,7 @@
                                 </div>
 
                                 <div class="badge bg-success w-25  ">
-                                    <span>{{ $user->role->name }}</span>
+                                    <span>{{ $rol }}</span>
                                 </div>
 
                                 <div class="acciones d-flex flex-column gap-2    ">

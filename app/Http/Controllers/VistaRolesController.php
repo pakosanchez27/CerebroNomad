@@ -20,6 +20,7 @@ class VistaRolesController extends Controller
     {
         $path = $request->path();
         $rol = $request->user()->role->name;
+
         $users = User::all();
 
 
@@ -44,7 +45,7 @@ class VistaRolesController extends Controller
             'apellido_materno' => $request->apellido_materno,
             'email' => $request->email,
             'password' => $password,
-            'rol' => $request->rol
+            'role_id' => $request->rol
         ]);
 
         // enviar correo de alta de usuario
