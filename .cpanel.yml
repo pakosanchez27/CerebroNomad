@@ -1,0 +1,16 @@
+---
+tasks:
+  - name: "Instalar dependencias de Composer"
+    command: "composer install --no-dev --optimize-autoloader"
+
+  - name: "Generar clave de la aplicación"
+    command: "php artisan key:generate"
+
+  - name: "Migrar la base de datos"
+    command: "php artisan migrate --force"
+
+  - name: "Ejecutar seeders"
+    command: "php artisan db:seed --force"
+
+  - name: "Compilar estilos CSS"
+    command: "npm run prod"
