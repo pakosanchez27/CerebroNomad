@@ -12,7 +12,9 @@ use App\Models\venta;
 
 
 
-use Illuminate\Http\Request;class VistaPacienteController extends Controller
+use Illuminate\Http\Request;
+
+class VistaPacienteController extends Controller
 {
     function __construct()
     {
@@ -25,7 +27,50 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
         $rol = $request->user()->role->name;
         $pacientes = Patient::orderBy('created_at', 'desc')->paginate(10);
         $current_page = $pacientes->currentPage();
-        return view('vistas.pacientes', ['path' => $path , 'pacientes' => $pacientes, 'current_page' => $current_page, 'rol' => $rol]);
+        return view('vistas.pacientes', ['path' => $path, 'pacientes' => $pacientes, 'current_page' => $current_page, 'rol' => $rol]);
+    }
+
+    public function search(request $request)
+    {
+        $path = $request->path();
+        $rol = $request->user()->role->name;
+        $current_page = $request->input('page', 1);
+
+
+        //validando datos porque el fomulario se dejo sin restriccion 
+        $validatedData = $request->validate([
+            'Nombre' => 'nullable|regex:/^[\pL\s.]+$/u|max:100',
+            'ApellidoPaterno' => 'nullable|regex:/^[\pL\s.]+$/u|max:100',
+            'ApellidoMaterno' => 'nullable|regex:/^[\pL\s.]+$/u|max:100',
+        ]);
+
+        $nombre = $validatedData['Nombre'] ?? null;
+        $apellidoPaterno = $validatedData['ApellidoPaterno'] ?? null;
+        $apellidoMaterno = $validatedData['ApellidoMaterno'] ?? null;
+
+        // Búsqueda condicional con paginación
+        $pacientesbuscado = Patient::query()
+            ->when($nombre, function ($query, $nombre) {
+                return $query->where('name', 'like', "%{$nombre}%");
+            })
+            ->when($apellidoPaterno, function ($query, $apellidoPaterno) {
+                return $query->where('apellido_paterno', 'like', "%{$apellidoPaterno}%");
+            })
+            ->when($apellidoMaterno, function ($query, $apellidoMaterno) {
+                return $query->where('apellido_materno', 'like', "%{$apellidoMaterno}%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        // Si no hay búsqueda, obtener todos los pacientes
+        if ($pacientesbuscado->isEmpty()) {
+            $pacientes = Patient::orderBy('created_at', 'desc')->paginate(10);
+        } else {
+            $pacientes = $pacientesbuscado;
+        }
+
+        // return response()->json($pacientes);
+        return view('vistas.pacientes', compact('pacientes', 'path', 'current_page', 'rol'));
     }
 
     public function show(request $request, $id)
@@ -36,7 +81,7 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
         $doctor = Doctor::find($paciente->doctor_id);
         $direccion = Address::where('patient_id', $paciente->id)->first();
         $responsable = Guardian::where('patient_id', $paciente->id)->first();
-        return view('vistas.ver-paciente', ['path' => $path, 'paciente' => $paciente , 'aseguradora' => $aseguradora, 'doctor' => $doctor, 'direccion' => $direccion, 'responsable' => $responsable]);
+        return view('vistas.ver-paciente', ['path' => $path, 'paciente' => $paciente, 'aseguradora' => $aseguradora, 'doctor' => $doctor, 'direccion' => $direccion, 'responsable' => $responsable]);
     }
 
     public function create(request $request)
@@ -44,7 +89,7 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
         $path = $request->path();
         $aseguradoras = Insurance::all();
         $doctores = Doctor::all();
-        return view('vistas.agregar-paciente', ['path' => $path , 'aseguradoras' => $aseguradoras , 'doctores' => $doctores]);
+        return view('vistas.agregar-paciente', ['path' => $path, 'aseguradoras' => $aseguradoras, 'doctores' => $doctores]);
     }
 
     public function store(request $request)
@@ -91,7 +136,7 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
         $paciente = Patient::find($id);
         $aseguradoras = Insurance::all();
         $doctores = Doctor::all();
-        return view('vistas.editar-paciente', ['path' => $path , 'paciente' => $paciente, 'aseguradoras' => $aseguradoras , 'doctores' => $doctores]);
+        return view('vistas.editar-paciente', ['path' => $path, 'paciente' => $paciente, 'aseguradoras' => $aseguradoras, 'doctores' => $doctores]);
     }
 
     public function update(request $request, $id)
@@ -143,5 +188,4 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
         // Redirige con un mensaje de éxito
         return redirect()->route('pacientes')->with('eliminado', 'Paciente eliminado correctamente');
     }
-
 }
