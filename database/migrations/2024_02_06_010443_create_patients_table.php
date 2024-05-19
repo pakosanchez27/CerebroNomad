@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+    /** 
      * Run the migrations.
      */
     public function up(): void
@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
 
             //Atributos de la tabla
-            $table->id();
+            $table->string('id', 36)->primary();
             $table->string('name');
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
@@ -25,19 +25,19 @@ return new class extends Migration
             $table->string('telefono');
             $table->string('tipo_sangre');
             $table->text('descripcion_medica');
-           
+
 
             //llaves foraneas
-           
+
             $table->unsignedBigInteger('insurance_id')->nullable();
             $table->unsignedBigInteger('doctor_id')->nullable();
-            
+
 
             //Relaciones}
-           
+
             $table->foreign('insurance_id')->references('id')->on('insurances')->onDelete('set null');
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('set null');
-            
+
 
 
 

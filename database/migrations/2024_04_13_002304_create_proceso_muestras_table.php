@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('venta_id')->unsigned();
             $table->foreign('venta_id')->references('id')->on('ventas');
-            $table->bigInteger(('patient_id'))->unsigned();
-            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->string('patient_id')->nullable();
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->date('fecha_toma_muestra')->nullable();
             $table->time('hora_toma_muestra')->nullable();
             $table->date('fecha_envio_lab')->nullable();

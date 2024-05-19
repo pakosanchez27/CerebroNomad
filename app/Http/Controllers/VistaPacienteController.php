@@ -95,7 +95,6 @@ class VistaPacienteController extends Controller
     public function store(request $request)
     {
 
-
         $request->validate([
             'name' => 'required|alpha|min:3',
             'apellido_paterno' => 'required|alpha|min:3',
@@ -111,7 +110,17 @@ class VistaPacienteController extends Controller
             'descripcion_medica' => 'required',
         ]);
 
+        $ultimopaciente = Patient::latest()->first(); // se hace una consulta a patient y se ordena decendentemente y se toma al primero
+        //uso de operacion ternaria
+        //donde se compara, si el ultimo paciente es null significa que no hay pacientes y se guarda el valor de 0 en ultimo id
+        //si hay minimo un paciente es true y con el metodo se obtiene solo despues de el quinto caracteres("NOMAD0000") 
+        $ultimoId = $ultimopaciente ? intval(substr($ultimopaciente->id, 5)) : 0;
+
+        // en esta funcion se toma el id del ultimo usuario y se le suma uno y se ponen 3 ceros a la derecha gracias a la funcion str_pad_left
+        $nomenclatura = 'NOMAD' . str_pad($ultimoId + 1, 4, '0', STR_PAD_LEFT);
+
         Patient::create([
+            'id' => $nomenclatura,
             'name' => $request->name,
             'apellido_paterno' => $request->apellido_paterno,
             'apellido_materno' => $request->apellido_materno,

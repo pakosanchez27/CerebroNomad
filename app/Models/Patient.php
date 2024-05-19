@@ -8,13 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Patient extends Model
 {
     use HasFactory;
+
+
+    public $incrementing = false; // Deshabilitar auto-incremento
+    protected $keyType = 'string'; // Establecer el tipo de clave a string
+
     protected $fillable = [
+        'id',
         'name',
         'apellido_paterno',
         'apellido_materno',
         'sexo',
         'fecha_nacimiento',
-        'tipo_identificacion', 
+        'tipo_identificacion',
         'num_identificacion',
         'email',
         'telefono',
@@ -28,17 +34,17 @@ class Patient extends Model
     {
         return $this->belongsTo(Insurance::class, 'insurance_id');
     }
-    
+
     public function guardian()
     {
         return $this->belongsTo(Patient::class, 'guardian_id'); // Asumiendo que 'guardian_id' es la clave foránea correcta para el guardián del paciente
     }
-    
+
     public function doctor()
     {
         return $this->belongsTo(Doctor::class, 'doctor_id');
     }
-    
+
     public function address()
     {
         return $this->hasOne(Address::class); // Asumiendo que la relación se establece correctamente en el modelo Address
@@ -53,8 +59,4 @@ class Patient extends Model
     {
         return $this->hasMany(proceso_muestras::class);
     }
-
-  
-    
-    
 }
