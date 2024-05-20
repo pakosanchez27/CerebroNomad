@@ -6,6 +6,8 @@ use App\Models\Doctor;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -28,6 +30,34 @@ class HomeController extends Controller
         $totalDoctores = Doctor::count();
         //total de vendedores
         $totalVendedores = Vendor::count();
-        return view('vistas/home' , ['path' => $path, 'users' => $users , 'vendedores' => $vendedores, 'totalPacientes' => $totalPacientes, 'totalDoctores' => $totalDoctores , 'totalVendedores' => $totalVendedores, 'rol' => $rol ] );
+
+    
+       $userId = Auth::id();
+        $vendorId = DB::table('vendors')
+            ->where('id_usuario', $userId)
+            ->value('id');
+
+        // Usando el Constructor de Consultas
+        $totalVentas = DB::table('ventas')
+            ->where('vendor_id', $vendorId)
+            ->count();
+            // ->value('id');
+
+            $ventasid = DB::table('ventas')
+            ->where('vendor_id', $vendorId)
+            ->value('id');
+
+            // $totalPruebasPendientes = DB::table('proceso_muestras')
+            // ->where('venta_id', $ventasid)
+            // ->where('proceso_muestras.estado', '!=', 'completado')
+            // ->count();
+           // Obtener el total de pruebas pendientes
+           $totalPruebasPendientes = DB::table('proceso_muestras')
+                ->join('ventas', 'proceso_muestras.venta_id', '=', 'ventas.id')
+               ->where('ventas.vendor_id', $vendorId)
+                ->where('proceso_muestras.estado', '!=', 'completado')
+              ->count();
+
+        return view('vistas/home', ['path' => $path, 'users' => $users, 'vendedores' => $vendedores, 'totalPacientes' => $totalPacientes, 'totalDoctores' => $totalDoctores, 'totalVendedores' => $totalVendedores, 'rol' => $rol,'totalVentas' => $totalVentas, 'totalPruebasPendientes' => $totalPruebasPendientes ]);
     }
 }
