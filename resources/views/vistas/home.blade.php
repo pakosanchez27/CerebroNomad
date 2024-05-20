@@ -491,7 +491,7 @@
                 @endif
                 <!-- Nueva vistaH -->
                 <div class="container">
-                    <div class="d-flex">
+                    <div class="d-flex flex-wrap">
                         <div class="vistasH bg-primary text-white" onclick="redirectToPacientes()">
                             <div class="vistasH-header">
                                 <h1>Buscar paciente</h1>
@@ -501,11 +501,10 @@
                             </div>
                             <div class="vistasH-footer">
                                 <i class="fas fa-info-circle"></i>
-
                             </div>
                             <i class="fas fa-user-md icon-bg"></i>
                         </div>
-
+                
                         <div class="vistasH bg-info text-white">
                             <div class="vistasH-header">
                                 <h1>Nueva venta</h1>
@@ -518,7 +517,7 @@
                             </div>
                             <i class="fas fa-cash-register icon-bg"></i>
                         </div>
-
+                
                         <div class="vistasH bg-warning text-white">
                             <div class="vistasH-header">
                                 <h1>Estudios pendientes</h1>
@@ -532,14 +531,8 @@
                             <i class="fas fa-file-alt icon-bg"></i>
                         </div>
                     </div>
-
-                    <body>
-
                 </div>
-
-            </div>
-
-
+                
         </div>
     </div>
 
