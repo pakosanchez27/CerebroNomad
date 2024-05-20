@@ -25,40 +25,43 @@
             </a>
         </div>
     </div>
-    <div class="contenido-buscar-paciente shadow mb-5 mt-3 rounded">
-        <h3 class="mb-2">Buscar Paciente</h3>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                Estos datos no son válidos.
-            </div>
-        @endif
-        <form action="{{ route('pacientes.buscar') }}" method="get" class="row  mb-5 ">
-            <div class="col-md-4 col-12">
-                <label for="Nombre" class="form-label">Nombre:</label>
-                <input type="text" name="Nombre" id="NombreInput" class="form-control" placeholder="Ingresa el Nombre">
-            </div>
-            <div class="col-md-4 col-12">
-                <label for="ApellidoPaterno" class="form-label">Apellido Paterno:</label>
-                <input type="text" name="ApellidoPaterno" id="ApellidoPaternoInput" class="form-control"
-                    placeholder="Ingresa el apellido paterno">
-            </div>
-            <div class="col-md-4 col-12">
-                <label for="ApellidoMaterno" class="form-label">Apellido Materno:</label>
-                <input type="text" name="ApellidoMaterno" id="ApellidoMaternoInput" class="form-control"
-                    placeholder="Ingresa el apellido Materno">
-            </div>
-            <div class="col-md-4 col-7">
-                <button type="submit" class="boton btn btn-success mt-5">
-                    Buscar
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-search" viewBox="0 0 16 16">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.856 3.856a1 1 0 1 0 1.415-1.415l-3.856-3.857zM6.5 11.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10z" />
-                    </svg>
-                </button>
-            </div>
-        </form>
+    <div class="container-fluid">
+        <div class="contenido-buscar-paciente shadow rounded w-100">
+            <h3 class="mb-2">Buscar Paciente</h3>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    Estos datos no son válidos.
+                </div>
+            @endif
+            <form action="{{ route('pacientes.buscar') }}" method="get" class="row  mb-5 ">
+                <div class="col-md-4 col-12">
+                    <label for="Nombre" class="form-label">Nombre:</label>
+                    <input type="text" name="Nombre" id="NombreInput" class="form-control" placeholder="Ingresa el Nombre">
+                </div>
+                <div class="col-md-4 col-12">
+                    <label for="ApellidoPaterno" class="form-label">Apellido Paterno:</label>
+                    <input type="text" name="ApellidoPaterno" id="ApellidoPaternoInput" class="form-control"
+                        placeholder="Ingresa el apellido paterno">
+                </div>
+                <div class="col-md-4 col-12">
+                    <label for="ApellidoMaterno" class="form-label">Apellido Materno:</label>
+                    <input type="text" name="ApellidoMaterno" id="ApellidoMaternoInput" class="form-control"
+                        placeholder="Ingresa el apellido Materno">
+                </div>
+                <div class="col-md-4 col-7">
+                    <button type="submit" class="boton btn btn-success mt-5">
+                        Buscar
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.856 3.856a1 1 0 1 0 1.415-1.415l-3.856-3.857zM6.5 11.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10z" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
+    
 
     <div class="contenido-paciente__cards p-5 row gap-5 mt-5 ">
         @foreach ($pacientes as $paciente)
