@@ -25,7 +25,7 @@
 }
 
 .contenedor__cards {
-    padding: 5rem  3rem;
+    padding: 5rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -33,10 +33,11 @@
     gap: 3rem;
 
     @include m.desktop {
-        padding: 2rem  3rem;
+        padding: 2rem 3rem;
         flex-direction: row;
-       flex-wrap: wrap;
+        flex-wrap: wrap;
     }
+
     .card-opcRapida {
         display: flex;
         flex-direction: row;
@@ -45,11 +46,14 @@
         padding: 1rem 2rem;
         width: 30rem;
         height: 9rem;
-        transition: all 0.3s ease; /* Agregamos una transición para suavizar el efecto */
-        
+        transition: all 0.3s ease;
+        /* Agregamos una transición para suavizar el efecto */
+
         &:hover {
-            transform: scale(1.05); /* Escalamos ligeramente la tarjeta en hover */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Agregamos una sombra */
+            transform: scale(1.05);
+            /* Escalamos ligeramente la tarjeta en hover */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            /* Agregamos una sombra */
         }
 
         &__img {
@@ -59,7 +63,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            
+
 
             img {
                 width: 3rem;
@@ -70,11 +74,12 @@
         &__texto {
             color: v.$azulTexto;
             text-align: right;
-            
+
             h4 {
                 color: v.$azulTexto;
                 font-size: 2rem;
                 font-weight: v.$delgada;
+
                 span {
                     font-weight: v.$bold;
                 }
@@ -90,52 +95,57 @@
     }
 }
 
-.azul{
+.azul {
     background-color: v.$azulClaro;
-    
+
 }
 
-.naranja{
+.naranja {
     background-color: v.$naranja;
 }
-.verde{
+
+.verde {
     background-color: v.$verdeClaro;
 }
 
-.morado{
+.morado {
     background-color: v.$morado;
 }
-.turquesa{
+
+.turquesa {
     background-color: #40E0D0;
 
 }
 
 
-.borde-azul{
+.borde-azul {
     border-top: solid 2px v.$azulClaro;
 }
-.borde-naranja{
+
+.borde-naranja {
     border-top: solid 2px v.$naranja;
 }
-.borde-verde{
+
+.borde-verde {
     border-top: solid 2px v.$verdeClaro;
 }
-.borde-morado{
+
+.borde-morado {
     border-top: solid 2px v.$morado;
 }
 
-.borde-turquesa{
+.borde-turquesa {
     border-top: solid 2px #40E0D0;
 }
 
-canvas#ventasPorMes{
+canvas#ventasPorMes {
     width: 100%;
     height: 30rem;
     margin: 0 auto;
     display: block;
 }
 
-.contenedor-resumen__cards--card{
+.contenedor-resumen__cards--card {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -143,21 +153,25 @@ canvas#ventasPorMes{
     padding: 1rem 2rem;
     width: 30rem;
     height: 15rem;
-    transition: all 0.3s ease; /* Agregamos una transición para suavizar el efecto */
-    
+    transition: all 0.3s ease;
+    /* Agregamos una transición para suavizar el efecto */
+
     &:hover {
-        transform: scale(1.05); /* Escalamos ligeramente la tarjeta en hover */
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Agregamos una sombra */
+        transform: scale(1.05);
+        /* Escalamos ligeramente la tarjeta en hover */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        /* Agregamos una sombra */
     }
 
     &__texto {
         color: v.$azulTexto;
         text-align: right;
-        
+
         h4 {
             color: v.$azulTexto;
             font-size: 2rem;
             font-weight: v.$delgada;
+
             span {
                 font-weight: v.$bold;
             }
@@ -170,4 +184,71 @@ canvas#ventasPorMes{
             font-weight: v.$delgada;
         }
     }
+}
+
+.vistasH {
+    margin: 15px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 18px;
+    cursor: pointer;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    padding: 14px;
+}
+
+.vistasH:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.vistasH-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: none;
+    border-radius: 15px 15px 0 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.vistasH-header .icon {
+    font-size: 30px;
+}
+
+.vistasH-body {
+    padding: 20px;
+}
+
+.vistasH-body a {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.vistasH-body a:hover {
+    text-decoration: underline;
+}
+
+.vistasH-footer {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 20px;
+}
+
+.icon-bg {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 100px;
+    color: rgba(255, 255, 255, 0.3);
 }
