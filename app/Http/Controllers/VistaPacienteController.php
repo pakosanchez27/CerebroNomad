@@ -61,8 +61,6 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
             'numero_identificacion' => 'required',
             'telefono' => 'required|digits_between:8,15',
             'email' => 'required|email',
-            'aseguradora' => 'required',
-            'doctor' => 'required',
             'descripcion_medica' => 'required',
         ]);
 
@@ -105,10 +103,9 @@ use Illuminate\Http\Request;class VistaPacienteController extends Controller
             'numero_identificacion' => 'required',
             'telefono' => 'required',
             'email' => 'required|email',
-            'aseguradora' => 'required',
-            'doctor' => 'required',
             'descripcion_medica' => 'required',
         ]);
+
 
         $paciente = Patient::find($id);
         $paciente->name = $request->name;

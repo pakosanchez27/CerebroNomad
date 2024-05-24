@@ -36,14 +36,14 @@ class LoginController extends Controller
             return redirect()->route('cambiar-contraseña', ['user' => $user = auth()->user()]);
         }
 
-        // Generar token de autenticación de 8 digitos alfanumerico
-        $token = bin2hex(random_bytes(4));
+    //     // Generar token de autenticación de 8 digitos alfanumerico
+    //     $token = bin2hex(random_bytes(4));
 
-        // Guardar el tiken en la base de datos
-       User::where('email', $request->email)->update(['tokenLogin' => $token]);
+    //     // Guardar el tiken en la base de datos
+    //    User::where('email', $request->email)->update(['tokenLogin' => $token]);
 
-    //    Enviar token por el email
-       Mail::to($request->email)->send(new TokenLogin($token));
+    // //    Enviar token por el email
+    //    Mail::to($request->email)->send(new TokenLogin($token));
 
         return back()->with('token', 'Ingresa el token enviado a tu correo');
     }
@@ -51,21 +51,21 @@ class LoginController extends Controller
     {
 
 
-        if (!$request->tokenLogin || $request->tokenLogin === 'null') {
-            return back()->with('errorToken', 'No puede estar vacio');
-        }
+        // if (!$request->tokenLogin || $request->tokenLogin === 'null') {
+        //     return back()->with('errorToken', 'No puede estar vacio');
+        // }
 
-        // Buscar al usuario por el token
-        $user = User::where('tokenLogin', $request->tokenLogin)->first();
+        // // Buscar al usuario por el token
+        // $user = User::where('tokenLogin', $request->tokenLogin)->first();
 
-        if (!$user) {
-            return back()->with('errorToken', 'Token incorrecto');
-        }
+        // if (!$user) {
+        //     return back()->with('errorToken', 'Token incorrecto');
+        // }
 
-        // Verificar si el token proporcionado es igual al almacenado en la base de datos
-        if ($user->tokenLogin !== $request->tokenLogin) {
-            return back()->with('errorToken', 'Token incorrecto');
-        }
+        // // Verificar si el token proporcionado es igual al almacenado en la base de datos
+        // if ($user->tokenLogin !== $request->tokenLogin) {
+        //     return back()->with('errorToken', 'Token incorrecto');
+        // }
 
 
         // Si el token es correcto, no lo eliminamos de la base de datos,

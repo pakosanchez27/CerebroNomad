@@ -74,9 +74,7 @@
                                         <div class="mb-3 col-12 col-md">
                                             <label for="disabledSelect" class="form-label">Aseguradora</label>
                                             <input type="text" id="disabledTextInput" class="form-control"
-                                                placeholder="@if ($aseguradora !== null) {{ $aseguradora->name }}
-                                                @else
-                                                    No tiene aseguradora @endif">
+                                                placeholder="@if ($aseguradora !== null) {{ $aseguradora->name }} @else No tiene aseguradora @endif">
                                         </div>
 
                                     </fieldset>
@@ -230,7 +228,7 @@ Ninguna
                                 data-bs-target="#AgregarResponsable">Agregar</a>
                         @else
                             <a href="#" class="btn btn-warning" data-bs-toggle="modal"
-                            data-bs-target="#EditarResponsable">Editar</a>
+                                data-bs-target="#EditarResponsable">Editar</a>
                         @endif
 
 
@@ -488,59 +486,66 @@ Ninguna
     </div>
 
     @if (isset($responsable))
-    <!-- Modal -->
-    <div class="modal fade " id="EditarResponsable" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog modal-dialog-centered ">
-            <div class="modal-content ">
-                <div class="tabla__header   ">
-                    <p><span class="">Editar Direccion </span></p>
+        <!-- Modal -->
+        <div class="modal fade " id="EditarResponsable" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog modal-dialog-centered ">
+                <div class="modal-content ">
+                    <div class="tabla__header   ">
+                        <p><span class="">Editar Direccion </span></p>
+                    </div>
+                    <form class="p-3" method="post" action="{{ Route('guardianes.update', $responsable->id) }}">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3 col-12 col-md">
+                            <label for="disabledTextInput" class="form-label">Nombre</label>
+                            <input type="text" id="disabledTextInput" class="form-control" name="name"
+                                value="{{ $responsable->name }}">
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-md">
+                                <label for="disabledTextInput" class="form-label">Apellido Paterno</label>
+                                <input type="text" id="disabledTextInput" class="form-control"
+                                    name="apellido_paterno" value="{{ $responsable->apellido_paterno }}">
+                            </div>
+                            <div class="mb-3 col-md">
+                                <label for="disabledTextInput" class="form-label">Apellido Materno</label>
+                                <input type="text" id="disabledTextInput" class="form-control"
+                                    name="apellido_materno" value="{{ $responsable->apellido_materno }}">
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md">
+                            <label for="disabledTextInput" class="form-label">Edad</label>
+                            <input type="number" id="disabledTextInput" class="form-control" name="edad"
+                                value="{{ $responsable->edad }}">
+                        </div>
+                        <div class="mb-3 col-md">
+                            <label for="disabledTextInput" class="form-label">Parentesco</label>
+                            <input type="text" id="disabledTextInput" class="form-control" name="parentesco"
+                                value="{{ $responsable->parentesco }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="disabledTextInput" class="form-label">Telefono</label>
+                            <input type="text" id="disabledTextInput" class="form-control" name="telefono"
+                                value="{{ $responsable->telefono }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="disabledTextInput" class="form-label">Email</label>
+                            <input type="text" id="disabledTextInput" class="form-control" name="email"
+                                value="{{ $responsable->email }}">
+                        </div>
+
+                        <input type="hidden" name="patient_id" value="{{ $paciente->id }}">
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
                 </div>
-                <form class="p-3" method="post" action="{{ Route('guardianes.update', $responsable->id) }}">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-3 col-12 col-md">
-                        <label for="disabledTextInput" class="form-label">Nombre</label>
-                        <input type="text" id="disabledTextInput" class="form-control" name="name" value="{{$responsable->name}}">
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-md">
-                            <label for="disabledTextInput" class="form-label">Apellido Paterno</label>
-                            <input type="text" id="disabledTextInput" class="form-control" name="apellido_paterno" value="{{$responsable->apellido_paterno}}">
-                        </div>
-                        <div class="mb-3 col-md">
-                            <label for="disabledTextInput" class="form-label">Apellido Materno</label>
-                            <input type="text" id="disabledTextInput" class="form-control" name="apellido_materno" value="{{$responsable->apellido_materno}}">
-                        </div>
-                    </div>
-                    <div class="mb-3 col-md">
-                        <label for="disabledTextInput" class="form-label">Edad</label>
-                        <input type="number" id="disabledTextInput" class="form-control" name="edad" value="{{$responsable->edad}}">
-                    </div>
-                    <div class="mb-3 col-md">
-                        <label for="disabledTextInput" class="form-label">Parentesco</label>
-                        <input type="text" id="disabledTextInput" class="form-control" name="parentesco" value="{{$responsable->parentesco}}">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="disabledTextInput" class="form-label">Telefono</label>
-                        <input type="text" id="disabledTextInput" class="form-control" name="telefono" value="{{$responsable->telefono}}">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="disabledTextInput" class="form-label">Email</label>
-                        <input type="text" id="disabledTextInput" class="form-control" name="email" value="{{$responsable->email}}">
-                    </div>
-
-                    <input type="hidden" name="patient_id" value="{{ $paciente->id }}">
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
-@endif
+    @endif
 
     {{-- mensajes --}}
     @if (@session('agregado'))

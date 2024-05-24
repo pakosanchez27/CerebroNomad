@@ -16,7 +16,10 @@ class VistaVendedoresController extends Controller
     function index(Request $request){
         $path = $request->path();
         $rol = $request->user()->role->name;
-        $vendedores = Vendor::all();
+        // usuarios que tienen el rol 4
+        $vendedores = Vendor::with('user')->get();
+        
+        
         return view('vistas.vendedores' , ['path' => $path, 'vendedores' => $vendedores, 'rol' => $rol]);
     }
 
@@ -47,7 +50,7 @@ class VistaVendedoresController extends Controller
             'name' => $request->nombre,
             'apellido_paterno' => $request->apellido_paterno,
             'apellido_materno' => $request->apellido_materno,
-            'role_id' => 'vendedor',
+            'role_id' => 4,
             'email' => $request->email,
             'password' => bcrypt($password),
         ]);
@@ -66,11 +69,14 @@ class VistaVendedoresController extends Controller
 
     function edit(Request $request, $id){
         $path = $request->path();
-        $vendedor = Vendor::find($id);
+        $vendedor = User::with('vendor')->where('id', $id)->first();
+        
+        
         return view('vistas.editar-vendedor' , ['path' => $path, 'vendedor' => $vendedor]);
     }
 
     function update(Request $request, $id){
+
         $this->validate($request, [
             'nombre' => 'required',
             'apellido_paterno' => 'required',
@@ -78,20 +84,39 @@ class VistaVendedoresController extends Controller
             'telefono' => 'required|numeric',
             'zona' => 'required',
         ]);
-
-        $vendedor = Vendor::find($id);
-        $vendedor->name = $request->nombre;
-        $vendedor->apellido_paterno = $request->apellido_paterno;
-        $vendedor->apellido_materno = $request->apellido_materno;
-        $vendedor->email = $request->email;
+    
+        // Buscar el usuario por su ID
+        $user = User::find($id);
+    
+        if (!$user) {
+            // Si el usuario no existe, redirige con un mensaje de error
+            return redirect('vendedores')->with('error', 'El usuario no existe');
+        }
+    
+        // Actualizar los datos del usuario
+        $user->name = $request->nombre;
+        $user->apellido_paterno = $request->apellido_paterno;
+        $user->apellido_materno = $request->apellido_materno;
+        $user->email = $request->email;
+        $user->save();
+     
+ 
+        // Buscar el vendedor asociado al usuario
+        $vendedor = Vendor::where('id_usuario', $id)->first();
+    
+        if (!$vendedor) {
+            // Si el vendedor no existe, redirige con un mensaje de error
+            return redirect('vendedores')->with('error', 'El vendedor no existe');
+        }
+    
+        // Actualizar los datos del vendedor
         $vendedor->telefono = $request->telefono;
         $vendedor->zona = $request->zona;
         $vendedor->save();
-
+    
         return redirect('vendedores')->with('success', 'Vendedor actualizado correctamente');
-
+    
     }
-
     function destroy(Request $request, $id){
         $vendedor = Vendor::find($id);
         $vendedor->delete();

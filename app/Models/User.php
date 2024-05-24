@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'rol',
+        'role_id',
         'apellido_paterno',
         'apellido_materno',
 
@@ -54,8 +54,13 @@ class User extends Authenticatable
 
     // hasRole
     public function hasRole($role)
-{
-    return $this->role->name === $role;
-}
+    {
+        return $this->role->name === $role;
+    }
+
+    public function vendor()
+    {
+        return $this->hasOne(Vendor::class, 'id_usuario');
+    }
 
 }

@@ -40,6 +40,7 @@ class VentaController extends Controller
      
         
         foreach ($request->pruebas as $prueba) {
+            
             venta::create([
                 'patient_id' => $id,
                 'vendor_id' => $request->vendedor,

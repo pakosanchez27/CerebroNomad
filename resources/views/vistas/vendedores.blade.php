@@ -47,13 +47,13 @@
                                 <td class="d-flex  gap-5 p-3">
                                     <img src="{{ asset('img/usuario.svg') }}" alt="" width="40px">
                                     <div class="d-flex flex-column ">
-                                        {{ $vendedor->name }} {{ $vendedor->apellido_paterno }}
-                                        {{ $vendedor->apellido_materno }}
+                                        {{ $vendedor->user->name }} {{ $vendedor->user->apellido_paterno }}
+                                        {{ $vendedor->user->apellido_materno }}
                                         <span class="text-success fw-normal">{{ $vendedor->zona }}</span>
                                     </div>
                                 </td>
                                 <td>
-                                    {{ $vendedor->email }}
+                                    {{ $vendedor->user->email }}
                                 </td>
                                 <td>
                                     {{ $vendedor->telefono }}
@@ -62,7 +62,7 @@
 
                                 <td class="">
                                     <div class=" d-flex gap-4 ">
-                                        <a href="{{ route('vendedores.edit', $vendedor->id) }}"
+                                        <a href="{{ route('vendedores.edit', $vendedor->user->id) }}"
                                             class="btn btn-warning btn-sm ">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="white" class="bi bi-pencil-square" viewBox="0 0 16 16">

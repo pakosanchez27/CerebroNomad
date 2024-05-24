@@ -34,7 +34,7 @@
                 <div class="mb-3 col-12 col-md-6">
                     <label for="nombre" class="form-label">Apellido Materno</label>
                     <input type="text" class="form-control" id="apellido_materno" name="apellido_materno"
-                        value="{{ $vendedor->apellido_materno }}">
+                        value="{{$vendedor->apellido_materno }}">
 
                 </div>
             </div>
@@ -49,7 +49,7 @@
                 <div class="mb-3 col-12 col-md-6">
                     <label for="nombre" class="form-label">Télefono</label>
                     <input type="tel" class="form-control" id="telefono" name="telefono"
-                        value="{{ $vendedor->telefono }}">
+                        value="{{ $vendedor->vendor->telefono }}">
                     @error('telefono')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -57,7 +57,7 @@
                 <div class="mb-3 col-12 col-md-6">
                     <label for="Zona">Zona designada</label>
                     <select id="zona" name="zona" class="form-select form-select-lg">
-                        <option selected >{{ $vendedor->zona }}</option>
+                        <option selected >{{ $vendedor->vendor->zona }}</option>
                         <option value="Aguascalientes">Aguascalientes</option>
                         <option value="Baja California">Baja California</option>
                         <option value="Baja California Sur">Baja California Sur</option>
