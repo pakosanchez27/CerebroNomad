@@ -22,11 +22,11 @@ return new class extends Migration
             $table->string('email');
             $table->string('telefono');
             $table->string('parentesco');
+            $table->string('patient_id')->nullable();
 
-            // Llave foránea corregida
-            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
+            // Agregar la clave foránea
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
 
-          
             $table->timestamps();
         });
     }

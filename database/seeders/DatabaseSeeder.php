@@ -21,11 +21,11 @@ class DatabaseSeeder extends Seeder
 
 
             RolesSeeder::class,
-            UsersSeeder::class,
-            PatientSeeder::class,
-            GuardianSeeder::class,
-            AddressSeeder::class,
-            TestSeeder::class,
+            // UsersSeeder::class,
+            // PatientSeeder::class,
+            // GuardianSeeder::class,
+            // AddressSeeder::class,
+            // TestSeeder::class,
             CreateAdminUserSeeder::class,
 
 

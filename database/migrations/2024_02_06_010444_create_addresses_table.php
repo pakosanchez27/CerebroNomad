@@ -24,8 +24,10 @@ return new class extends Migration
             $table->string('pais');
             $table->string('referencias');
 
-            // Llave foránea corregida
-            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
+            $table->string('patient_id')->nullable();
+
+            // Agregar la clave foránea
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
 
             $table->timestamps();
         });
