@@ -7,6 +7,7 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 'resources/js/app.js',
+                'resources/js/API/clima.js'
             ],
             refresh: ['resources/views/**', 'resources/sass/**', 'resources/js/**'],
         }),
