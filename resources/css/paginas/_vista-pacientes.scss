@@ -31,30 +31,6 @@ body {
 
 
 
-.contenido-buscar-paciente {
-    background-color: white;
-    padding: 20px;
-    margin-left: 3rem;
-    margin-right: 7rem;
-    /* Alineación izquierda en pantallas grandes */
-    width: 79%;
-    /* Ancho predeterminado para pantallas grandes */
-    border-radius: 8px;
-    /* Bordes redondeados */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* Sombra sutil */
-
-    @media (min-width: 768px) {
-        width: 80%;
-        /* Ajustar ancho en pantallas medianas y grandes */
-    }
-
-    @media (min-width: 1200px) {
-        width: 70%;
-        /* Ajustar ancho en pantallas extra grandes */
-    }
-
-}
 
 
 
