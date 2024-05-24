@@ -2,20 +2,21 @@
 @use "../base/mixins" as m;
 
 
-.agregar-paciente{
+.agregar-paciente {
 
-    &__contenedor{
-        width: 100  ;
-        @include m.tablet{
+    &__contenedor {
+        width: 100;
+
+        @include m.tablet {
             width: 90%;
         }
 
-        @include m.desktop{
+        @include m.desktop {
             width: 75%;
         }
-        
-        h3{
-           
+
+        h3 {
+
             color: v.$azul;
             margin-top: 3rem;
         }
@@ -23,23 +24,36 @@
 
 }
 
-#aseguradora{
+// hace que no se muestre el desplazamiento de el paddin de las tarjetas: se tiene que agregar a las variables globales 
+body {
+    overflow-x: hidden;
+}
+
+
+
+
+
+
+
+#aseguradora {
     width: 100%;
-    @include m.tablet{
+
+    @include m.tablet {
         width: 50%;
     }
 }
 
-.card_paciente{
+.card_paciente {
     border-radius: 1rem;
     width: 30rem;
-    img{
+
+    img {
         margin-top: -6rem;
-        
+
     }
 }
 
-.form-control::placeholder{
+.form-control::placeholder {
     color: v.$negro;
     font-weight: v.$bold;
 }
