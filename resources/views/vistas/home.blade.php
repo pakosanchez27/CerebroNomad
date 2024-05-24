@@ -490,41 +490,46 @@
                     </div>
                 @endif
                 @if ($rol === 'vendedor')
-                    <!-- Modal -->
-
-                    <div class="container">
-                        <div class="row gap-5 p-5">
-                            <div class="cartas card-ventas col-12 col-md-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <i class="fas fa-shopping-cart"></i> Ventas Realizadas
+                <div class="container-fluid p-3">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        <div class="col">
+                            <div class="card h-100 shadow rounded-3 border-0 bg-light">
+                                <div class="card-body text-start">
+                                    <h5 class="card-title mb-0">
+                                        <i class="fas fa-shopping-cart fs-5 me-2 text-primary"></i> Ventas Realizadas
                                     </h5>
-                                    <p class="text-muted">Total de ventas completadas</p>
-                                    <h1>{{ $totalVentas }}</h1>
+                                    <h1 class="display-1"><strong>0</strong><p class="card-text text-muted">Total de ventas completadas</p></h1>
+                                    
                                 </div>
                             </div>
-                            <div class="cartas card-pacientes col-12 col-md-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <i class="fas fa-user-injured"></i> Pacientes Registrados
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 shadow rounded-3 border-0 bg-light">
+                                <div class="card-body text-start">
+                                    <h5 class="card-title mb-0">
+                                        <i class="fas fa-user-injured fs-5 me-2 text-danger"></i> Pacientes Registrados
                                     </h5>
-                                    <p class="text-muted">Total de pacientes registrados</p>
-                                    {{-- <h1>{{$pasientesRegistrados}}</h1> --}}
-                                    {{-- sin funcion --}}
-                                    <h1>0</h1>
+                                    <h1 class="display-1"><strong>0</strong><p class="card-text text-muted">Total de pacientes registrados</p></h1>
+                                    
                                 </div>
                             </div>
-                            <div class="cartas card-pruebas col-12 col-md-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <i class="fas fa-vial"></i> Pruebas Pendientes
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 shadow rounded-3 border-0 bg-light">
+                                <div class="card-body text-start">
+                                    <h5 class="card-title mb-0">
+                                        <i class="fas fa-vial fs-5 me-2 text-warning"></i> Pruebas Pendientes
                                     </h5>
-                                    <p class="text-muted">Estudios pendientes de completar</p>
-                                    <h1>{{ $totalPruebasPendientes }}</h1>
+                                    <h1 class="display-1"><strong>0</strong><p class="card-text text-muted">Estudios pendientes de completar</p></h1>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                
+                
+                    
                 @endif
 
                 <body>
