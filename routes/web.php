@@ -59,6 +59,7 @@ Route::group(['middleware' => 'checkRole:admin,vendedor,editor'], function () {
 
     Route::get('/pacientes', [VistaPacienteController::class, 'index'])->name('pacientes'); //pacientes page
     Route::get('/pacientes/crear', [VistaPacienteController::class, 'create'])->name('pacientes.create'); //pacientes page
+    Route::get('/pacientes/expediente',[VistaPacienteController::class, 'expe'])->name('pacientes.expe'); //paciente page
     Route::post('/pacientes/crear', [VistaPacienteController::class, 'store'])->name('pacientes.store'); //pacientes page
     Route::get('/pacientes/{id}', [VistaPacienteController::class, 'show'])->name('pacientes.show'); //pacientes page
     Route::get('/pacientes/editar/{id}', [VistaPacienteController::class, 'edit'])->name('pacientes.edit'); //pacientes page
