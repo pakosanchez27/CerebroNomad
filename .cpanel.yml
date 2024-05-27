@@ -10,7 +10,12 @@ tasks:
     command: "php artisan migrate --force"
 
   - name: "Ejecutar seeders"
-    command: "php artisan db:seed --force"
+    # command: "php artisan db:seed --force"
+    commad:"  php artisan db:seed
+              php artisan db:seed UsersSeeder
+              php artisan db:seed TestSeeder
+              php artisan db:seed DoctorSeeder
+              php artisan db:seed InsuranceSeeder"
 
   - name: "Compilar estilos CSS"
     command: "npm run prod"

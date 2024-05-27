@@ -28,6 +28,7 @@ class Patient extends Model
         'descripcion_medica',
         'doctor_id',
         'insurance_id',
+        'id_usuario',
     ];
 
     public function insurance()

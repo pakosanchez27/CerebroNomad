@@ -13,6 +13,7 @@ use App\Models\venta;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VistaPacienteController extends Controller
 {
@@ -131,6 +132,7 @@ class VistaPacienteController extends Controller
             'email' => $request->email,
             'insurance_id' => $request->aseguradora,
             'doctor_id' => $request->doctor,
+            'id_usuario' => Auth::id(),
             'descripcion_medica' => $request->descripcion_medica,
         ]);
 
