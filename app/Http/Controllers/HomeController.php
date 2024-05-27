@@ -47,6 +47,10 @@ class HomeController extends Controller
             ->where('vendor_id', $vendorId)
             ->value('id');
 
+            $totalPacientesRegistrados = DB::table('patients')
+            ->where('id_usuario', $userId)
+            ->count();
+        
             // $totalPruebasPendientes = DB::table('proceso_muestras')
             // ->where('venta_id', $ventasid)
             // ->where('proceso_muestras.estado', '!=', 'completado')
@@ -58,6 +62,6 @@ class HomeController extends Controller
                 ->where('proceso_muestras.estado', '!=', 'completado')
               ->count();
 
-        return view('vistas/home', ['path' => $path, 'users' => $users, 'vendedores' => $vendedores, 'totalPacientes' => $totalPacientes, 'totalDoctores' => $totalDoctores, 'totalVendedores' => $totalVendedores, 'rol' => $rol,'totalVentas' => $totalVentas, 'totalPruebasPendientes' => $totalPruebasPendientes ]);
+        return view('vistas/home', ['path' => $path, 'users' => $users, 'vendedores' => $vendedores, 'totalPacientes' => $totalPacientes, 'totalDoctores' => $totalDoctores, 'totalVendedores' => $totalVendedores, 'rol' => $rol,'totalVentas' => $totalVentas, 'totalPruebasPendientes' => $totalPruebasPendientes,'totalPacientesRegistrados' => $totalPacientesRegistrados]);
     }
 }
