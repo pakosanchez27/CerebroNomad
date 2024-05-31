@@ -7,6 +7,7 @@ use App\Models\Address;
 use App\Models\Guardian;
 use App\Models\Patient;
 use App\Models\Insurance;
+use App\Models\proceso_muestras;
 use App\Models\venta;
 
 
@@ -14,6 +15,8 @@ use App\Models\venta;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\VarLikeIdentifier;
 
 class VistaPacienteController extends Controller
 {
@@ -22,7 +25,7 @@ class VistaPacienteController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(request $request)
+    public function index(request $request) 
     {
         $path = $request->path();
         $rol = $request->user()->role->name;
@@ -72,6 +75,42 @@ class VistaPacienteController extends Controller
 
         // return response()->json($pacientes);
         return view('vistas.pacientes', compact('pacientes', 'path', 'current_page', 'rol'));
+    }
+
+    public function estudiosPendientes(Request $request){
+        $rol = $request->user()->role->name;
+
+        $path = $request->path();
+
+               $userId = Auth::id();
+        $vendorId = DB::table('vendors')
+            ->where('id_usuario', $userId)
+            ->value('id');
+        
+            // $totalPruebasPendientes = DB::table('proceso_muestras')
+            // ->where('venta_id', $ventasid)
+            // ->where('proceso_muestras.estado', '!=', 'completado')
+            // ->count();
+           // Obtener el total de pruebas pendientes
+           $ids = DB::table('proceso_muestras')
+                ->join('ventas', 'proceso_muestras.venta_id', '=', 'ventas.id')
+               ->where('ventas.vendor_id', $vendorId)
+                ->where('proceso_muestras.estado', '!=', 'completado')
+                ->pluck('ventas.Patient_id');
+
+
+                $pacientes = DB::table('patients')
+                ->whereIn('id', $ids)
+                ->get();
+
+           
+
+
+    
+
+       return view('vistas.estudiosPendientes', ['rol' => $rol,'path' => $path,'pacientes' => $pacientes]);
+
+      // return response()->json( $pacientes);
     }
 
     public function show(request $request, $id)
@@ -196,4 +235,8 @@ class VistaPacienteController extends Controller
         // Redirige con un mensaje de éxito
         return redirect()->route('pacientes')->with('eliminado', 'Paciente eliminado correctamente');
     }
+
+
+   
+
 }

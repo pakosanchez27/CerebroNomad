@@ -21,6 +21,7 @@ class VistaVendedoresController extends Controller
         
         
         return view('vistas.vendedores' , ['path' => $path, 'vendedores' => $vendedores, 'rol' => $rol]);
+        
     }
 
     function create(Request $request){
@@ -121,5 +122,6 @@ class VistaVendedoresController extends Controller
         $vendedor = Vendor::find($id);
         $vendedor->delete();
         return redirect('vendedores')->with('success', 'Vendedor eliminado correctamente');
+        
     }
 }

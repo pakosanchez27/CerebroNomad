@@ -86,18 +86,24 @@
                         <i class="fas fa-cash-register icon-bg"></i>
                     </div>
 
-                    <div class="vistasH bg-warning text-white">
+                    <div class="vistasH bg-warning text-white" onclick="redirectToEstudiosPendientes()">
                         <div class="vistasH-header">
                             <h1>Estudios pendientes</h1>
                         </div>
                         <div class="vistasH-body">
-                            <p>Sin funcionalidad</p><br>
+                            <p>Ver estudios pendientes</p><br>
                         </div>
                         <div class="vistasH-footer">
                             <i class="fas fa-info-circle"></i>
                         </div>
                         <i class="fas fa-file-alt icon-bg"></i>
                     </div>
+                    <script>
+                        function redirectToEstudiosPendientes() {
+                            var url = "{{ route('pacientes.estudiosPendientes') }}"; // Asegúrate de tener esta ruta definida en tus rutas de Laravel
+                            window.location.href = url;
+                        }
+                    </script>
                 </div>
             </div>
         @endif

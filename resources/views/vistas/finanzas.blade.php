@@ -8,4 +8,3 @@
     <h1>Finanzas</h1>
     
 @endsection
-
