@@ -1,9 +1,45 @@
-/* custom.css */
-.titulo-azul {
-    background-color: blue;
-    color: white;
+.header {
+    width: 100%;
+    background-color: #0b2545;
+    padding: 2rem 0;
+    margin-bottom: 3rem;
+}
+
+.header .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.header .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f9fafb;
+    margin: 0;
+    display: inline-block;
+    width: auto;
+    max-width: fit-content;
     text-align: center;
-    padding: 15px;
-    border-radius: 5px;
-    margin-top: 20px;
+}
+
+@media (min-width: 640px) {
+    .header .title {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .header .title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .header .title {
+        font-size: 3rem;
+    }
+}
+
+.contenido-paciente__cards {
+    margin-top: 5rem;
 }

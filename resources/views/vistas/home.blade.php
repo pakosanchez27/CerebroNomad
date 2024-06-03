@@ -73,18 +73,25 @@
                         }
                     </script>
 
-                    <div class="vistasH bg-info text-white">
+                    <div class="vistasH bg-info text-white" onclick="redirectToNuevoPaciente()">
                         <div class="vistasH-header">
-                            <h1>Nueva venta</h1>
+                            <h1>Registrar Paciente</h1>
                         </div>
                         <div class="vistasH-body">
-                            <p>Sin funcionalidad</p><br>
+                            <p>Ir a Registrar Paciente</p><br>
                         </div>
                         <div class="vistasH-footer">
                             <i class="fas fa-info-circle"></i>
                         </div>
-                        <i class="fas fa-cash-register icon-bg"></i>
+                        <i class="fas fa-user-plus icon-bg"></i> 
                     </div>
+
+                    <script>
+                        function redirectToNuevoPaciente() {
+                            var url = "{{ route('pacientes.create') }}"; 
+                            window.location.href = url;
+                        }
+                    </script>
 
                     <div class="vistasH bg-warning text-white" onclick="redirectToEstudiosPendientes()">
                         <div class="vistasH-header">
@@ -100,7 +107,8 @@
                     </div>
                     <script>
                         function redirectToEstudiosPendientes() {
-                            var url = "{{ route('pacientes.estudiosPendientes') }}"; // Asegúrate de tener esta ruta definida en tus rutas de Laravel
+                            var url =
+                                "{{ route('pacientes.estudiosPendientes') }}"; 
                             window.location.href = url;
                         }
                     </script>
