@@ -63,5 +63,5 @@ class VentaController extends Controller
 
        
         return redirect()->route('pruebas-paciente', $id)->with('agregado', 'Venta creada correctamente');
-}
+   }
 }

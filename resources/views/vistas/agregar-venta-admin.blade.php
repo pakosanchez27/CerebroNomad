@@ -1,173 +1,185 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Ventas - agregar
+    Nueva Venta
 @endsection
 
 @section('contenido')
-    <div class="contenido-roles__texto text-center text-md-start p-5">
-        <h2>Nueva Venta</h2>
-        <p>Este formulario es exclusivo del administrado y el editor, es con el fin de registrar ventas extraordinariamente.
-        </p>
+
+    <div class="container">
+        <h2 class="section-title">Información del paciente</h2>
+        <div class="grid">
+            <input type="text" placeholder="Nombre" class="input" id="nombrePaciente" value="{{ $paciente->name }}" readonly>
+            <input type="text" placeholder="Apellido paterno" class="input" id="apellidoPaterno" value="{{ $paciente->apellido_paterno }}" readonly>
+            <input type="text" placeholder="Apellido materno" class="input" id="apellidoMaterno" value="{{ $paciente->apellido_materno }}" readonly>
+            <input type="email" placeholder="Correo electrónico" class="input" id="correoPaciente" value="{{ $paciente->email }}" readonly>
+            <input type="tel" placeholder="Teléfono" class="input" id="telefonoPaciente" value="{{ $paciente->telefono }}" readonly>
+            <div class="select-container">
+                <select class="select" id="aseguradoraPaciente" disabled>
+                    <option disabled>Aseguradora</option>
+                    @foreach ($aseguradora as $Aseguradora)
+                        <option value="{{ $aseguradora->id }}" {{ $aseguradora->id == $paciente->aseguradora_id ? 'selected' : '' }}>
+                            {{ $aseguradora->name }}
+                        </option>
+                    @endforeach
+                </select>
+                <svg class="icon">
+                    <path d="m6 9 6 6 6-6"></path>
+                </svg>
+            </div>
+        </div>
+        <h2 class="section-title">Información de venta</h2>
+        <div class="grid">
+            <div class="select-container">
+                <select class="select" id="seller">
+                    <option disabled selected>Vendedor</option>
+                    @foreach ($vendedores as $vendedor)
+                        <option value="{{ $vendedor->id }}">{{ $vendedor->name }}</option>
+                    @endforeach
+                </select>
+                <svg class="icon">
+                    <path d="m6 9 6 6 6-6"></path>
+                </svg>
+            </div>
+            <div class="select-container">
+                <select class="select" id="payment-method">
+                    <option disabled selected>Método de pago</option>
+                    <option value="efectivo">Efectivo</option>
+                    <option value="TDC">Tarjeta de Crédito</option>
+                    <option value="TDD">Tarjeta de Débito</option>
+                    <option value="aseguradora">Aseguradora</option>
+                </select>
+                <svg class="icon">
+                    <path d="m6 9 6 6 6-6"></path>
+                </svg>
+            </div>
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center mb-4">
+                    <select id="testSelect" class="input flex-1 mr-4">
+                        <option disabled selected>--Selecciona una prueba--</option>
+                        @foreach ($pruebas as $prueba)
+                            <option value="{{ $prueba->id }}" data-precio="{{ $prueba->price }}">
+                                {{ $prueba->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <button class="button" onclick="handleAddTest()">Agregar</button>
+                </div>
+                <div class="border-t pt-4">
+                    <div id="testHeader" class="flex justify-between mb-6" style="display: none;">
+                        <span class="text-primary font-semibold">Prueba</span>
+                        <span class="text-primary font-semibold">Precio</span>
+                        <span class="text-primary font-semibold">Editar</span>
+                    </div>
+                    <div id="testsContainer"></div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t pt-6">
+            <div id="addedTestsContainer" class="mb-6"></div>
+            <div class="flex justify-between mb-6">
+                <span class="text-primary font-semibold">Subtotal</span>
+                <span id="subtotal" class="text-black font-semibold">0</span>
+            </div>
+            <div class="flex justify-between mb-6">
+                <span class="text-primary font-semibold">IVA 16%</span>
+                <span id="iva" class="text-black font-semibold">0</span>
+            </div>
+            <div class="flex justify-between mb-6 font-semibold">
+                <span class="text-primary font-semibold">Total</span>
+                <span id="total" class="text-black font-semibold">0</span>
+            </div>
+            <button class="button full-width" onclick="handleSubmit()">Registrar venta</button>
+        </div>
     </div>
 
-    <div class="contenedor-venta p-5">
-        <div class="">
-            <h2 class="mb-5">Datos del Paciente</h2>
+    <form id="ventaForm" action="{{ route('venta.store', $paciente->id) }}" method="POST">
+        @csrf
+        <input type="hidden" name="nombre" id="hiddenNombre" value="{{ $paciente->name }}">
+        <input type="hidden" name="apellido_paterno" id="hiddenApellidoPaterno" value="{{ $paciente->apellido_paterno }}">
+        <input type="hidden" name="apellido_materno" id="hiddenApellidoMaterno" value="{{ $paciente->apellido_materno }}">
+        <input type="hidden" name="correo" id="hiddenCorreo" value="{{ $paciente->email }}">
+        <input type="hidden" name="telefono" id="hiddenTelefono" value="{{ $paciente->telefono }}">
+        <input type="hidden" name="aseguradora" id="hiddenAseguradora" value="{{ $paciente->aseguradora_id }}">
+        <input type="hidden" name="vendedor" id="hiddenVendedor">
+        <input type="hidden" name="metodo_pago" id="hiddenMetodoPago">
+        <input type="hidden" name="subtotal" id="hiddenSubtotal">
+        <input type="hidden" name="iva" id="hiddenIva">
+        <input type="hidden" name="total" id="hiddenTotal">
+        <input type="hidden" name="pruebas" id="hiddenPruebas">
+        <button type="submit" style="display: none;"></button>
+    </form>
 
-            <fieldset disabled="disabled">
+    <script>
+        let tests = []
 
-                <div class="row w-100 w-md-75 mb-3">
-                    <div class="col-12 col-lg">
-                        <input type="text" class="form-control" value="{{ $paciente->name }}">
-                        <label class="form-label">Apellido Materno</label>
-                    </div>
-                    <div class="col-12 col-lg">
-                        <input type="text" class="form-control" value="{{ $paciente->apellido_paterno }}">
-                        <label class="form-label">Apellido Paterno</label>
-                    </div>
-                    <div class="col-12 col-lg">
-                        <input type="text" class="form-control" value="{{ $paciente->apellido_materno }}">
-                        <label class="form-label">Apellido Materno</label>
-                    </div>
+        function handleAddTest() {
+            const testSelect = document.getElementById('testSelect')
+            const selectedOption = testSelect.options[testSelect.selectedIndex]
+
+            if (selectedOption.value !== "") {
+                const testName = selectedOption.text
+                const testPrice = parseFloat(selectedOption.getAttribute('data-precio'))
+
+                tests.push({ name: testName, price: testPrice })
+                renderTests()
+                updateTotals()
+            }
+        }
+
+        function handleRemoveTest(index) {
+            tests.splice(index, 1)
+            renderTests()
+            updateTotals()
+        }
+
+        function renderTests() {
+            const container = document.getElementById('testsContainer')
+            const addedTestsContainer = document.getElementById('addedTestsContainer')
+            const testHeader = document.getElementById('testHeader')
+            
+            if (tests.length > 0) {
+                testHeader.style.display = 'flex'
+            } else {
+                testHeader.style.display = 'none'
+            }
+            
+            container.innerHTML = tests.map((test, index) => `
+                <div class="test-row" key="${index}">
+                    <span class="text-primary">${test.name}</span>
+                    <span class="text-primary">${test.price.toFixed(2)}</span>
+                    <button class="button delete" onclick="handleRemoveTest(${index})">Editar</button>
                 </div>
+            `).join('')
 
-                <div class="row w-100 w-md-75 mb-3">
-                    <div class="col-12 col-lg">
-                        <input type="text" class="form-control" value="{{ $paciente->email }}">
-                        <label class="form-label">Email</label>
-                    </div>
-                    <div class="col-12 col-lg">
-                        <input type="text" class="form-control" value="{{ $paciente->telefono }}">
-                        <label class="form-label">Telefono</label>
-                    </div>
-                    <div class="col-12 col-lg">
-                        <input type="text" class="form-control" value="{{ $aseguradora->name }}">
-                        <label class="form-label">Aseguradora</label>
-                    </div>
+            addedTestsContainer.innerHTML = tests.map((test, index) => `
+                <div class="flex justify-between mb-4" key="${index}">
+                    <span class="text-primary">${test.name}</span>
+                    <span class="text-primary">${test.price.toFixed(2)}</span>
                 </div>
+            `).join('')
+        }
 
-            </fieldset>
-        </div>
-        <div class="">
-            <h2 class="mb-5">Datos de la venta</h2>
+        function updateTotals() {
+            let subtotal = tests.reduce((sum, test) => sum + test.price, 0)
+            let iva = subtotal * 0.16
+            let total = subtotal + iva
 
-            <form action="{{ route('venta.store', $paciente->id) }}" method="POST">
-                @csrf
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2)
+            document.getElementById('iva').textContent = iva.toFixed(2)
+            document.getElementById('total').textContent = total.toFixed(2)
+        }
 
-                <fieldset>
-                    <div class="mb-3">
-                        <label class="form-label">Vendedor</label>
-                        <select name="vendedor" id="vendedor" class="form-select form-select-lg mb-3 w-25 "
-                            aria-label="Large select example">">
-                            <option disabled selected>--Selecciona un vendedor--</option>
-                            @foreach ($vendedores as $vendedor)
-                                <option value="{{ $vendedor->id }}">{{ $vendedor->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Método de Pago</label>
-                        <select name="metodo_pago" id="metodo_pago" class="form-select form-select-lg mb-3 w-25" aria-label="Large select example">
-                            <option disabled selected>--Selecciona un método de pago--</option>
-                            <option value="efectivo">Efectivo</option>
-                            <option value="TDC">Tarjeta de Crédito</option>
-                            <option value="TDD">Tarjeta de Débito</option>
-                            <option value="aseguradora">Aseguradora</option>
-                        </select>
-                    </div>
-                    <div class="mb-3 w-50 ">
-                        <label class="form-label">Pruebas</label>
-                        <div class="input-group d-flex  align-items-center gap-3 ">
-                            <select name="" id="prueba" class="form-select form-select-lg mb-3 w-25"
-                                aria-label="Large select example">
-                                <option disabled selected>--Selecciona una prueba--</option>
-                                @foreach ($pruebas as $prueba)
-                                    <option value="{{ $prueba->id }}" data-precio="{{ $prueba->price }}">
-                                        {{ $prueba->name }}</option>
-                                @endforeach
-                            </select>
-                            <a id="agregarPrueba" class="btn btn-primary ">Agregar</a>
-                        </div>
-                    </div>
+        function handleSubmit() {
+            document.getElementById('hiddenVendedor').value = document.getElementById('seller').value
+            document.getElementById('hiddenMetodoPago').value = document.getElementById('payment-method').value
+            document.getElementById('hiddenSubtotal').value = document.getElementById('subtotal').textContent
+            document.getElementById('hiddenIva').value = document.getElementById('iva').textContent
+            document.getElementById('hiddenTotal').value = document.getElementById('total').textContent
+            document.getElementById('hiddenPruebas').value = JSON.stringify(tests.map(test => test.name))
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Prueba</th>
-                                    <th>Precio</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaPruebas">
-                                <!-- Aquí se agregarán las pruebas seleccionadas -->
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td><strong>Subtotal</strong></td>
-                                    <td id="subtotal" class="text-success">0</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>IVA 16%</strong></td>
-                                    <td id="iva" class="text-success">0</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Total</strong></td>
-                                    <td id="total" class="text-primary">0</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    
-                    <select name="pruebas[]" id="pruebasArray" multiple style="display: none;"></select>
+            document.getElementById('ventaForm').submit()
+        }
+    </script>
+@endsection
 
-
-                    <!-- Agregar campo oculto para enviar el subtotal al controlador -->
-                    <input type="hidden" name="subtotal" id="subtotalInput">
-                    {{-- Total --}}
-                    <input type="hidden" name="total" id="totalInput">
-
-                </fieldset>
-
-                <button type="submit" class="btn btn-success">Registrar venta</button>
-            </form>
-            <script>
-                document.getElementById('agregarPrueba').addEventListener('click', function() {
-                    var pruebaSelect = document.getElementById('prueba');
-                    var pruebaId = pruebaSelect.value;
-                    var pruebaNombre = pruebaSelect.options[pruebaSelect.selectedIndex].text;
-                    var precio = parseFloat(pruebaSelect.options[pruebaSelect.selectedIndex].getAttribute('data-precio'));
-            
-                    // Agregar la prueba a la tabla
-                    var fila = `<tr><td>${pruebaNombre}</td><td>${precio}</td></tr>`;
-                    document.getElementById('tablaPruebas').innerHTML += fila;
-            
-                    // Calcular subtotal
-                    var subtotal = parseFloat(document.getElementById('subtotal').textContent);
-                    subtotal += parseFloat(precio);
-                    document.getElementById('subtotal').textContent = subtotal.toFixed(2);
-            
-                    // Calcular IVA
-                    var iva = subtotal * 0.16;
-                    document.getElementById('iva').textContent = iva.toFixed(2);
-            
-                    // Calcular total
-                    var total = subtotal + iva;
-                    document.getElementById('total').textContent = total.toFixed(2);
-            
-                    // Agregar el ID de la prueba al array de pruebas
-                    var pruebasArray = document.getElementById('pruebasArray');
-                    var option = document.createElement('option');
-                    option.value = pruebaId;
-                    option.selected = true; // Añadir la prueba seleccionada al array
-                    pruebasArray.appendChild(option);
-            
-                    // Actualizar el valor del campo oculto subtotal
-                    document.getElementById('subtotalInput').value = subtotal.toFixed(2);
-                    document.getElementById('totalInput').value = total.toFixed(2);
-                });
-            </script>
-            
-            
-            
-        @endsection
