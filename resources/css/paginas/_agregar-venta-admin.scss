@@ -1,11 +1,11 @@
-body {
+.venta-container {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
 
-.container {
+.venta-container .container {
     width: 100%;
     max-width: 60rem;
     margin: 3rem auto;
@@ -15,14 +15,14 @@ body {
     border-radius: 2rem;
 }
 
-.section-title {
+.venta-container .section-title {
     font-size: 2.25rem;
     font-weight: bold;
     margin-bottom: 2rem;
-    color: #000080; /* Azul oscuro */
+    color: #000080;
 }
 
-.grid {
+.venta-container .grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -30,48 +30,37 @@ body {
 }
 
 @media (min-width: 768px) {
-    .grid {
+    .venta-container .grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .col-span-2 {
+    .venta-container .col-span-2 {
         grid-column: span 2;
     }
 }
 
-.input {
+.venta-container .input, .venta-container .select {
+    width: calc(100% - 2rem);
+    height: auto;
     padding: 0.5rem;
     border: 1px solid #00bfff;
     border-radius: 0.5rem;
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
-    color: #000000; /* Color de los textos de entrada */
-    width: calc(100% - 2rem); /* Asegura que el ancho no sea mayor al contenedor */
+    color: #000000;
 }
 
-.input:focus {
+.venta-container .input:focus, .venta-container .select:focus {
     border-color: #00bfff;
     box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
 }
 
-.select-container {
+.venta-container .select-container {
     position: relative;
     width: 100%;
 }
 
-.select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #00bfff;
-    border-radius: 0.5rem;
-    outline: none;
-    appearance: none;
-    background-color: #fff;
-    cursor: pointer;
-    color: #000080; /* Azul oscuro */
-}
-
-.icon {
+.venta-container .icon {
     position: absolute;
     top: 50%;
     right: 0.75rem;
@@ -82,12 +71,12 @@ body {
     opacity: 0.5;
 }
 
-.button {
+.venta-container .button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0.75rem 1.5rem;
-    background-color: #000080; /* Azul oscuro */
+    background-color: #000080;
     color: #fff;
     border: none;
     border-radius: 0.5rem;
@@ -95,85 +84,130 @@ body {
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.button:hover {
+.venta-container .button:hover {
     background-color: #00bfff;
 }
 
-.full-width {
+.venta-container .full-width {
     width: 100%;
     margin-top: 1rem;
 }
 
-.border-t {
+.venta-container .border-t {
     border-top: 1px solid #e0e0e0;
 }
 
-.pt-4 {
+.pagos {
+    width: auto;
+    align-items: center;
+}
+
+.venta-container .pt-4 {
     padding-top: 1rem;
 }
 
-.pt-6 {
+.venta-container .pt-6 {
     padding-top: 1.5rem;
 }
 
-.mb-4, .mb-6, .mb-8 {
+.venta-container .mb-4, .mb-6, .mb-8 {
     margin-bottom: 1rem;
     margin-bottom: 1.5rem;
     margin-bottom: 2rem;
 }
 
-.text-primary {
-    color: #000080; /* Azul oscuro para todos los demás textos */
+.venta-container .text-primary {
+    color: #000080;
 }
 
-.text-danger {
+.venta-container .text-danger {
     color: #ff0000;
 }
 
-.text-black {
-    color: #000000; /* Negro para los precios */
+.venta-container .text-black {
+    color: #000000;
 }
 
-.font-semibold {
+.venta-container .font-semibold {
     font-weight: 600;
 }
 
-.flex {
+.venta-container .flex {
     display: flex;
 }
 
-.justify-between {
+.venta-container .justify-between {
     justify-content: space-between;
 }
 
-.items-center {
+.venta-container .items-center {
     align-items: center;
 }
 
-.delete {
+.venta-container .delete {
     background-color: #ff0000;
 }
 
-.delete:hover {
+.venta-container .delete:hover {
     background-color: #ff6347;
+}
+
+.venta-container .test-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.venta-container .test-name {
+    flex: 1;
+    text-align: center;
+}
+
+.venta-container .test-price {
+    flex: 1;
+    text-align: center;
+}
+
+.venta-container .test-edit {
+    flex: 1;
+    text-align: center;
+}
+
+.pagos {
+    width: 100%;
+}
+
+.test-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header-item {
+    flex: 1;
+    text-align: center;
+}
+
+.test-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .test-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.test-row span {
+.test-name, .test-price, .delete {
     flex: 1;
-}
-
-.test-row button {
-    margin-left: 1rem;
-}
-
-/* Añadido para asegurar que los textos específicos sean azul oscuro */
-.text-primary {
-    color: #000080 !important;
+    text-align: center;
 }

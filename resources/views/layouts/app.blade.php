@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <title>Estudio Pendiente</title>
     <link rel="stylesheet" href="styles.css">
+    
 
 
     @php

@@ -7,7 +7,7 @@
     <header class="header bg-dark-blue">
         <div class="container text-center narrow-width">
             <h1 class="title text-gray-50">
-                Estudio Pendientes
+                Estudios Pendientes
             </h1>
         </div>
     </header>

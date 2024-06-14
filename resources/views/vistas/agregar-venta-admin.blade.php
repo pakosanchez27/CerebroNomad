@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-
+<div class="venta-container">
     <div class="container">
         <h2 class="section-title">Información del paciente</h2>
         <div class="grid">
@@ -17,9 +17,9 @@
             <div class="select-container">
                 <select class="select" id="aseguradoraPaciente" disabled>
                     <option disabled>Aseguradora</option>
-                    @foreach ($aseguradora as $Aseguradora)
-                        <option value="{{ $aseguradora->id }}" {{ $aseguradora->id == $paciente->aseguradora_id ? 'selected' : '' }}>
-                            {{ $aseguradora->name }}
+                    @foreach ($aseguradoras as $aseguradoraItem)
+                        <option value="{{ $aseguradoraItem->id }}" {{ $aseguradoraItem->id == $paciente->insurance_id ? 'selected' : '' }}>
+                            {{ $aseguradoraItem->name }}
                         </option>
                     @endforeach
                 </select>
@@ -34,13 +34,11 @@
                 <select class="select" id="seller">
                     <option disabled selected>Vendedor</option>
                     @foreach ($vendedores as $vendedor)
-                        <option value="{{ $vendedor->id }}">{{ $vendedor->name }}</option>
+                        <option value="{{ $vendedor->id_usuario }}">{{ $vendedor->user_name }}</option>
                     @endforeach
                 </select>
-                <svg class="icon">
-                    <path d="m6 9 6 6 6-6"></path>
-                </svg>
             </div>
+            
             <div class="select-container">
                 <select class="select" id="payment-method">
                     <option disabled selected>Método de pago</option>
@@ -58,25 +56,22 @@
                     <select id="testSelect" class="input flex-1 mr-4">
                         <option disabled selected>--Selecciona una prueba--</option>
                         @foreach ($pruebas as $prueba)
-                            <option value="{{ $prueba->id }}" data-precio="{{ $prueba->price }}">
-                                {{ $prueba->name }}
-                            </option>
+                            <option value="{{ $prueba->id }}" data-precio="{{ $prueba->price }}">{{ $prueba->name }}</option>
                         @endforeach
                     </select>
                     <button class="button" onclick="handleAddTest()">Agregar</button>
                 </div>
-                <div class="border-t pt-4">
-                    <div id="testHeader" class="flex justify-between mb-6" style="display: none;">
-                        <span class="text-primary font-semibold">Prueba</span>
-                        <span class="text-primary font-semibold">Precio</span>
-                        <span class="text-primary font-semibold">Editar</span>
-                    </div>
-                    <div id="testsContainer"></div>
-                </div>
             </div>
         </div>
+        <div class="pagos">
+            <div id="testHeader" class="test-header" style="display: none;">
+                <span class="text-primary font-semibold header-item">Prueba</span>
+                <span class="text-primary font-semibold header-item">Precio</span>
+                <span class="text-primary font-semibold header-item">Editar</span>
+            </div>
+            <div id="testsContainer" class="test-list"></div>
+        </div>
         <div class="border-t pt-6">
-            <div id="addedTestsContainer" class="mb-6"></div>
             <div class="flex justify-between mb-6">
                 <span class="text-primary font-semibold">Subtotal</span>
                 <span id="subtotal" class="text-black font-semibold">0</span>
@@ -95,12 +90,6 @@
 
     <form id="ventaForm" action="{{ route('venta.store', $paciente->id) }}" method="POST">
         @csrf
-        <input type="hidden" name="nombre" id="hiddenNombre" value="{{ $paciente->name }}">
-        <input type="hidden" name="apellido_paterno" id="hiddenApellidoPaterno" value="{{ $paciente->apellido_paterno }}">
-        <input type="hidden" name="apellido_materno" id="hiddenApellidoMaterno" value="{{ $paciente->apellido_materno }}">
-        <input type="hidden" name="correo" id="hiddenCorreo" value="{{ $paciente->email }}">
-        <input type="hidden" name="telefono" id="hiddenTelefono" value="{{ $paciente->telefono }}">
-        <input type="hidden" name="aseguradora" id="hiddenAseguradora" value="{{ $paciente->aseguradora_id }}">
         <input type="hidden" name="vendedor" id="hiddenVendedor">
         <input type="hidden" name="metodo_pago" id="hiddenMetodoPago">
         <input type="hidden" name="subtotal" id="hiddenSubtotal">
@@ -109,77 +98,88 @@
         <input type="hidden" name="pruebas" id="hiddenPruebas">
         <button type="submit" style="display: none;"></button>
     </form>
-
+    
     <script>
-        let tests = []
+        let tests = [];
 
         function handleAddTest() {
-            const testSelect = document.getElementById('testSelect')
-            const selectedOption = testSelect.options[testSelect.selectedIndex]
+            const testSelect = document.getElementById('testSelect');
+            const selectedOption = testSelect.options[testSelect.selectedIndex];
 
             if (selectedOption.value !== "") {
-                const testName = selectedOption.text
-                const testPrice = parseFloat(selectedOption.getAttribute('data-precio'))
+                const testId = selectedOption.value;
+                const testName = selectedOption.text;
+                const testPrice = parseFloat(selectedOption.getAttribute('data-precio'));
 
-                tests.push({ name: testName, price: testPrice })
-                renderTests()
-                updateTotals()
+                tests.push({
+                    id: testId,
+                    name: testName,
+                    price: testPrice
+                });
+                renderTests();
+                updateTotals();
             }
         }
 
         function handleRemoveTest(index) {
-            tests.splice(index, 1)
-            renderTests()
-            updateTotals()
+            tests.splice(index, 1);
+            renderTests();
+            updateTotals();
         }
 
         function renderTests() {
-            const container = document.getElementById('testsContainer')
-            const addedTestsContainer = document.getElementById('addedTestsContainer')
-            const testHeader = document.getElementById('testHeader')
-            
+            const container = document.getElementById('testsContainer');
+            const testHeader = document.getElementById('testHeader');
+
             if (tests.length > 0) {
-                testHeader.style.display = 'flex'
+                testHeader.style.display = 'flex';
             } else {
-                testHeader.style.display = 'none'
+                testHeader.style.display = 'none';
             }
-            
+
             container.innerHTML = tests.map((test, index) => `
                 <div class="test-row" key="${index}">
-                    <span class="text-primary">${test.name}</span>
-                    <span class="text-primary">${test.price.toFixed(2)}</span>
-                    <button class="button delete" onclick="handleRemoveTest(${index})">Editar</button>
+                    <span class="text-primary test-name">${test.name}</span>
+                    <span class="text-primary test-price">${test.price.toFixed(2)}</span>
+                    <button class="button delete" onclick="handleRemoveTest(${index})">Eliminar</button>
                 </div>
-            `).join('')
-
-            addedTestsContainer.innerHTML = tests.map((test, index) => `
-                <div class="flex justify-between mb-4" key="${index}">
-                    <span class="text-primary">${test.name}</span>
-                    <span class="text-primary">${test.price.toFixed(2)}</span>
-                </div>
-            `).join('')
+            `).join('');
         }
 
         function updateTotals() {
-            let subtotal = tests.reduce((sum, test) => sum + test.price, 0)
-            let iva = subtotal * 0.16
-            let total = subtotal + iva
+            let subtotal = tests.reduce((sum, test) => sum + test.price, 0);
+            let iva = subtotal * 0.16;
+            let total = subtotal + iva;
 
-            document.getElementById('subtotal').textContent = subtotal.toFixed(2)
-            document.getElementById('iva').textContent = iva.toFixed(2)
-            document.getElementById('total').textContent = total.toFixed(2)
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+            document.getElementById('iva').textContent = iva.toFixed(2);
+            document.getElementById('total').textContent = total.toFixed(2);
         }
 
         function handleSubmit() {
-            document.getElementById('hiddenVendedor').value = document.getElementById('seller').value
-            document.getElementById('hiddenMetodoPago').value = document.getElementById('payment-method').value
-            document.getElementById('hiddenSubtotal').value = document.getElementById('subtotal').textContent
-            document.getElementById('hiddenIva').value = document.getElementById('iva').textContent
-            document.getElementById('hiddenTotal').value = document.getElementById('total').textContent
-            document.getElementById('hiddenPruebas').value = JSON.stringify(tests.map(test => test.name))
+            const vendedor = document.querySelector('#seller').value;
+            const metodoPago = document.querySelector('#payment-method').value;
+            const subtotal = document.querySelector('#subtotal').textContent;
+            const iva = document.querySelector('#iva').textContent;
+            const total = document.querySelector('#total').textContent;
+            const pruebas = JSON.stringify(tests.map(test => test.id));
 
-            document.getElementById('ventaForm').submit()
+            // Agregar logs para verificar los valores
+            console.log("Vendedor:", vendedor);
+            console.log("Método de Pago:", metodoPago);
+            console.log("Subtotal:", subtotal);
+            console.log("IVA:", iva);
+            console.log("Total:", total);
+            console.log("Pruebas:", pruebas);
+
+            document.querySelector('#hiddenVendedor').value = vendedor;
+            document.querySelector('#hiddenMetodoPago').value = metodoPago;
+            document.querySelector('#hiddenSubtotal').value = subtotal;
+            document.querySelector('#hiddenIva').value = iva;
+            document.querySelector('#hiddenTotal').value = total;
+            document.querySelector('#hiddenPruebas').value = pruebas;
+
+            document.querySelector('#ventaForm').submit();
         }
     </script>
 @endsection
-
