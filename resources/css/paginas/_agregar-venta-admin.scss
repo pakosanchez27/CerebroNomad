@@ -33,21 +33,19 @@
     .venta-container .grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
     .venta-container .col-span-2 {
         grid-column: span 2;
     }
 }
 
 .venta-container .input, .venta-container .select {
-    width: calc(100% - 2rem);
-    height: auto;
     padding: 0.5rem;
     border: 1px solid #00bfff;
     border-radius: 0.5rem;
     outline: none;
+    width: calc(100% - 2rem);
     transition: border-color 0.3s, box-shadow 0.3s;
-    color: #000000;
+    color: #000;
 }
 
 .venta-container .input:focus, .venta-container .select:focus {
@@ -58,6 +56,12 @@
 .venta-container .select-container {
     position: relative;
     width: 100%;
+}
+
+.venta-container .select {
+    appearance: none;
+    background-color: #fff;
+    cursor: pointer;
 }
 
 .venta-container .icon {
@@ -97,8 +101,8 @@
     border-top: 1px solid #e0e0e0;
 }
 
-.pagos {
-    width: auto;
+.pagos, .venta-container .flex {
+    display: flex;
     align-items: center;
 }
 
@@ -112,7 +116,13 @@
 
 .venta-container .mb-4, .mb-6, .mb-8 {
     margin-bottom: 1rem;
+}
+
+.venta-container .mb-6 {
     margin-bottom: 1.5rem;
+}
+
+.venta-container .mb-8 {
     margin-bottom: 2rem;
 }
 
@@ -125,23 +135,15 @@
 }
 
 .venta-container .text-black {
-    color: #000000;
+    color: #000;
 }
 
 .venta-container .font-semibold {
     font-weight: 600;
 }
 
-.venta-container .flex {
-    display: flex;
-}
-
 .venta-container .justify-between {
     justify-content: space-between;
-}
-
-.venta-container .items-center {
-    align-items: center;
 }
 
 .venta-container .delete {
@@ -161,26 +163,12 @@
     border-bottom: 1px solid #e0e0e0;
 }
 
-.venta-container .test-name {
+.venta-container .test-name, .venta-container .test-price, .venta-container .test-edit {
     flex: 1;
     text-align: center;
 }
 
-.venta-container .test-price {
-    flex: 1;
-    text-align: center;
-}
-
-.venta-container .test-edit {
-    flex: 1;
-    text-align: center;
-}
-
-.pagos {
-    width: 100%;
-}
-
-.test-header {
+.test-header, .test-list {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -189,25 +177,6 @@
 }
 
 .header-item {
-    flex: 1;
-    text-align: center;
-}
-
-.test-list {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.test-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.test-name, .test-price, .delete {
     flex: 1;
     text-align: center;
 }

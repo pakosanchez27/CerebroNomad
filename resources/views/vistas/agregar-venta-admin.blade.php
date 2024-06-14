@@ -6,6 +6,7 @@
 
 @section('contenido')
 <div class="venta-container">
+
     <div class="container">
         <h2 class="section-title">Información del paciente</h2>
         <div class="grid">
@@ -37,8 +38,10 @@
                         <option value="{{ $vendedor->id_usuario }}">{{ $vendedor->user_name }}</option>
                     @endforeach
                 </select>
+                <svg class="icon">
+                    <path d="m6 9 6 6 6-6"></path>
+                </svg>
             </div>
-            
             <div class="select-container">
                 <select class="select" id="payment-method">
                     <option disabled selected>Método de pago</option>
@@ -61,17 +64,18 @@
                     </select>
                     <button class="button" onclick="handleAddTest()">Agregar</button>
                 </div>
+                <div class="border-t pt-4">
+                    <div id="testHeader" class="flex justify-between mb-6" style="display: none;">
+                        <span class="text-primary font-semibold">Prueba</span>
+                        <span class="text-primary font-semibold">Precio</span>
+                        <span class="text-primary font-semibold">Editar</span>
+                    </div>
+                    <div id="testsContainer"></div>
+                </div>
             </div>
-        </div>
-        <div class="pagos">
-            <div id="testHeader" class="test-header" style="display: none;">
-                <span class="text-primary font-semibold header-item">Prueba</span>
-                <span class="text-primary font-semibold header-item">Precio</span>
-                <span class="text-primary font-semibold header-item">Editar</span>
-            </div>
-            <div id="testsContainer" class="test-list"></div>
         </div>
         <div class="border-t pt-6">
+            <div id="addedTestsContainer" class="mb-6"></div>
             <div class="flex justify-between mb-6">
                 <span class="text-primary font-semibold">Subtotal</span>
                 <span id="subtotal" class="text-black font-semibold">0</span>
@@ -88,7 +92,7 @@
         </div>
     </div>
 
-    <form id="ventaForm" action="{{ route('venta.store', $paciente->id) }}" method="POST">
+    <form id="ventaForm" action="{{ route('venta.store', $paciente->id) }}" method="POST" style="display: none;">
         @csrf
         <input type="hidden" name="vendedor" id="hiddenVendedor">
         <input type="hidden" name="metodo_pago" id="hiddenMetodoPago">
@@ -98,7 +102,7 @@
         <input type="hidden" name="pruebas" id="hiddenPruebas">
         <button type="submit" style="display: none;"></button>
     </form>
-    
+
     <script>
         let tests = [];
 
@@ -129,6 +133,7 @@
 
         function renderTests() {
             const container = document.getElementById('testsContainer');
+            const addedTestsContainer = document.getElementById('addedTestsContainer');
             const testHeader = document.getElementById('testHeader');
 
             if (tests.length > 0) {
@@ -139,9 +144,16 @@
 
             container.innerHTML = tests.map((test, index) => `
                 <div class="test-row" key="${index}">
-                    <span class="text-primary test-name">${test.name}</span>
-                    <span class="text-primary test-price">${test.price.toFixed(2)}</span>
+                    <span class="text-primary">${test.name}</span>
+                    <span class="text-primary">${test.price.toFixed(2)}</span>
                     <button class="button delete" onclick="handleRemoveTest(${index})">Eliminar</button>
+                </div>
+            `).join('');
+
+            addedTestsContainer.innerHTML = tests.map((test, index) => `
+                <div class="flex justify-between mb-4" key="${index}">
+                    <span class="text-primary">${test.name}</span>
+                    <span class="text-primary">${test.price.toFixed(2)}</span>
                 </div>
             `).join('');
         }
@@ -157,29 +169,14 @@
         }
 
         function handleSubmit() {
-            const vendedor = document.querySelector('#seller').value;
-            const metodoPago = document.querySelector('#payment-method').value;
-            const subtotal = document.querySelector('#subtotal').textContent;
-            const iva = document.querySelector('#iva').textContent;
-            const total = document.querySelector('#total').textContent;
-            const pruebas = JSON.stringify(tests.map(test => test.id));
+            document.getElementById('hiddenVendedor').value = document.getElementById('seller').value;
+            document.getElementById('hiddenMetodoPago').value = document.getElementById('payment-method').value;
+            document.getElementById('hiddenSubtotal').value = document.getElementById('subtotal').textContent;
+            document.getElementById('hiddenIva').value = document.getElementById('iva').textContent;
+            document.getElementById('hiddenTotal').value = document.getElementById('total').textContent;
+            document.getElementById('hiddenPruebas').value = JSON.stringify(tests.map(test => test.id));
 
-            // Agregar logs para verificar los valores
-            console.log("Vendedor:", vendedor);
-            console.log("Método de Pago:", metodoPago);
-            console.log("Subtotal:", subtotal);
-            console.log("IVA:", iva);
-            console.log("Total:", total);
-            console.log("Pruebas:", pruebas);
-
-            document.querySelector('#hiddenVendedor').value = vendedor;
-            document.querySelector('#hiddenMetodoPago').value = metodoPago;
-            document.querySelector('#hiddenSubtotal').value = subtotal;
-            document.querySelector('#hiddenIva').value = iva;
-            document.querySelector('#hiddenTotal').value = total;
-            document.querySelector('#hiddenPruebas').value = pruebas;
-
-            document.querySelector('#ventaForm').submit();
+            document.getElementById('ventaForm').submit();
         }
     </script>
 @endsection
