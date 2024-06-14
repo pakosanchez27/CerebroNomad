@@ -236,6 +236,10 @@ class VistaPacienteController extends Controller
         return redirect()->route('pacientes')->with('eliminado', 'Paciente eliminado correctamente');
     }
 
+    public function expe()
+    {
+        return view('vistas.ver-expediente-paciente');
+    }
 
    
 
