@@ -7,25 +7,21 @@ use App\Models\Address;
 use App\Models\Guardian;
 use App\Models\Patient;
 use App\Models\Insurance;
-use App\Models\proceso_muestras;
-use App\Models\venta;
-
-
-
-
+use App\Models\ProcesoMuestras;
+use App\Models\Venta;
+use App\Models\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\VarLikeIdentifier;
 
 class VistaPacienteController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function index(request $request) 
+    public function index(Request $request) 
     {
         $path = $request->path();
         $rol = $request->user()->role->name;
@@ -34,14 +30,51 @@ class VistaPacienteController extends Controller
         return view('vistas.pacientes', ['path' => $path, 'pacientes' => $pacientes, 'current_page' => $current_page, 'rol' => $rol]);
     }
 
-    public function search(request $request)
+    public function show(Request $request, $id)
+    {
+        $path = $request->path();
+        $paciente = Patient::find($id);
+    
+        if (!$paciente) {
+            return redirect()->back()->withErrors(['msg' => 'Paciente no encontrado']);
+        }
+    
+        $aseguradora = null;
+        if (isset($paciente->insurance_id)) {
+            $aseguradora = Insurance::find($paciente->insurance_id);
+        }
+    
+        $doctor = null;
+        if (isset($paciente->doctor_id)) {
+            $doctor = Doctor::find($paciente->doctor_id);
+        }
+    
+        $direccion = Address::where('patient_id', $paciente->id)->first();
+        $responsable = Guardian::where('patient_id', $paciente->id)->first();
+        $pruebas = DB::table('ventas')
+                        ->join('tests', 'ventas.prueba_id', '=', 'tests.id')
+                        ->join('proceso_muestras', 'ventas.id', '=', 'proceso_muestras.venta_id')
+                        ->where('ventas.patient_id', $id)
+                        ->select('tests.name as nombre', 'tests.description as descripcion', 'proceso_muestras.estado', 'tests.price as precio')
+                        ->get();
+    
+        return view('vistas.ver-expediente-paciente', [
+            'path' => $path,
+            'paciente' => $paciente,
+            'aseguradora' => $aseguradora,
+            'doctor' => $doctor,
+            'direccion' => $direccion,
+            'responsable' => $responsable,
+            'pruebas' => $pruebas
+        ]);
+    }
+
+    public function search(Request $request)
     {
         $path = $request->path();
         $rol = $request->user()->role->name;
         $current_page = $request->input('page', 1);
 
-
-        //validando datos porque el fomulario se dejo sin restriccion 
         $validatedData = $request->validate([
             'Nombre' => 'nullable|regex:/^[\pL\s.]+$/u|max:100',
             'ApellidoPaterno' => 'nullable|regex:/^[\pL\s.]+$/u|max:100',
@@ -52,7 +85,6 @@ class VistaPacienteController extends Controller
         $apellidoPaterno = $validatedData['ApellidoPaterno'] ?? null;
         $apellidoMaterno = $validatedData['ApellidoMaterno'] ?? null;
 
-        // Búsqueda condicional con paginación
         $pacientesbuscado = Patient::query()
             ->when($nombre, function ($query, $nombre) {
                 return $query->where('name', 'like', "%{$nombre}%");
@@ -66,65 +98,38 @@ class VistaPacienteController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        // Si no hay búsqueda, obtener todos los pacientes
         if ($pacientesbuscado->isEmpty()) {
             $pacientes = Patient::orderBy('created_at', 'desc')->paginate(10);
         } else {
             $pacientes = $pacientesbuscado;
         }
 
-        // return response()->json($pacientes);
         return view('vistas.pacientes', compact('pacientes', 'path', 'current_page', 'rol'));
     }
 
-    public function estudiosPendientes(Request $request){
+    public function estudiosPendientes(Request $request)
+    {
         $rol = $request->user()->role->name;
-
         $path = $request->path();
-
-               $userId = Auth::id();
+        $userId = Auth::id();
         $vendorId = DB::table('vendors')
             ->where('id_usuario', $userId)
             ->value('id');
-        
-            // $totalPruebasPendientes = DB::table('proceso_muestras')
-            // ->where('venta_id', $ventasid)
-            // ->where('proceso_muestras.estado', '!=', 'completado')
-            // ->count();
-           // Obtener el total de pruebas pendientes
-           $ids = DB::table('proceso_muestras')
-                ->join('ventas', 'proceso_muestras.venta_id', '=', 'ventas.id')
-               ->where('ventas.vendor_id', $vendorId)
-                ->where('proceso_muestras.estado', '!=', 'completado')
-                ->pluck('ventas.Patient_id');
 
+        $ids = DB::table('proceso_muestras')
+            ->join('ventas', 'proceso_muestras.venta_id', '=', 'ventas.id')
+            ->where('ventas.vendor_id', $vendorId)
+            ->where('proceso_muestras.estado', '!=', 'completado')
+            ->pluck('ventas.patient_id');
 
-                $pacientes = DB::table('patients')
-                ->whereIn('id', $ids)
-                ->get();
+        $pacientes = DB::table('patients')
+            ->whereIn('id', $ids)
+            ->get();
 
-           
-
-
-    
-
-       return view('vistas.estudiosPendientes', ['rol' => $rol,'path' => $path,'pacientes' => $pacientes]);
-
-      // return response()->json( $pacientes);
+        return view('vistas.estudiosPendientes', ['rol' => $rol, 'path' => $path, 'pacientes' => $pacientes]);
     }
 
-    public function show(request $request, $id)
-    {
-        $path = $request->path();
-        $paciente = Patient::find($id);
-        $aseguradora = Insurance::find($paciente->insurance_id);
-        $doctor = Doctor::find($paciente->doctor_id);
-        $direccion = Address::where('patient_id', $paciente->id)->first();
-        $responsable = Guardian::where('patient_id', $paciente->id)->first();
-        return view('vistas.ver-paciente', ['path' => $path, 'paciente' => $paciente, 'aseguradora' => $aseguradora, 'doctor' => $doctor, 'direccion' => $direccion, 'responsable' => $responsable]);
-    }
-
-    public function create(request $request)
+    public function create(Request $request)
     {
         $path = $request->path();
         $aseguradoras = Insurance::all();
@@ -132,9 +137,8 @@ class VistaPacienteController extends Controller
         return view('vistas.agregar-paciente', ['path' => $path, 'aseguradoras' => $aseguradoras, 'doctores' => $doctores]);
     }
 
-    public function store(request $request)
+    public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required|alpha|min:3',
             'apellido_paterno' => 'required|alpha|min:3',
@@ -148,13 +152,8 @@ class VistaPacienteController extends Controller
             'descripcion_medica' => 'required',
         ]);
 
-        $ultimopaciente = Patient::latest()->first(); // se hace una consulta a patient y se ordena decendentemente y se toma al primero
-        //uso de operacion ternaria
-        //donde se compara, si el ultimo paciente es null significa que no hay pacientes y se guarda el valor de 0 en ultimo id
-        //si hay minimo un paciente es true y con el metodo se obtiene solo despues de el quinto caracteres("NOMAD0000") 
+        $ultimopaciente = Patient::latest()->first();
         $ultimoId = $ultimopaciente ? intval(substr($ultimopaciente->id, 5)) : 0;
-
-        // en esta funcion se toma el id del ultimo usuario y se le suma uno y se ponen 3 ceros a la derecha gracias a la funcion str_pad_left
         $nomenclatura = 'NOMAD' . str_pad($ultimoId + 1, 4, '0', STR_PAD_LEFT);
 
         Patient::create([
@@ -178,7 +177,7 @@ class VistaPacienteController extends Controller
         return redirect()->route('pacientes')->with('agregado', 'Paciente creado correctamente');
     }
 
-    public function edit(request $request, $id)
+    public function edit(Request $request, $id)
     {
         $path = $request->path();
         $paciente = Patient::find($id);
@@ -187,7 +186,7 @@ class VistaPacienteController extends Controller
         return view('vistas.editar-paciente', ['path' => $path, 'paciente' => $paciente, 'aseguradoras' => $aseguradoras, 'doctores' => $doctores]);
     }
 
-    public function update(request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
@@ -200,7 +199,6 @@ class VistaPacienteController extends Controller
             'email' => 'required|email',
             'descripcion_medica' => 'required',
         ]);
-
 
         $paciente = Patient::find($id);
         $paciente->name = $request->name;
@@ -223,24 +221,10 @@ class VistaPacienteController extends Controller
 
     public function destroy($id)
     {
-        // Encuentra al paciente por su ID
         $paciente = Patient::find($id);
-
-        // Elimina al paciente
         $paciente->delete();
-
-        // Elimina las ventas asociadas al paciente usando su ID
         Venta::where('patient_id', $id)->delete();
 
-        // Redirige con un mensaje de éxito
         return redirect()->route('pacientes')->with('eliminado', 'Paciente eliminado correctamente');
     }
-
-    public function expe()
-    {
-        return view('vistas.ver-expediente-paciente');
-    }
-
-   
-
 }

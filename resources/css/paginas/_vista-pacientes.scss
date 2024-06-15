@@ -58,20 +58,27 @@ body {
     font-weight: v.$bold;
 }
 
-.container {
-    max-width: 1000px;
+
+
+
+
+
+
+
+.custom-container .container {
+    max-width: 95%;
     margin: 0 auto;
     padding: 2em;
     background-color: white;
 }
-.header-card{
-    background-color: #506C6C;
+
+.custom-container .header-card {
+    background-color: #000080;
     color: white;
 }
 
-
-.profile-header {
-    background-color: #3E565E;
+.custom-container .profile-header {
+    background-color: #000080;
     color: white;
     padding: 1em;
     border-radius: 8px 8px 0 0;
@@ -82,7 +89,7 @@ body {
     flex-wrap: wrap;
 }
 
-.profile-info {
+.custom-container .profile-info {
     display: flex;
     justify-content: space-between;
     padding: 1em;
@@ -91,54 +98,54 @@ body {
     flex-wrap: wrap;
 }
 
-.profile-info div {
+.custom-container .profile-info div {
     flex: 1;
     min-width: 250px;
     margin-bottom: 1em;
 }
 
-.profile-color {
+.custom-container .profile-color {
     background: #f5f5f5;
 }
 
-table {
+.custom-container table {
     width: 100%;
     margin-top: 1em;
     border-collapse: collapse;
 }
 
-th, td {
+.custom-container th, .custom-container td {
     padding: 0.75em;
     text-align: left;
     border-bottom: 1px solid #ccc;
 }
 
 @media (max-width: 768px) {
-    .profile-header, .profile-info {
+    .custom-container .profile-header, .custom-container .profile-info {
         flex-direction: column;
         text-align: center;
     }
 
-    .profile-info div {
+    .custom-container .profile-info div {
         min-width: 100%;
     }
 }
 
 @media (max-width: 480px) {
-    .profile-header h2, .profile-header p, .profile-header h4, .profile-header p {
+    .custom-container .profile-header h2, .custom-container .profile-header p, .custom-container .profile-header h4, .custom-container .profile-header p {
         font-size: 1em;
     }
 
-    .profile-info p {
+    .custom-container .profile-info p {
         font-size: 0.875em;
     }
 
-    th, td {
+    .custom-container th, .custom-container td {
         font-size: 0.875em;
         padding: 0.5em;
     }
 
-    .container {
+    .custom-container .container {
         padding: 1em;
     }
 }

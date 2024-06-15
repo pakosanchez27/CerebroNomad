@@ -56,26 +56,25 @@
             </div>
             <div class="col-span-1 md:col-span-2">
                 <div class="flex items-center mb-4">
-                    <select id="testSelect" class="input flex-1 mr-4">
-                        <option disabled selected>--Selecciona una prueba--</option>
+                    <select id="testSelect" class="input flex-1 mr-4" onchange="toggleAddTestButton('testSelect', 'addTestButton')">
+                        <option disabled selected value="prueba">--Selecciona una prueba--</option>
                         @foreach ($pruebas as $prueba)
                             <option value="{{ $prueba->id }}" data-precio="{{ $prueba->price }}">{{ $prueba->name }}</option>
                         @endforeach
                     </select>
-                    <button class="button" onclick="handleAddTest()">Agregar</button>
-                </div>
-                <div class="border-t pt-4">
-                    <div id="testHeader" class="flex justify-between mb-6" style="display: none;">
-                        <span class="text-primary font-semibold">Prueba</span>
-                        <span class="text-primary font-semibold">Precio</span>
-                        <span class="text-primary font-semibold">Editar</span>
-                    </div>
-                    <div id="testsContainer"></div>
+                    <button id="addTestButton" class="button" onclick="handleAddTest('testSelect')">Agregar</button>
                 </div>
             </div>
         </div>
+        <div class="border-t pt-1">
+            <div id="testHeader" class="flex justify-between mb-5" style="display: none;">
+                <span class="text-primary font-semibold header-item">Prueba</span>
+                <span class="text-primary font-semibold header-item">Precio</span>
+                <span class="text-primary font-semibold header-item">Editar</span>
+            </div>
+            <div id="testsContainer"></div>
+        </div>
         <div class="border-t pt-6">
-            <div id="addedTestsContainer" class="mb-6"></div>
             <div class="flex justify-between mb-6">
                 <span class="text-primary font-semibold">Subtotal</span>
                 <span id="subtotal" class="text-black font-semibold">0</span>
@@ -102,81 +101,90 @@
         <input type="hidden" name="pruebas" id="hiddenPruebas">
         <button type="submit" style="display: none;"></button>
     </form>
+</div>
 
-    <script>
-        let tests = [];
+<script>
+    let tests = [];
 
-        function handleAddTest() {
-            const testSelect = document.getElementById('testSelect');
-            const selectedOption = testSelect.options[testSelect.selectedIndex];
+    function toggleAddTestButton(selectId, buttonId) {
+        const selectElement = document.getElementById(selectId);
+        const addTestButton = document.getElementById(buttonId);
+        addTestButton.disabled = selectElement.value === "prueba";
+    }
 
-            if (selectedOption.value !== "") {
-                const testId = selectedOption.value;
-                const testName = selectedOption.text;
-                const testPrice = parseFloat(selectedOption.getAttribute('data-precio'));
+    function handleAddTest(selectId) {
+        const testSelect = document.getElementById(selectId);
+        const selectedOption = testSelect.options[testSelect.selectedIndex];
 
-                tests.push({
-                    id: testId,
-                    name: testName,
-                    price: testPrice
-                });
-                renderTests();
-                updateTotals();
-            }
+        // Verificar si la opción seleccionada es la predeterminada
+        if (selectedOption.value === "prueba") {
+            return; // No agregar nada si la opción es la predeterminada
         }
 
-        function handleRemoveTest(index) {
-            tests.splice(index, 1);
+        if (selectedOption.value !== "" && !tests.find(test => test.id === selectedOption.value)) {
+            const testId = selectedOption.value;
+            const testName = selectedOption.text;
+            const testPrice = parseFloat(selectedOption.getAttribute('data-precio'));
+
+            tests.push({
+                id: testId,
+                name: testName,
+                price: testPrice
+            });
             renderTests();
             updateTotals();
+            toggleAddTestButton(selectId, 'addTestButton'); // Check button state after adding test
+        }
+    }
+
+    function handleRemoveTest(index) {
+        tests.splice(index, 1);
+        renderTests();
+        updateTotals();
+    }
+
+    function renderTests() {
+        const container = document.getElementById('testsContainer');
+        const testHeader = document.getElementById('testHeader');
+
+        if (tests.length > 0) {
+            testHeader.style.display = 'flex';
+        } else {
+            testHeader.style.display = 'none';
         }
 
-        function renderTests() {
-            const container = document.getElementById('testsContainer');
-            const addedTestsContainer = document.getElementById('addedTestsContainer');
-            const testHeader = document.getElementById('testHeader');
+        container.innerHTML = tests.map((test, index) => `
+            <div class="test-row" key="${index}">
+                <span class="text-primary test-name">${test.name}</span>
+                <span class="text-primary test-price">${test.price.toFixed(2)}</span>
+                <button class="button delete" onclick="handleRemoveTest(${index})">Eliminar</button>
+            </div>
+        `).join('');
+    }
 
-            if (tests.length > 0) {
-                testHeader.style.display = 'flex';
-            } else {
-                testHeader.style.display = 'none';
-            }
+    function updateTotals() {
+        let subtotal = tests.reduce((sum, test) => sum + test.price, 0);
+        let iva = subtotal * 0.16;
+        let total = subtotal + iva;
 
-            container.innerHTML = tests.map((test, index) => `
-                <div class="test-row" key="${index}">
-                    <span class="text-primary">${test.name}</span>
-                    <span class="text-primary">${test.price.toFixed(2)}</span>
-                    <button class="button delete" onclick="handleRemoveTest(${index})">Eliminar</button>
-                </div>
-            `).join('');
+        document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+        document.getElementById('iva').textContent = iva.toFixed(2);
+        document.getElementById('total').textContent = total.toFixed(2);
+    }
 
-            addedTestsContainer.innerHTML = tests.map((test, index) => `
-                <div class="flex justify-between mb-4" key="${index}">
-                    <span class="text-primary">${test.name}</span>
-                    <span class="text-primary">${test.price.toFixed(2)}</span>
-                </div>
-            `).join('');
-        }
+    function handleSubmit() {
+        document.getElementById('hiddenVendedor').value = document.getElementById('seller').value;
+        document.getElementById('hiddenMetodoPago').value = document.getElementById('payment-method').value;
+        document.getElementById('hiddenSubtotal').value = document.getElementById('subtotal').textContent;
+        document.getElementById('hiddenIva').value = document.getElementById('iva').textContent;
+        document.getElementById('hiddenTotal').value = document.getElementById('total').textContent;
+        document.getElementById('hiddenPruebas').value = JSON.stringify(tests.map(test => test.id));
 
-        function updateTotals() {
-            let subtotal = tests.reduce((sum, test) => sum + test.price, 0);
-            let iva = subtotal * 0.16;
-            let total = subtotal + iva;
+        document.getElementById('ventaForm').submit();
+    }
 
-            document.getElementById('subtotal').textContent = subtotal.toFixed(2);
-            document.getElementById('iva').textContent = iva.toFixed(2);
-            document.getElementById('total').textContent = total.toFixed(2);
-        }
-
-        function handleSubmit() {
-            document.getElementById('hiddenVendedor').value = document.getElementById('seller').value;
-            document.getElementById('hiddenMetodoPago').value = document.getElementById('payment-method').value;
-            document.getElementById('hiddenSubtotal').value = document.getElementById('subtotal').textContent;
-            document.getElementById('hiddenIva').value = document.getElementById('iva').textContent;
-            document.getElementById('hiddenTotal').value = document.getElementById('total').textContent;
-            document.getElementById('hiddenPruebas').value = JSON.stringify(tests.map(test => test.id));
-
-            document.getElementById('ventaForm').submit();
-        }
-    </script>
+    document.addEventListener('DOMContentLoaded', () => {
+        toggleAddTestButton('testSelect', 'addTestButton');
+    });
+</script>
 @endsection
