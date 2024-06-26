@@ -73,7 +73,7 @@
                                             </svg>
                                         </a>
                                         @if ($rol === 'admin')
-                                        <form action="{{ route('vendedores.destroy', $vendedor->id) }}" method="POST" class="deleteForm">
+                                        <form action="{{ route('vendedores.destroy', $vendedor->id) }}" method="POST" class="deleteForm m-0">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm ">

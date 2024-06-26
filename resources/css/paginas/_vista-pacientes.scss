@@ -5,7 +5,7 @@
 .agregar-paciente {
 
     &__contenedor {
-        width: 100;
+        width: 100%;
 
         @include m.tablet {
             width: 90%;

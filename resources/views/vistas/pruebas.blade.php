@@ -66,7 +66,7 @@
                                         </svg></a>
 
                                         @if ($rol == 'admin')
-                                        <form action="{{ route('pruebas.destroy', $prueba->id) }}" method="POST" class="deleteForm">
+                                        <form action="{{ route('pruebas.destroy', $prueba->id) }}" method="POST" class="deleteForm m-0">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">
