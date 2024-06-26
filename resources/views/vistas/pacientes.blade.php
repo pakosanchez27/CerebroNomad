@@ -6,7 +6,7 @@
 
 @section('contenido')
     <div
-        class="contenido-aseguradoras__header  d-flex flex-column flex-md-row justify-content-between align-items-center p-5 ">
+        class="contenido-aseguradoras__header  d-flex flex-column flex-md-row justify-content-between align-items-center px-5 mt-3 ">
         <div class="contenido-roles__texto text-center text-md-start">
             <h2>Pacientes</h2>
             <p>Administración, alta y seguimiento de pacientes</p>
@@ -25,35 +25,34 @@
             </a>
         </div>
     </div>
-    <div class=" contenido-buscar-paciente shadow rounded bg-white m-5 mb-4 p-3">
-        <h3 class="mb-4 text-center">Buscar Paciente</h3>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                ¡Los datos ingresados no son válidos!
+<div class="contenido-buscar-paciente shadow rounded bg-white m-3 p-3">
+    <h3 class="mb-3 text-center">Buscar Paciente</h3>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            ¡Los datos ingresados no son válidos!
+        </div>
+    @endif
+    <form action="{{ route('pacientes.buscar') }}" method="get">
+        <div class="row gx-2 gy-2 align-items-end">
+            <div class="col-sm-4">
+                <label for="Nombre" class="form-label">Nombre:</label>
+                <input type="text" name="Nombre" id="NombreInput" class="form-control" placeholder="Ingresa el Nombre">
             </div>
-        @endif
-        <form action="{{ route('pacientes.buscar') }}" method="get">
-            <div class="row gx-4 gy-3 align-items-center">
-                <div class="col-md-4">
-                    <label for="Nombre" class="form-label">Nombre:</label>
-                    <input type="text" name="Nombre" id="NombreInput" class="form-control" placeholder="Ingresa el Nombre">
-                </div>
-                <div class="col-md-4">
-                    <label for="ApellidoPaterno" class="form-label">Apellido Paterno:</label>
-                    <input type="text" name="ApellidoPaterno" id="ApellidoPaternoInput" class="form-control"
-                        placeholder="Ingresa el apellido paterno">
-                </div>
-                <div class="col-md-4">
-                    <label for="ApellidoMaterno" class="form-label">Apellido Materno:</label>
-                    <input type="text" name="ApellidoMaterno" id="ApellidoMaternoInput" class="form-control"
-                        placeholder="Ingresa el apellido Materno">
-                </div>
-                <div class="col-md-4 m-auto mt-5">
-                    <button type="submit" class="boton btn btn-success w-100">Buscar</button>
-                </div>
+            <div class="col-sm-4">
+                <label for="ApellidoPaterno" class="form-label">Apellido Paterno:</label>
+                <input type="text" name="ApellidoPaterno" id="ApellidoPaternoInput" class="form-control" placeholder="Ingresa el apellido paterno">
             </div>
-        </form>
-    </div>
+            <div class="col-sm-4">
+                <label for="ApellidoMaterno" class="form-label">Apellido Materno:</label>
+                <input type="text" name="ApellidoMaterno" id="ApellidoMaternoInput" class="form-control" placeholder="Ingresa el apellido Materno">
+            </div>
+            <div class="col-sm-4 mt-3 ">
+                <button type="submit" class="btn btn-success w-100">Buscar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
     
     
     
