@@ -6,17 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.scss')
-
-    <title>Document</title>
+    <link rel="icon" href="{{asset('img/icon.png')}}" type="image/png">
+    <title>Cerebro Nomad - Login</title>
 </head>
 
 <body class="fondo">
     <div class="contenedor-login">
         <div class="contenedor-login__form">
-            <div class="logo-login ">
-                <a href="#"><img src="{{ asset('img/logo.png') }}" alt="Logo"></a>
+            <div class="logo-login  ">
+                <a href="#"><img src="{{ asset('img/logo.png') }}" alt="Logo" width="200px"></a>
             </div>
-            <div action="" class="formulario-login">
+            <div action="" class="formulario-login mt-5
+            ">
                 <div class="formulario-login__texto">
                     <h1 class="w-75 fw-normal mb-3 ">Bienvenido a Cerebro Nomad.</h1>
                     <p>Ingresa tus datos para iniciar sesión en cerebro Nomad. </p>
