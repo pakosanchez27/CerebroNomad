@@ -204,9 +204,9 @@
                                        name="rol" id="rol">
                                        <option selected disabled value="">Selecciona el Rol del colaborador
                                        </option>
-                                       <option value="Admin">Administrador</option>
-                                       <option value="Analista">Analista</option>
-                                       <option value="Editor">Editor</option>
+                                       <option value="1">Administrador</option>
+                                       <option value="3">Analista</option>
+                                       <option value="2">Editor</option>
                                    </select>
 
                                </div>
