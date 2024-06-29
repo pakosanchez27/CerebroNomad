@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Doctor;
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Doctor;
+use App\Models\Patient;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -20,16 +22,19 @@ class HomeController extends Controller
 
         $path = $request->path(); // Obtener la parte de la URL después del dominio
         $rol = $request->user()->role->name;
+        $ganacias = DB::table('ventas')
+            ->sum('total');
 
+        
         $users = User::take(10)->get();
 
         $vendedores = Vendor::all();
         // Total de pacientes
-        $totalPacientes = User::count();
+        $totalPacientes = Patient::count();
         // Total doctores
         $totalDoctores = Doctor::count();
         //total de vendedores
-        $totalVendedores = Vendor::count();
+        $totalVendedores = User::where('role_id', 4)->count();
 
     
        $userId = Auth::id();
@@ -58,6 +63,6 @@ class HomeController extends Controller
                 ->where('proceso_muestras.estado', '!=', 'completado')
               ->count();
 
-        return view('vistas/home', ['path' => $path, 'users' => $users, 'vendedores' => $vendedores, 'totalPacientes' => $totalPacientes, 'totalDoctores' => $totalDoctores, 'totalVendedores' => $totalVendedores, 'rol' => $rol,'totalVentas' => $totalVentas, 'totalPruebasPendientes' => $totalPruebasPendientes ]);
+        return view('vistas/home', ['path' => $path, 'users' => $users, 'vendedores' => $vendedores, 'totalPacientes' => $totalPacientes, 'totalDoctores' => $totalDoctores, 'totalVendedores' => $totalVendedores, 'rol' => $rol,'totalVentas' => $totalVentas, 'totalPruebasPendientes' => $totalPruebasPendientes, 'ganacias' => $ganacias]);
     }
 }

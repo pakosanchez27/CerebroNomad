@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('ventas', function (Blueprint $table) {
             //
             $table->string('metodo_pago');
+           
         });
     }
 
@@ -25,6 +26,8 @@ return new class extends Migration
         Schema::table('ventas', function (Blueprint $table) {
             //
             $table->dropColumn('metodo_pago');
+          
+
         });
     }
 };

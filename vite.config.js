@@ -5,11 +5,11 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/sass/app.scss',
+                'resources/css/app.scss',
                 'resources/js/app.js',
-                'resources/js/API/clima.js'
+                'resources/js/APIs/clima.js'
             ],
-            refresh: ['resources/views/**', 'resources/sass/**', 'resources/js/**'],
+            refresh: ['resources/views/**', 'resources/css/**', 'resources/js/**'],
         }),
     ],
     optimizeDeps: {

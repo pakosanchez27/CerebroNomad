@@ -21,6 +21,8 @@ return new class extends Migration
             $table->time('hora_toma_muestra')->nullable();
             $table->date('fecha_envio_lab')->nullable();
             $table->date('fecha_resultado')->nullable();
+            $table->bigInteger('prueba_id')->unsigned();
+            $table->foreign('prueba_id')->references('id')->on('tests');
             $table->string('estado');
             $table->timestamps();
         });

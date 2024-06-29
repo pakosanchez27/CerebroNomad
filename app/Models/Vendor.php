@@ -25,4 +25,9 @@ class Vendor extends Model
     {
         return $this->hasMany(Venta::class);
     }
+
+    // vendor
+    public function vendor(){
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
 }

@@ -16,7 +16,7 @@
                             <h5 class="card-title mb-0">
                                 <i class="fas fa-shopping-cart fs-5 me-2 text-primary"></i> Ventas Realizadas
                             </h5>
-                            <h1 class="display-1"><strong>0</strong>
+                            <h1 class="display-1"><strong></strong>
                                 <p class="card-text text-muted">Total de ventas completadas</p>
                             </h1>
 
@@ -103,7 +103,7 @@
                     <div
                         class="contenedor-resumen__cards--card d-flex flex-column justify-content-between gap-4 p-3 card col-12 col-md-6 col-lg ">
                         <h3 class="fw-bold fs-4 ">Venta del Mes</h3>
-                        <p class=" fs-1 fw-bold ">$10,250 <span class=" fs-4 text-success  ">+2.5%</span></p>
+                        <p class=" fs-1 fw-bold ">${{$ganacias}} <span class=" fs-4 text-success  ">+2.5%</span></p>
                         <p class="fs-5 text-secondary ">Venta hasta el dia de hoy @php
                             echo date('d-m-Y');
                         @endphp</p>

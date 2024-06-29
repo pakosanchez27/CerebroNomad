@@ -95,6 +95,7 @@ class VistaPacienteController extends Controller
     public function store(request $request)
     {
 
+        
         $request->validate([
             'name' => 'required|alpha|min:3',
             'apellido_paterno' => 'required|alpha|min:3',

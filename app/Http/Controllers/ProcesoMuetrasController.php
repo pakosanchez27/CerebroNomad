@@ -29,7 +29,7 @@ class ProcesoMuetrasController extends Controller
 
         $pruebas = proceso_muestras::where('proceso_muestras.patient_id', $id)
         ->join('ventas', 'proceso_muestras.venta_id', '=', 'ventas.id')
-        ->join('tests', 'ventas.prueba_id', '=', 'tests.id')
+        ->join('tests', 'proceso_muestras.prueba_id', '=', 'tests.id')
         ->select('tests.name as prueba', 'proceso_muestras.*', 'proceso_muestras.id as id_proceso')
         ->get();
 

@@ -13,7 +13,7 @@ class Test extends Model
 
   
 
-
-
-
+    public function prueba_venta(){
+        return $this->belongsTo(proceso_muestras::class);
+    }
 }

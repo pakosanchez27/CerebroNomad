@@ -57,3 +57,26 @@ body {
     color: v.$negro;
     font-weight: v.$bold;
 }
+
+.table-pruebas {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    margin-top: 20px;
+}
+
+.table-pruebas th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    color: #6c757d;
+    font-size: 1.25rem;
+}
+
+.table-pruebas td, .table-pruebas th {
+    border-top: none !important;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.table-pruebas tfoot td {
+    font-weight: bold;
+}

@@ -15,6 +15,7 @@ class proceso_muestras extends Model
         'fecha_toma_muestra',
         'fecha_envio_lab',
         'fecha_resultado',
+        'prueba_id', 
         'estado',
     ];
 
@@ -28,6 +29,10 @@ class proceso_muestras extends Model
     {
         // uno a muchos
         return $this->belongsTo(Patient::class);
+    }
+
+    public function test(){
+        return $this->belongsTo(Test::class);
     }
 
     

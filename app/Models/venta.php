@@ -10,10 +10,12 @@ class venta extends Model
     use HasFactory;
 
     protected $fillable = [
+        'n_venta',
         'patient_id',
         'vendor_id',
-        'prueba_id', // Cambiar 'test_id' por 'prueba_id' si es el nombre correcto de la columna en la tabla 'ventas'
+        'id_doctor',
         'fecha_venta',
+        'lugar_toma',
         'total',
         'metodo_pago',
     ];
@@ -23,9 +25,10 @@ class venta extends Model
         return $this->belongsTo(Patient::class);
     }
 
+   
     public function vendor()
     {
-        return $this->belongsTo(Vendor::class);
+        return $this->belongsTo(User::class, 'vendor_id');
     }
 
     public function proceso_muestras()
@@ -33,6 +36,12 @@ class venta extends Model
         // uno a uno
         return $this->hasOne(proceso_muestras::class);
     }
+
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class, 'id_doctor');
+    }
+
 
     
 
