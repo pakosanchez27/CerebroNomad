@@ -38,7 +38,7 @@ class VistaRolesController extends Controller
 
 
         $password = bcrypt('Nomad2024');
-
+        
         User::create([
             'name' => $request->name,
             'apellido_paterno' => $request->apellido_paterno,
@@ -48,12 +48,13 @@ class VistaRolesController extends Controller
             'role_id' => $request->rol
         ]);
 
-        // enviar correo de alta de usuario
-        Mail::to($request->email)->send(new AltaColaboradorMailable());
+        // // enviar correo de alta de usuario
+        // Mail::to($request->email)->send(new AltaColaboradorMailable());
 
 
         return redirect()->route('roles')->with('susses', 'Usuario creado correctamente, su contraseña temporal es : Nomad2024');
     }
+
 
     function edit(Request $request, $id)
     {
@@ -69,7 +70,7 @@ class VistaRolesController extends Controller
             'apellido_paterno' => 'required',
             'apellido_materno' => '',
             'email' => 'required|email',
-            'rol' => 'required'
+            'role_id' => 'required'
         ]);
 
         // Buscar el usuario por su ID
@@ -80,7 +81,7 @@ class VistaRolesController extends Controller
         $user->apellido_paterno = $request->input('apellido_paterno');
         $user->apellido_materno = $request->input('apellido_materno');
         $user->email = $request->input('email');
-        $user->rol = $request->input('rol');
+        $user->role_id = $request->input('role_id');
 
         // Guardar los cambios en la base de datos
         $user->save();

@@ -46,11 +46,11 @@
                 </div>
                 <div class="mb-5">
                     <label for="message-text" class="col-form-label">Rol:</label>
-                    <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="rol">
-                        <option selected value="{{ $user->rol }}">{{ $user->rol }}</option>
-                        <option value="Admin">Administrador</option>
-                        <option value="Analista">Analista</option>
-                        <option value="Editor">Editor</option>
+                    <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="role_id">
+                        <option selected value="{{ $user->role_id }}">{{ $user->role->name }}</option>
+                        <option value="1">Administrador</option>
+                        <option value="3">Analista</option>
+                        <option value="2">Editor</option>
                     </select>
                     @error('rol')
                         <div class="h5 text-danger mt-2 ">{{ $message }}</div>
